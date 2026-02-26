@@ -29,11 +29,13 @@ jobs:
         run: npm run build
         working-directory: frontend
 
-      - name: FTP Deploy
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+      - name: SFTP Deploy
+        uses: wlixcc/SFTP-Deploy-Action@v1.2.4
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: frontend/dist/
-          server-dir: ./
+          port: 22
+          local_path: './frontend/dist/*'
+          remote_path: '/nordicpark.eu/'
+          sftp_only: true
