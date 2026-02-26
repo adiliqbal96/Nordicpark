@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="2000"
+   height="2000"
+   viewBox="0 0 2000 2000"
+   version="1.1"
+   id="svg3"
+   sodipodi:docname="logoNP.svg"
+   inkscape:version="1.4.2 (f4327f4, 2025-05-13)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview3"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     showguides="false"
+     inkscape:zoom="0.35355339"
+     inkscape:cx="922.06724"
+     inkscape:cy="1298.248"
+     inkscape:window-width="1168"
+     inkscape:window-height="1000"
+     inkscape:window-x="731"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg3" />
+  <defs
+     id="defs1">
+    <linearGradient
+       id="swatch6"
+       inkscape:swatch="solid">
+      <stop
+         style="stop-color:#0a3d91;stop-opacity:1;"
+         offset="0"
+         id="stop6" />
+    </linearGradient>
+    <style
+       id="style1">
+      .navy { fill:#0b224a; }
+      text { font-family: 'Times New Roman', serif; letter-spacing:8px; }
+    </style>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#swatch6"
+       id="linearGradient6"
+       x1="711.51848"
+       y1="729.16564"
+       x2="1636.3238"
+       y2="729.16564"
+       gradientUnits="userSpaceOnUse" />
+  </defs>
+  <!-- OUTER GRAY RING WITH GAP AT BOTTOM -->
+  <path
+     d="m 318.57836,1562.5426 a 914.69016,903.35804 0 1 1 1401.39674,0"
+     stroke="#9d9d9d"
+     stroke-width="45.4504"
+     stroke-linecap="round"
+     id="path1"
+     style="display:inline;fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#164ea5;stroke-opacity:1" />
+  <!-- INNER RINGS -->
+  <ellipse
+     cx="1019.2767"
+     cy="964.95135"
+     stroke="#0b224a"
+     stroke-width="10.584"
+     fill="none"
+     id="circle1"
+     rx="807.02368"
+     ry="801.7663"
+     style="display:inline;stroke:#0a3d91;stroke-opacity:1;fill:#000000;fill-opacity:0" />
+  <ellipse
+     cx="1021.0293"
+     cy="957.94159"
+     stroke="#9d9d9d"
+     stroke-width="7.99991"
+     fill="none"
+     id="circle2"
+     rx="733.50494"
+     ry="726.49518"
+     style="display:none" />
+  <!-- LETTER N (tilted) -->
+  <text
+     x="1191.453"
+     y="810.0329"
+     text-anchor="middle"
+     dominant-baseline="central"
+     transform="matrix(0.99396766,0.18429016,-0.20791087,0.96752048,0,0)"
+     class="navy"
+     font-size="1282.33px"
+     id="text2"
+     style="display:inline;fill:#164ea5;fill-opacity:1;stroke-width:2.67148;stroke:none;stroke-opacity:1">N</text>
+  <!-- TEXT ON BOTTOM, INSIDE GAP -->
+  <path
+     id="textcurve"
+     d="m 500,1350 a 600,600 0 0 0 1000,0"
+     fill="none"
+     style="display:inline" />
+  <text
+     fill="#0b224a"
+     font-size="150px"
+     id="text3"
+     transform="matrix(1.3962992,0,0,1.2560651,-386.21665,-54.290706)"
+     style="display:inline;mix-blend-mode:color;fill:#164ea5;fill-opacity:1;stroke:none;stroke-opacity:1"><textPath
+       href="#textcurve"
+       startOffset="50%"
+       text-anchor="middle"
+       id="textPath2">NORDIC PARK</textPath></text>
+  <ellipse
+     cx="1019.2767"
+     cy="964.95135"
+     stroke="#0b224a"
+     stroke-width="10.584"
+     fill="none"
+     id="ellipse6"
+     rx="807.02368"
+     ry="801.7663"
+     style="display:inline;stroke:#164ea5;stroke-opacity:1" />
+</svg>

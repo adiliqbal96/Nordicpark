@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: nordic-park-backend
+    env: node
+    buildCommand: npm install
+    startCommand: npm start
+    rootDirectory: backend
+    envVars:
+      - key: NODE_VERSION
+        value: 20
