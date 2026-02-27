@@ -39,3 +39,4 @@ jobs:
           source: 'frontend/dist/*'
           target: 'nordicpark.eu'
           strip_components: 2
+        # Final deployment trigger
