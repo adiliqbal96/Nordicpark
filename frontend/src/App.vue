@@ -38,12 +38,14 @@
       </div>
       <p>© {{ year }} NordicPark · Professionel parkeringskontrol</p>
     </footer>
+    <FaqChatBubble />
   </div>
 </template>
 
 <script setup>
 import { ref, onMounted } from 'vue'
 import { RouterLink, RouterView } from 'vue-router'
+import FaqChatBubble from './components/FaqChatBubble.vue'
 
 const year = new Date().getFullYear()
 const showingSplash = ref(true)
