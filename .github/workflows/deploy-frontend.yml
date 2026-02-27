@@ -37,5 +37,5 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           port: 22
           source: 'frontend/dist/*'
-          target: './'
+          target: 'nordicpark.eu'
           strip_components: 2
