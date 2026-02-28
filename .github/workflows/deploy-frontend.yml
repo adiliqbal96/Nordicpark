@@ -29,11 +29,28 @@ jobs:
         run: npm run build
         working-directory: frontend
 
-      - name: FTP Deploy
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+      - name: SSH Server Check
+        uses: appleboy/ssh-action@v1.0.3
         with:
-          server: ${{ secrets.FTP_SERVER }}
+          host: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: frontend/dist/
-          server-dir: /nordicpark.eu/
+          script: |
+            echo "Current Directory (pwd):"
+            pwd
+            echo "Root Listing (ls -la):"
+            ls -la
+            echo "Checking www or public_html:"
+            ls -la www || true
+            ls -la public_html || true
+            
+      - name: SFTP Deploy
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          port: 22
+          source: 'frontend/dist/*'
+          target: './'
+          strip_components: 2
