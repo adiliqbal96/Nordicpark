@@ -45,7 +45,7 @@ jobs:
         uses: rostimelk/one.com-deployer@master
         env:
           ONE_DOMAIN_NAME: 'nordicpark.eu'
-          ONE_SSH_KEY_PRIVATE: ${{ secrets.FTP_PASSWORD }}
+          ONE_SSH_KEY_PRIVATE: ${{ secrets.SSH_PRIVATE_KEY }}
           ONE_SSH_KEY_PUBLIC: ${{ secrets.PUB_KEY }}
           TPO_SRC_PATH: 'frontend/dist/'
           TPO_PATH: ''
