@@ -29,28 +29,23 @@ jobs:
         run: npm run build
         working-directory: frontend
 
-      - name: SSH Server Check
+      - name: Auto-Install SSH Key
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           script: |
-            echo "Current Directory (pwd):"
-            pwd
-            echo "Root Listing (ls -la):"
-            ls -la
-            echo "Checking www or public_html:"
-            ls -la www || true
-            ls -la public_html || true
-            
-      - name: SFTP Deploy
-        uses: appleboy/scp-action@v0.1.7
-        with:
-          host: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          port: 22
-          source: 'frontend/dist/*'
-          target: './'
-          strip_components: 2
+            mkdir -p ~/.ssh
+            echo "${{ secrets.PUB_KEY }}" > ~/.ssh/authorized_keys
+            chmod 700 ~/.ssh
+            chmod 600 ~/.ssh/authorized_keys
+
+      - name: GitHub Deploy to One.com
+        uses: rostimelk/one.com-deployer@master
+        env:
+          ONE_DOMAIN_NAME: 'nordicpark.eu'
+          ONE_SSH_KEY_PRIVATE: ${{ secrets.FTP_PASSWORD }}
+          ONE_SSH_KEY_PUBLIC: ${{ secrets.PUB_KEY }}
+          TPO_SRC_PATH: 'frontend/dist/'
+          TPO_PATH: ''
