@@ -34,7 +34,7 @@
         <h2>2. Parkeringskontrol</h2>
         <p>
           Parkeringskontrol udføres af Nordic Park ApS eller bemyndigede kontrollører. 
-          Overtrædelser dokumenteres digitalt, herunder ved billeder af køretøj, registreringsnummer, 
+          Overtrædelser dokumenteres, herunder ved brug af billeder af køretøj, registreringsnummer, 
           placering, dato og tidspunkt.
           Automatisk kontrol, herunder kamera og nummerpladegenkendelse (ANPR), kan anvendes, hvor 
           dette er lovligt og skiltet.

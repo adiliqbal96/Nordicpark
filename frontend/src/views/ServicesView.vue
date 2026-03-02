@@ -6,7 +6,7 @@
       <h1>Løsninger til parkering 🅿️</h1>
       <p class="service-intro">
         NordicPark tilbyder skræddersyede løsninger til boligforeninger, butikker, centre
-        og private P-pladser. Vi kombinerer professionel service med digital præcision.
+        og private P-pladser. Vi kombinerer professionel service med traditionel og fair kontrol.
       </p>
     </header>
 
@@ -17,8 +17,7 @@
           <ul class="premium-list">
             <li><span>Komplet parkeringskontrol med uniformerede vagter</span></li>
             <li><span>Opsætning af tydelig skiltning og parkeringsregler</span></li>
-            <li><span>Digital registrering af parkering og kontrol 📲</span></li>
-            <li><span>Rapporter og statistik til ejere og administratorer 📊</span></li>
+            <li><span>Traditionel og fair parkeringskontrol 📲</span></li>
           </ul>
         </section>
       </div>

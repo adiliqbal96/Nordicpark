@@ -91,7 +91,7 @@ const toggleItem = (index) => {
 const faqItems = [
   {
     question: "Hvilke parkeringsløsninger tilbyder I?",
-    answer: "Vi tilbyder skræddersyede løsninger, herunder digital parkering, ANPR (gengivelse af nummerplader), og traditionel parkeringsvagt-service baseret på din ejendoms behov."
+    answer: "Vi tilbyder skræddersyede løsninger med traditionel og fair parkeringskontrol, uniformeret vagtservice og tydelig skiltning baseret på din ejendoms behov."
   },
   {
     question: "Koster det noget at få jer ud?",
@@ -104,6 +104,10 @@ const faqItems = [
   {
     question: "Hvor hurtigt kan vi komme i gang?",
     answer: "Fra vi har besigtiget arealet og aftalt rammerne, kan vi typisk implementere løsningen og opsætte skiltning inden for 1-2 uger."
+  },
+  {
+    question: "Hvordan kan jeg se billeder af min parkering?",
+    answer: "Når du har modtaget en afgift, er overtrædelsen altid dokumenteret med billeder. Du kan se billederne af din bil ved at klikke ind på 'Har du fået en afgift?' her på hjemmesiden og indtaste dit kontrolafgifts- eller registreringsnummer."
   }
 ]
 </script>

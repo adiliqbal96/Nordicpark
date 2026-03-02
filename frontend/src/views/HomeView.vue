@@ -3,10 +3,10 @@
     <!-- HERO -->
     <section class="hero" id="top">
       <div class="hero-inner">
-        <p class="hero-kicker">NORDICPARK – DIGITAL PARKERINGSKONTROL</p>
+        <p class="hero-kicker">NORDICPARK – TRADITIONEL OG FAIR KONTROL</p>
         <h1>Fremtidens p-løsninger til jeres ejendom</h1>
         <p class="hero-subtitle">
-          Vi skaber tryghed og orden på p-pladsen med intelligente, digitale systemer. 
+          Vi skaber tryghed og orden på p-pladsen med traditionel og fair parkering. 
           Professionel kontrol med fokus på dialog og fairness. 🤝
         </p>
 
@@ -44,7 +44,7 @@
             </div>
             <h3>Erhverv & Retail</h3>
             <p>
-              Optimér pladsen for jeres kunder og undgå langtidsparkering med digital overvågning. 🛍️
+              Optimér pladsen for jeres kunder og undgå langtidsparkering med traditionel og fair kontrol. 🛍️
             </p>
             <span class="link">Læs mere →</span>
           </article>
@@ -72,10 +72,10 @@
           <div class="why-list">
             <article class="why-card">
               <h3>
-                <span class="why-icon">📲</span>
-                Digital registrering
+                <span class="why-icon">✅</span>
+                Traditionel kontrol
               </h3>
-              <p>Moderne systemer med registrering via app, kamera eller tablet.</p>
+              <p>Fysisk og nærværende parkeringskontrol udført af professionelle vagter.</p>
             </article>
 
             <article class="why-card">
@@ -86,13 +86,7 @@
               <p>Fokus på dialog og tydelig skiltning – ikke på bøder for enhver pris.</p>
             </article>
 
-            <article class="why-card">
-              <h3>
-                <span class="why-icon">📈</span>
-                Statistik &amp; rapporter
-              </h3>
-              <p>Gennemsigtige rapporter så du altid ved, hvordan pladsen bruges.</p>
-            </article>
+
 
             <article class="why-card">
               <h3>
@@ -138,16 +132,16 @@
             <div class="process-badge">2</div>
             <h3>Opsætning</h3>
             <p>
-              Skiltning, zoner og digitale løsninger sættes op.
+              Skiltning og p-zoner sættes op.
               Vi hjælper også med kommunikation til beboere og brugere.
             </p>
           </article>
 
           <article class="process-card">
             <div class="process-badge">3</div>
-            <h3>Kontrol &amp; rapporter</h3>
+            <h3>Løbende kontrol</h3>
             <p>
-              Løbende kontrol, statistik og sparring.
+              Daglig kontrol og sparring.
               I kan altid følge med i udviklingen og justere ordningen efter behov.
             </p>
           </article>

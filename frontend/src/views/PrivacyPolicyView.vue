@@ -45,7 +45,7 @@
           <li>Klagebehandling og dokumentation</li>
           <li>Opkrævning og eventuel inkasso</li>
           <li>Overholdelse af retlige forpligtelser</li>
-          <li>Drift og forbedring af digitale løsninger</li>
+          <li>Drift og forbedring af vores services</li>
           <li>Kommunikation med brugere og samarbejdspartnere</li>
         </ul>
         <p>Hvis der anvendes kamera- eller ANPR-teknologi, sker dette for at sikre effektiv og korrekt parkeringskontrol.</p>

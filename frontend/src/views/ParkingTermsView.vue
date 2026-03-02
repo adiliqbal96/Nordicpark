@@ -21,7 +21,7 @@
         <h2>2. Parkering og betalingsvilkår</h2>
         <p>
           Parkering må kun ske i overensstemmelse med den skiltning og de vilkår, der fremgår af det konkrete
-          parkeringsområde. Eventuelle krav om tidsbegrænsning, registrering, betaling eller anvendelse af digitale løsninger
+          parkeringsområde. Eventuelle krav om tidsbegrænsning, registrering eller betaling
           fremgår af skiltningen.
         </p>
         <p>
