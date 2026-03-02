@@ -24,7 +24,7 @@
       
       <aside class="service-visual">
         <div class="visual-card">
-          <img src="https://images.unsplash.com/photo-1590674852885-ce8245d98863?q=80&w=800&auto=format&fit=crop" alt="Parkeringsservice" loading="lazy" />
+          <img src="https://images.unsplash.com/photo-1541882356-9de960c1fb41?q=80&w=800&auto=format&fit=crop" alt="Parkeringsservice" loading="lazy" />
         </div>
       </aside>
     </div>
