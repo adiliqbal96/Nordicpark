@@ -115,15 +115,4 @@ onMounted(() => {
   transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Nav CTA specific */
-.nav-cta {
-  background: #fff !important;
-  color: #000 !important;
-  font-weight: 700 !important;
-}
-
-.nav-cta:hover {
-  background: #f0f0f0 !important;
-  transform: translateY(-1px);
-}
 </style>
