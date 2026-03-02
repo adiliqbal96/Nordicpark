@@ -319,6 +319,11 @@ section {
   transition: all 0.3s ease;
   display: flex;
   flex-direction: column;
+  text-decoration: none;
+  /* Fjern link-understregning */
+  color: inherit;
+  /* Bevar indholdets tekstfarve */
+  cursor: pointer;
 }
 
 @media (min-width: 1024px) {
@@ -341,6 +346,7 @@ section {
   transform: translateY(-8px);
   background: #142145;
   border-color: var(--color-accent);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3), 0 0 20px rgba(0, 69, 165, 0.15);
 }
 
 .card-image-wrapper {

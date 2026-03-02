@@ -27,7 +27,7 @@
         <h2 class="section-title centered">Specialiserede løsninger 🏢</h2>
 
         <div class="cards-grid">
-          <article class="card">
+          <RouterLink :to="{ name: 'services' }" class="card">
             <div class="card-image-wrapper">
               <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=800&auto=format&fit=crop" alt="Boligforeninger" class="card-image" loading="lazy" />
             </div>
@@ -36,9 +36,9 @@
               Få styr på gæsteparkering og beboerlicenser med vores brugervenlige app-løsninger. 📲
             </p>
             <span class="link">Læs mere →</span>
-          </article>
+          </RouterLink>
 
-          <article class="card">
+          <RouterLink :to="{ name: 'services' }" class="card">
             <div class="card-image-wrapper">
               <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800&auto=format&fit=crop" alt="Erhverv & Retail" class="card-image" loading="lazy" />
             </div>
@@ -47,9 +47,9 @@
               Optimér pladsen for jeres kunder og undgå langtidsparkering med traditionel og fair kontrol. 🛍️
             </p>
             <span class="link">Læs mere →</span>
-          </article>
+          </RouterLink>
 
-          <article class="card">
+          <RouterLink :to="{ name: 'services' }" class="card">
             <div class="card-image-wrapper">
               <img src="https://images.unsplash.com/photo-1506521781263-d8422e82f27a?w=800" alt="Privat kontrol" class="card-image" loading="lazy" />
             </div>
@@ -58,7 +58,7 @@
               Beskyt jeres private arealer mod uvedkommende parkering med tydelig skiltning. 🛡️
             </p>
             <span class="link">Læs mere →</span>
-          </article>
+          </RouterLink>
         </div>
       </div>
     </section>
