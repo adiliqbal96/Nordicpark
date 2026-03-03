@@ -44,13 +44,33 @@
       
       <h1>Betal afgift</h1>
       <p>
-        Vi arbejder på at gøre det muligt at betale din afgift direkte her på siden med MobilePay.
+        Vælg venligst typen af din parkeringsafgift for at fortsætte til betaling.
       </p>
+
+      <div class="choice-grid mini">
+        <button class="choice-card small" @click="selectPaymentAmount(950)">
+          <div class="choice-icon small">🚗</div>
+          <div class="choice-content">
+            <h3>Standard afgift</h3>
+            <p>950,00 kr.</p>
+          </div>
+        </button>
+
+        <button class="choice-card small" @click="selectPaymentAmount(1900)">
+          <div class="choice-icon small">♿</div>
+          <div class="choice-content">
+            <h3>Handicap afgift</h3>
+            <p>1.900,00 kr.</p>
+          </div>
+        </button>
+      </div>
       
       <div class="info-box">
-        <h4>Hvornår er det klar?</h4>
-        <p>Vi forventer at åbne for betaling i løbet af kort tid. Indtil da kan du betale via de informationer, der fremgår af din parkeringsafgift.</p>
-        <p style="margin-top: 1rem; color: #fff; font-weight: 700;">Husk altid at påføre referencenummer ved betaling.</p>
+        <h4>Betalingsinfo</h4>
+        <p>Vi arbejder på at åbne for direkte MobilePay/Kort-betaling her på siden. Indtil da skal betaling ske via bankoverførsel som angivet på din fysiske afgift.</p>
+        <p style="margin-top: 1.5rem; color: #fff; font-weight: 700; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1rem;">
+          ⚠️ Husk altid at påføre afgiftsnummer/referencenummer ved betaling.
+        </p>
       </div>
     </div>
 
@@ -121,6 +141,12 @@ const status = reactive({
 const selectType = (type) => {
   form.type = type
   status.message = ''
+}
+
+const selectPaymentAmount = (amount) => {
+  // Gemmer beløbet så vi kan bruge det når Stripe er klar
+  form.amount = amount
+  console.log('Valgt beløb:', amount)
 }
 
 const handleSubmit = async () => {
@@ -286,5 +312,23 @@ const handleSubmit = async () => {
   margin: 0;
   font-size: 0.95rem;
   color: var(--color-text-muted);
+}
+
+.choice-grid.mini {
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  margin: 2rem 0 3rem;
+}
+
+.choice-card.small {
+  padding: 1.5rem;
+  gap: 1rem;
+}
+
+.choice-icon.small {
+  font-size: 2rem;
+}
+
+.choice-card.small h3 {
+  font-size: 1.1rem;
 }
 </style>
