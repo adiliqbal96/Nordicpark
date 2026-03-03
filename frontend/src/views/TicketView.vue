@@ -50,6 +50,7 @@
       <div class="info-box">
         <h4>Hvornår er det klar?</h4>
         <p>Vi forventer at åbne for betaling i løbet af kort tid. Indtil da kan du betale via de informationer, der fremgår af din parkeringsafgift.</p>
+        <p style="margin-top: 1rem; color: #fff; font-weight: 700;">Husk altid at påføre referencenummer ved betaling.</p>
       </div>
     </div>
 
