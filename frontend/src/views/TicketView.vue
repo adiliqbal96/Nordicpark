@@ -24,6 +24,32 @@
             <p>Hvis du ønsker at se billeddokumentation for overtrædelsen.</p>
           </div>
         </button>
+
+        <button class="choice-card" @click="selectType('payment')">
+          <div class="choice-icon">📱</div>
+          <div class="choice-content">
+            <h3>Betal afgift</h3>
+            <p>Betal din parkeringsafgift hurtigt og nemt med MobilePay.</p>
+          </div>
+        </button>
+      </div>
+    </div>
+
+    <div v-else-if="form.type === 'payment'" class="form-container">
+      <button class="btn-back" @click="form.type = null">← Tilbage til valg</button>
+      
+      <div class="beta-status">
+        <span class="badge">UNDER UDVIKLING 🏗️</span>
+      </div>
+      
+      <h1>Betal afgift</h1>
+      <p>
+        Vi arbejder på at gøre det muligt at betale din afgift direkte her på siden med MobilePay.
+      </p>
+      
+      <div class="info-box">
+        <h4>Hvornår er det klar?</h4>
+        <p>Vi forventer at åbne for betaling i løbet af kort tid. Indtil da kan du betale via de informationer, der fremgår af din parkeringsafgift.</p>
       </div>
     </div>
 
@@ -136,7 +162,7 @@ const handleSubmit = async () => {
 <style scoped>
 .choice-container {
   text-align: center;
-  max-width: 800px;
+  max-width: 1000px;
   margin: 0 auto;
 }
 
@@ -147,8 +173,8 @@ const handleSubmit = async () => {
 
 .choice-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
 }
 
 @media (max-width: 600px) {
@@ -224,5 +250,40 @@ const handleSubmit = async () => {
 
 .page h1 {
   margin-bottom: 1rem;
+}
+
+.beta-status {
+  margin-bottom: 1.5rem;
+}
+
+.badge {
+  background: var(--color-accent);
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-full);
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+}
+
+.info-box {
+  background: rgba(0, 69, 165, 0.1);
+  border: 1px solid rgba(0, 69, 165, 0.2);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  margin-top: 3rem;
+  text-align: left;
+}
+
+.info-box h4 {
+  margin: 0 0 0.5rem 0;
+  color: #fff;
+  font-size: 1.1rem;
+}
+
+.info-box p {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--color-text-muted);
 }
 </style>
