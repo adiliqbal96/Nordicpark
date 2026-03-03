@@ -63,6 +63,21 @@
             <p>1.900,00 kr.</p>
           </div>
         </button>
+
+        <button class="choice-card small" @click="selectPaymentAmount('custom')">
+          <div class="choice-icon small">✏️</div>
+          <div class="choice-content">
+            <h3>Andet beløb</h3>
+            <p>Indtast selv beløb</p>
+          </div>
+        </button>
+      </div>
+
+      <div v-if="form.amount === 'custom'" class="custom-amount-input">
+        <label>
+          Indtast beløb (DKK)
+          <input v-model="form.customAmount" type="number" placeholder="F.eks. 500" step="1" min="1" />
+        </label>
       </div>
       
       <div class="info-box">
@@ -330,5 +345,21 @@ const handleSubmit = async () => {
 
 .choice-card.small h3 {
   font-size: 1.1rem;
+}
+
+.custom-amount-input {
+  max-width: 300px;
+  margin: 0 auto 3rem;
+  text-align: left;
+  background: var(--glass-bg);
+  padding: 1.5rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--glass-border);
+}
+
+.custom-amount-input label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
 }
 </style>
