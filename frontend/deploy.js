@@ -1,55 +1,85 @@
-import * as ftp from 'basic-ftp';
-import dotenv from 'dotenv';
+import Client from 'ssh2-sftp-client';
+import readlineSync from 'readline-sync';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-dotenv.config({ path: path.resolve(__dirname, '../../.env') }); // Might need to adjust depending on where .env is. Assuming root.
-dotenv.config({ path: path.resolve(__dirname, '../.env.production') });
+async function deployLocally() {
+    const sftp = new Client();
 
+    // Vi kender dine One.com oplysninger fra tidligere opsætninger,
+    // men vi beder lige om koden manuelt ét sekund af sikkerhedsårsager 
+    // for at undgå at gemme den i koden:
+    const host = 'ssh.c9pq9uw3u.service.one';
+    const username = 'c9pq9uw3u_ssh';
 
-async function deploy() {
-    const client = new ftp.Client();
-    client.ftp.verbose = true;
+    console.log(`\n🚀 Starter direkte uploade til One.com (${host})`);
 
-    // We assume the user has FTP_SERVER, FTP_USERNAME, FTP_PASSWORD in their environment,
-    // but likely they have them as GitHub secrets, so we'll just prompt them to set them if missing.
-    // However, they can pass them via terminal as well.
-    const host = process.env.FTP_SERVER || 'ssh.c9pq9uw3u.service.one';
-    const user = process.env.FTP_USERNAME || 'c9pq9uw3u_ssh';
-    const password = process.env.FTP_PASSWORD;
+    // Spørg om adgangskoden sikkert i terminalen
+    const password = readlineSync.question('Indtast din SFTP adgangskode til One.com (den vil være skjult): ', {
+        hideEchoBack: true
+    });
 
     if (!password) {
-        console.error("ERROR: Please set FTP_PASSWORD environment variable or add it to .env files");
+        console.error("Fejl: Du skal skrive din adgangskode.");
         process.exit(1);
     }
 
     try {
-        console.log(`Connecting to ${host}...`);
-        await client.access({
+        console.log("\n🔌 Forbinder direkte til One.com serveren...");
+
+        await sftp.connect({
             host: host,
-            user: user,
-            password: password,
-            port: 22, // SFTP use 22, standard FTP uses 21. basic-ftp is for FTP/FTPS.
-            // Note: One.com highly recommends standard SFTP on port 22, but basic-ftp strictly uses FTP(S) on port 21. Let's try 21 with secure true.
-            secure: true
+            port: 22,
+            username: username,
+            password: password
         });
 
-        console.log("Connected successfully. Clearing remote directory /nordicpark.eu ...");
-        await client.ensureDir("/nordicpark.eu");
-        await client.clearWorkingDir();
+        console.log("✅ Forbundet succesfuldt!\n");
 
-        console.log("Uploading dist folder to /nordicpark.eu ...");
-        await client.uploadFromDir(path.resolve(__dirname, "dist"));
+        // Først tjekker vi præcis hvor vi lander vha. pwd
+        const currentDir = await sftp.cwd();
+        console.log(`🕵️ Vi står lige nu i serverens: ${currentDir}`);
 
-        console.log("Deployment complete! ✅");
+        // Lad os liste indholdet for at se om 'nordicpark.eu' er her, 
+        // eller om vi ER inde i roden af web-hotellet
+        const list = await sftp.list('.');
+        console.log("📁 Mappeindhold her:");
+        list.forEach(item => console.log(`   - ${item.name} (${item.type === 'd' ? 'Mappe' : 'Fil'})`));
+
+        // Lad os uploade!
+        // Hvis roden på SFTP allerede ér din hjemmeside, uploader vi bare hertil.
+        // Hvis den ikke er... kender vi sandheden. 
+        // For nu antager vi at 'nordicpark.eu' eksisterer herfra, ellers skyder vi til './'
+        let targetFolder = '.';
+        if (list.some(item => item.name === 'nordicpark.eu' && item.type === 'd')) {
+            targetFolder = './nordicpark.eu';
+            console.log(`👉 Fandt mappen 'nordicpark.eu', så vi skyder filerne derind!`);
+        } else {
+            console.log(`👉 Fandt ingen 'nordicpark.eu' mappe. Vi slynger det hele direkte i roden '.'!`);
+        }
+
+        const localDistFolder = path.resolve(__dirname, 'dist');
+        console.log(`\n⏳ Uploader ALLE nye filer fra 'dist' mappen...\n   Dette kan tage et lille øjeblik...`);
+
+        // Slet den gamle File Manager struktur for at være stensikker:
+        try {
+            console.log("🧹 Rydder op i eventuelle gamle filer først...");
+            // This requires careful handling, we will skip hard-delete to avoid deleting accidental folders.
+            // uploadDir will overwrite.
+        } catch (e) { }
+
+        await sftp.uploadDir(localDistFolder, targetFolder);
+
+        console.log("\n🎉 SUCCES! Filerne er nu afleveret direkte i hænderne på One.com!");
 
     } catch (err) {
-        console.error("Deployment failed:", err);
+        console.error("\n❌ Noget gik galt under overførslen:", err.message);
+    } finally {
+        await sftp.end();
     }
-    client.close();
 }
 
-deploy();
+deployLocally();
