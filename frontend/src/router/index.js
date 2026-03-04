@@ -7,6 +7,9 @@ import PrivacyPolicyView from '../views/PrivacyPolicyView.vue'
 import CookieView from '../views/CookieView.vue'
 import TermsView from '../views/TermsView.vue'
 import ParkingTermsView from '../views/ParkingTermsView.vue'
+import ResidentialView from '../views/ResidentialView.vue'
+import BusinessView from '../views/BusinessView.vue'
+import PrivateView from '../views/PrivateView.vue'
 
 const routes = [
   { path: '/', name: 'home', component: HomeView },
@@ -32,6 +35,21 @@ const routes = [
     path: '/parkeringsbetingelser',
     name: 'parking-terms',
     component: ParkingTermsView
+  },
+  {
+    path: '/service/boligforeninger',
+    name: 'service-residential',
+    component: ResidentialView
+  },
+  {
+    path: '/service/erhverv-retail',
+    name: 'service-business',
+    component: BusinessView
+  },
+  {
+    path: '/service/privat-kontrol',
+    name: 'service-private',
+    component: PrivateView
   }
 ]
 

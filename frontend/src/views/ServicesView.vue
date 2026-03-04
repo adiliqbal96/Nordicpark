@@ -1,36 +1,54 @@
 <template>
   <div class="page">
-    <Backlink :to="{ name: 'home', hash: '#solutions' }" label="Til forsiden" />
+    <div class="container">
+      <Backlink :to="{ name: 'home', hash: '#solutions' }" label="Til forsiden" />
 
-    <header class="service-header">
-      <h1>Løsninger til parkering 🅿️</h1>
-      <p class="service-intro">
-        NordicPark tilbyder skræddersyede løsninger til boligforeninger, butikker, centre
-        og private P-pladser. Vi kombinerer professionel service med traditionel og fair kontrol.
-      </p>
-    </header>
+      <header class="service-header hub">
+        <h1>Vores P-løsninger 🅿️</h1>
+        <p class="service-intro">
+          NordicPark tilbyder professionelle løsninger til alle typer parkeringsarealer. Vælg nedenfor for at læse mere om vores specifikke ydelser.
+        </p>
+      </header>
 
-    <div class="service-grid">
-      <div class="service-content">
-        <section class="service-detail">
-          <h2>Professionel kontrol & Sparring</h2>
-          <ul class="premium-list">
-            <li><span>Komplet parkeringskontrol med uniformerede vagter</span></li>
-            <li><span>Opsætning af tydelig skiltning og parkeringsregler</span></li>
-            <li><span>Traditionel og fair parkeringskontrol 📲</span></li>
-          </ul>
-        </section>
+      <div class="cards-grid">
+        <RouterLink :to="{ name: 'service-residential' }" class="card">
+          <div class="card-image-wrapper">
+            <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=800&auto=format&fit=crop" alt="Boligforeninger" class="card-image" loading="lazy" />
+          </div>
+          <h3>Boligforeninger</h3>
+          <p>Beboerparkering og gæstelicenser.</p>
+          <span class="link">Se løsning →</span>
+        </RouterLink>
+
+        <RouterLink :to="{ name: 'service-business' }" class="card">
+          <div class="card-image-wrapper">
+            <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800&auto=format&fit=crop" alt="Erhverv & Retail" class="card-image" loading="lazy" />
+          </div>
+          <h3>Erhverv & Retail</h3>
+          <p>Optimering af kundeparkering.</p>
+          <span class="link">Se løsning →</span>
+        </RouterLink>
+
+        <RouterLink :to="{ name: 'service-private' }" class="card">
+          <div class="card-image-wrapper">
+            <img src="https://images.unsplash.com/photo-1506521781263-d8422e82f27a?w=800" alt="Privat kontrol" class="card-image" loading="lazy" />
+          </div>
+          <h3>Privat kontrol</h3>
+          <p>Sikring af private arealer.</p>
+          <span class="link">Se løsning →</span>
+        </RouterLink>
       </div>
-      
-      <aside class="service-visual">
-        <div class="visual-card">
-          <img src="https://images.unsplash.com/photo-1541882356-9de960c1fb41?q=80&w=800&auto=format&fit=crop" alt="Parkeringsservice" loading="lazy" />
-        </div>
-      </aside>
     </div>
   </div>
 </template>
 
 <script setup>
+import { RouterLink } from 'vue-router'
 import Backlink from '../components/Backlink.vue'
 </script>
+
+<style scoped>
+.hub {
+  margin-bottom: 4rem;
+}
+</style>

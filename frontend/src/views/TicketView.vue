@@ -1,136 +1,138 @@
 <template>
   <div class="page">
-    <Backlink :to="{ name: 'home' }" label="Til forsiden" />
+    <div class="container">
+      <Backlink :to="{ name: 'home' }" label="Til forsiden" />
 
-    <div v-if="!form.type" class="choice-container">
-      <h1>Har du fået en afgift?</h1>
-      <p class="intro-text">
-        Vælg venligst nedenfor hvad din henvendelse vedrører, så vi kan hjælpe dig bedst muligt.
-      </p>
-
-      <div class="choice-grid">
-        <button class="choice-card" @click="selectType('complaint')">
-          <div class="choice-icon">⚖️</div>
-          <div class="choice-content">
-            <h3>Jeg ønsker at klage</h3>
-            <p>Hvis du mener afgiften er udstedt på et forkert grundlag.</p>
-          </div>
-        </button>
-
-        <button class="choice-card" @click="selectType('photo')">
-          <div class="choice-icon">📸</div>
-          <div class="choice-content">
-            <h3>Se dokumentation</h3>
-            <p>Hvis du ønsker at se billeddokumentation for overtrædelsen.</p>
-          </div>
-        </button>
-
-        <button class="choice-card" @click="selectType('payment')">
-          <div class="choice-icon">📱</div>
-          <div class="choice-content">
-            <h3>Betal afgift</h3>
-            <p>Betal din parkeringsafgift hurtigt og nemt med MobilePay.</p>
-          </div>
-        </button>
-      </div>
-    </div>
-
-    <div v-else-if="form.type === 'payment'" class="form-container">
-      <button class="btn-back" @click="form.type = null">← Tilbage til valg</button>
-      
-      <div class="beta-status">
-        <span class="badge">UNDER UDVIKLING 🏗️</span>
-      </div>
-      
-      <h1>Betal afgift</h1>
-      <p>
-        Vælg venligst typen af din parkeringsafgift for at fortsætte til betaling.
-      </p>
-
-      <div class="choice-grid mini">
-        <button class="choice-card small" @click="selectPaymentAmount(950)">
-          <div class="choice-icon small">🚗</div>
-          <div class="choice-content">
-            <h3>Standard afgift</h3>
-            <p>950,00 kr.</p>
-          </div>
-        </button>
-
-        <button class="choice-card small" @click="selectPaymentAmount(1900)">
-          <div class="choice-icon small">♿</div>
-          <div class="choice-content">
-            <h3>Handicap afgift</h3>
-            <p>1.900,00 kr.</p>
-          </div>
-        </button>
-
-        <button class="choice-card small" @click="selectPaymentAmount('custom')">
-          <div class="choice-icon small">✏️</div>
-          <div class="choice-content">
-            <h3>Andet beløb</h3>
-            <p>Indtast selv beløb</p>
-          </div>
-        </button>
-      </div>
-
-      <div v-if="form.amount === 'custom'" class="custom-amount-input">
-        <label>
-          Indtast beløb (DKK)
-          <input v-model="form.customAmount" type="number" placeholder="F.eks. 500" step="1" min="1" />
-        </label>
-      </div>
-      
-      <div class="info-box">
-        <h4>Betalingsinfo</h4>
-        <p>Vi arbejder på at åbne for direkte MobilePay/Kort-betaling her på siden. Indtil da skal betaling ske via bankoverførsel som angivet på din fysiske afgift.</p>
-        <p style="margin-top: 1.5rem; color: #fff; font-weight: 700; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1rem;">
-          ⚠️ Husk altid at påføre afgiftsnummer/referencenummer ved betaling.
+      <div v-if="!form.type" class="choice-container">
+        <h1>Har du fået en afgift?</h1>
+        <p class="intro-text">
+          Vælg venligst nedenfor hvad din henvendelse vedrører, så vi kan hjælpe dig bedst muligt.
         </p>
+
+        <div class="choice-grid">
+          <button class="choice-card" @click="selectType('complaint')">
+            <div class="choice-icon">⚖️</div>
+            <div class="choice-content">
+              <h3>Jeg ønsker at klage</h3>
+              <p>Hvis du mener afgiften er udstedt på et forkert grundlag.</p>
+            </div>
+          </button>
+
+          <button class="choice-card" @click="selectType('photo')">
+            <div class="choice-icon">📸</div>
+            <div class="choice-content">
+              <h3>Se dokumentation</h3>
+              <p>Hvis du ønsker at se billeddokumentation for overtrædelsen.</p>
+            </div>
+          </button>
+
+          <button class="choice-card" @click="selectType('payment')">
+            <div class="choice-icon">📱</div>
+            <div class="choice-content">
+              <h3>Betal afgift</h3>
+              <p>Betal din parkeringsafgift hurtigt og nemt med MobilePay.</p>
+            </div>
+          </button>
+        </div>
       </div>
-    </div>
 
-    <div v-else class="form-container">
-      <button class="btn-back" @click="form.type = null">← Tilbage til valg</button>
-      
-      <h1>{{ form.type === 'complaint' ? 'Indsend klage' : 'Anmod om dokumentation' }}</h1>
-      <p v-if="form.type === 'complaint'">
-        Udfyld formularen nedenfor med detaljerne omkring din klage. Vi gennemgår sagen hurtigst muligt.
-      </p>
-      <p v-else>
-        Indtast dine oplysninger nedenfor, så sender vi billeddokumentationen til din e-mail.
-      </p>
+      <div v-else-if="form.type === 'payment'" class="form-container">
+        <button class="btn-back" @click="form.type = null">← Tilbage til valg</button>
+        
+        <div class="beta-status">
+          <span class="badge">UNDER UDVIKLING 🏗️</span>
+        </div>
+        
+        <h1>Betal afgift</h1>
+        <p>
+          Vælg venligst typen af din parkeringsafgift for at fortsætte til betaling.
+        </p>
 
-      <form class="form" @submit.prevent="handleSubmit">
-        <div class="form-grid">
+        <div class="choice-grid mini">
+          <button class="choice-card small" @click="selectPaymentAmount(950)">
+            <div class="choice-icon small">🚗</div>
+            <div class="choice-content">
+              <h3>Standard afgift</h3>
+              <p>950,00 kr.</p>
+            </div>
+          </button>
+
+          <button class="choice-card small" @click="selectPaymentAmount(1900)">
+            <div class="choice-icon small">♿</div>
+            <div class="choice-content">
+              <h3>Handicap afgift</h3>
+              <p>1.900,00 kr.</p>
+            </div>
+          </button>
+
+          <button class="choice-card small" @click="selectPaymentAmount('custom')">
+            <div class="choice-icon small">✏️</div>
+            <div class="choice-content">
+              <h3>Andet beløb</h3>
+              <p>Indtast selv beløb</p>
+            </div>
+          </button>
+        </div>
+
+        <div v-if="form.amount === 'custom'" class="custom-amount-input">
           <label>
-            Afgiftsnummer
-            <input v-model="form.ticketNumber" type="text" placeholder="F.eks. 123456" required />
+            Indtast beløb (DKK)
+            <input v-model="form.customAmount" type="number" placeholder="F.eks. 500" step="1" min="1" />
+          </label>
+        </div>
+        
+        <div class="info-box">
+          <h4>Betalingsinfo</h4>
+          <p>Vi arbejder på at åbne for direkte MobilePay/Kort-betaling her på siden. Indtil da skal betaling ske via bankoverførsel som angivet på din fysiske afgift.</p>
+          <p style="margin-top: 1.5rem; color: #fff; font-weight: 700; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1rem;">
+            ⚠️ Husk altid at påføre afgiftsnummer/referencenummer ved betaling.
+          </p>
+        </div>
+      </div>
+
+      <div v-else class="form-container">
+        <button class="btn-back" @click="form.type = null">← Tilbage til valg</button>
+        
+        <h1>{{ form.type === 'complaint' ? 'Indsend klage' : 'Anmod om dokumentation' }}</h1>
+        <p v-if="form.type === 'complaint'">
+          Udfyld formularen nedenfor med detaljerne omkring din klage. Vi gennemgår sagen hurtigst muligt.
+        </p>
+        <p v-else>
+          Indtast dine oplysninger nedenfor, så sender vi billeddokumentationen til din e-mail.
+        </p>
+
+        <form class="form" @submit.prevent="handleSubmit">
+          <div class="form-grid">
+            <label>
+              Afgiftsnummer
+              <input v-model="form.ticketNumber" type="text" placeholder="F.eks. 123456" required />
+            </label>
+
+            <label>
+              Nummerplade
+              <input v-model="form.licensePlate" type="text" placeholder="XX 12 345" required />
+            </label>
+          </div>
+
+          <label>
+            Din E-mail
+            <input v-model="form.email" type="email" placeholder="din@email.dk" required />
           </label>
 
           <label>
-            Nummerplade
-            <input v-model="form.licensePlate" type="text" placeholder="XX 12 345" required />
+            Besked / Begrundelse
+            <textarea v-model="form.message" rows="4" :placeholder="form.type === 'complaint' ? 'Beskriv hvorfor du klager...' : 'Evt. bemærkninger til din anmodning...'" required></textarea>
           </label>
-        </div>
 
-        <label>
-          Din E-mail
-          <input v-model="form.email" type="email" placeholder="din@email.dk" required />
-        </label>
+          <div v-if="status.message" :class="['status-msg', status.type]">
+            {{ status.message }}
+          </div>
 
-        <label>
-          Besked / Begrundelse
-          <textarea v-model="form.message" rows="4" :placeholder="form.type === 'complaint' ? 'Beskriv hvorfor du klager...' : 'Evt. bemærkninger til din anmodning...'" required></textarea>
-        </label>
-
-        <div v-if="status.message" :class="['status-msg', status.type]">
-          {{ status.message }}
-        </div>
-
-        <button type="submit" class="btn primary" :disabled="loading">
-          {{ loading ? 'Sender...' : 'Send henvendelse' }}
-        </button>
-      </form>
+          <button type="submit" class="btn primary" :disabled="loading">
+            {{ loading ? 'Sender...' : 'Send henvendelse' }}
+          </button>
+        </form>
+      </div>
     </div>
   </div>
 </template>
