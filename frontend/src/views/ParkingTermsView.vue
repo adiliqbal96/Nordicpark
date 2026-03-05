@@ -1,11 +1,11 @@
 <template>
   <div class="page legal-page">
-    <Backlink :to="{ name: 'home' }" label="Til forsiden" />
+    <Backlink :to="{ name: 'home' }" :label="i18n.t('services.back')" />
     
     <article class="legal-content">
       <header class="legal-header">
-        <h1>Parkeringsbetingelser 🅿️</h1>
-        <p class="last-updated">Gældende fra: 13. februar 2026</p>
+        <h1>{{ i18n.t('footer.parkingTerms') }} 🅿️</h1>
+        <p class="company-name">Nordic Park ApS</p>
       </header>
 
       <section>
@@ -110,6 +110,7 @@
 </template>
 
 <script setup>
+import { i18n } from '../i18n.js'
 import Backlink from '../components/Backlink.vue'
 </script>
 

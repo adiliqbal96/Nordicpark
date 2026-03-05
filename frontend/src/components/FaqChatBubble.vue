@@ -4,7 +4,7 @@
     <Transition name="fade-slide">
       <div v-if="isOpen" class="faq-window">
         <div class="faq-header">
-          <h3>Oftest Stillede Spørgsmål</h3>
+          <h3>{{ i18n.t('faq.header') }}</h3>
           <button @click="toggleChat" class="close-btn" aria-label="Close FAQ">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <line x1="18" y1="6" x2="6" y2="18"></line>
@@ -15,7 +15,7 @@
         
         <div class="faq-content">
           <div class="faq-intro">
-            Hej! 👋 Her finder du svar på de mest almindelige spørgsmål.
+            {{ i18n.t('faq.intro') }}
           </div>
           
           <div class="faq-list">
@@ -40,8 +40,8 @@
           </div>
           
           <div class="faq-footer">
-            Fandt du ikke hvad du søgte? 
-            <RouterLink to="/contact" @click="isOpen = false" class="contact-link">Kontakt os her</RouterLink>
+            {{ i18n.t('faq.footer') }}
+            <RouterLink to="/contact" @click="isOpen = false" class="contact-link">{{ i18n.t('faq.contactLink') }}</RouterLink>
           </div>
         </div>
       </div>
@@ -68,8 +68,9 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { RouterLink } from 'vue-router'
+import { i18n } from '../i18n.js'
 
 const isOpen = ref(false)
 const activeIndex = ref(null)
@@ -88,28 +89,7 @@ const toggleItem = (index) => {
   activeIndex.value = activeIndex.value === index ? null : index
 }
 
-const faqItems = [
-  {
-    question: "Hvilke parkeringsløsninger tilbyder I?",
-    answer: "Vi tilbyder skræddersyede løsninger med traditionel og fair parkeringskontrol, uniformeret vagtservice og tydelig skiltning baseret på din ejendoms behov."
-  },
-  {
-    question: "Koster det noget at få jer ud?",
-    answer: "Nej, vi tilbyder en gratis og uforpligtende gennemgang af dine parkeringsforhold, hvor vi vurderer potentialet for optimering."
-  },
-  {
-    question: "Hvordan håndteres en klage?",
-    answer: "Alle klager behandles professionelt gennem vores kundecenter. Bilisten kan nemt indsende en klage via vores hjemmeside med referencenummeret fra afgiften."
-  },
-  {
-    question: "Hvor hurtigt kan vi komme i gang?",
-    answer: "Fra vi har besigtiget arealet og aftalt rammerne, kan vi typisk implementere løsningen og opsætte skiltning inden for 1-2 uger."
-  },
-  {
-    question: "Hvordan kan jeg se billeder af min parkering?",
-    answer: "Når du har modtaget en afgift, er overtrædelsen altid dokumenteret med billeder. Du kan se billederne af din bil ved at klikke ind på 'Har du fået en afgift?' her på hjemmesiden og indtaste dit kontrolafgifts- eller registreringsnummer."
-  }
-]
+const faqItems = computed(() => i18n.t('faq.items'))
 </script>
 
 <style scoped>

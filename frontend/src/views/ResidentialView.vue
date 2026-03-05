@@ -1,42 +1,41 @@
 <template>
   <div class="page">
     <div class="container">
-      <Backlink :to="{ name: 'home', hash: '#solutions' }" label="Til forsiden" />
+      <Backlink :to="{ name: 'erhverv', hash: '#solutions' }" :label="i18n.t('services.back')" />
 
       <header class="service-header">
-        <h1>Boligforeninger 🏢</h1>
+        <h1>{{ i18n.t('services.residential.title') }}</h1>
         <p class="service-intro">
-          Vi skaber orden og tryghed for beboerne ved at sikre, at parkeringspladserne altid er tilgængelige for dem, der har ret til at holde der.
+          {{ i18n.t('services.residential.intro') }}
         </p>
       </header>
 
       <div class="service-grid">
         <div class="service-content">
-          <h2>Professionel kontrol & administration</h2>
+          <h2>{{ i18n.t('services.residential.contentTitle') }}</h2>
           <p>
-            Beboernes tryghed er vores højeste prioritet. Vi sørger for, at uvedkommende ikke optager pladsen, og at reglerne håndhæves med respekt og dialog.
+            {{ i18n.t('services.residential.contentDesc') }}
           </p>
           <ul class="premium-list">
-            <li><span>Administration af beboer- og gæstelicenser via app</span></li>
-            <li><span>Kontrol af p-zoner og tidsbegrænsning</span></li>
-            <li><span>Tydelig skiltning der guider gæster korrekt</span></li>
-            <li><span>Nærhed og dialog med beboerne</span></li>
+            <li v-for="(item, idx) in i18n.t('services.residential.list')" :key="idx">
+              <span>{{ item }}</span>
+            </li>
           </ul>
         </div>
         
         <aside class="service-visual">
           <div class="visual-card">
-            <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=1200" alt="Boligforeninger" loading="lazy" />
+            <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=1200" :alt="i18n.t('services.residential.title')" loading="lazy" />
           </div>
         </aside>
       </div>
 
       <section class="service-cta">
-        <h2>Skal vi hjælpe jeres boligforening?</h2>
+        <h2>{{ i18n.t('services.residential.ctaTitle') }}</h2>
         <p>
-          Vi tilbyder en uforpligtende gennemgang af jeres parkeringsarealer og giver et bud på en fair og effektiv løsning.
+          {{ i18n.t('services.residential.ctaDesc') }}
         </p>
-        <RouterLink :to="{ name: 'contact' }" class="btn primary lg">Book en gratis besigtigelse</RouterLink>
+        <RouterLink :to="{ name: 'contact' }" class="btn primary lg">{{ i18n.t('services.residential.ctaBtn') }}</RouterLink>
       </section>
     </div>
   </div>
@@ -44,6 +43,7 @@
 
 <script setup>
 import { RouterLink } from 'vue-router'
+import { i18n } from '../i18n.js'
 import Backlink from '../components/Backlink.vue'
 </script>
 

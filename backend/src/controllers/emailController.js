@@ -40,38 +40,49 @@ exports.sendContactEmail = async (req, res) => {
 };
 
 exports.sendTicketEmail = async (req, res) => {
-    const { ticketNumber, licensePlate, message } = req.body;
+    const { type, ticketNumber, licensePlate, email, message } = req.body;
 
-    if (!ticketNumber || !licensePlate || !message) {
-        return res.status(400).json({ error: 'Alle felter skal udfyldes.' });
+    if (!ticketNumber || !licensePlate || !email) {
+        return res.status(400).json({ error: 'Afgiftsnummer, nummerplade og e-mail skal udfyldes.' });
     }
+
+    // Message is required for complaints, optional for photo requests
+    if (type === 'complaint' && !message) {
+        return res.status(400).json({ error: 'Beskrivelse af klagen mangler.' });
+    }
+
+    const isComplaint = type === 'complaint';
+    const subject = (isComplaint ? "Klage over afgift: " : "Anmodning om fotodokumentation: ") + ticketNumber;
 
     const mailOptions = {
         from: '"NordicPark" <onboarding@resend.dev>',
-        to: 'kontakt@nordicpark.eu',
-        subject: `Ny henvendelse vedr. afgift: ${ticketNumber}`,
+        to: isComplaint ? 'kontakt@nordicpark.eu' : 'dokumentation@nordicpark.eu', // Simplified routing
+        subject: subject,
         text: `
       Ny henvendelse modtaget fra hjemmesiden:
       
+      Type: ${isComplaint ? 'Klage' : 'Fotodokumentation'}
       Afgiftsnummer: ${ticketNumber}
       Nummerplade: ${licensePlate}
+      E-mail: ${email}
       
       Besked:
-      ${message}
+      ${message || 'Ingen besked vedhæftet.'}
     `,
         html: `
-      <h3>Ny henvendelse modtaget fra hjemmesiden (Klagesag):</h3>
+      <h3>Ny henvendelse modtaget fra hjemmesiden (${isComplaint ? 'Klagesag' : 'Fotodokumentation'}):</h3>
       <p><strong>Afgiftsnummer:</strong> ${ticketNumber}</p>
       <p><strong>Nummerplade:</strong> ${licensePlate}</p>
-      <p><strong>Besked:</strong><br>${message.replace(/\n/g, '<br>')}</p>
+      <p><strong>E-mail:</strong> ${email}</p>
+      <p><strong>Besked:</strong><br>${(message || '<i>Ingen besked vedhæftet.</i>').replace(/\n/g, '<br>')}</p>
     `,
     };
 
     try {
         await transporter.sendMail(mailOptions);
-        res.status(200).json({ success: 'Din henvendelse er blevet sendt.' });
+        res.status(200).json({ success: isComplaint ? 'Din klage er blevet sendt.' : 'Din anmodning om billeder er modtaget.' });
     } catch (error) {
         console.error('Email error:', error);
-        res.status(500).json({ error: 'Der opstod en fejl under afsendelse af din henvendelse. Prøv venligst igen senere.' });
+        res.status(500).json({ error: 'Der opstod en fejl under afsendelse. Prøv venligst igen senere.' });
     }
 };

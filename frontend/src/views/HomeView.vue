@@ -1,63 +1,59 @@
 <template>
   <div class="home">
-    <!-- HERO -->
-    <section class="hero" id="top">
+    <!-- B2B HERO (ERHVERV) -->
+    <section class="hero reveal" id="top">
       <div class="hero-inner">
-        <p class="hero-kicker">NORDICPARK – TRADITIONEL OG FAIR KONTROL</p>
-        <h1>Fremtidens p-løsninger til jeres ejendom</h1>
+        <p class="hero-kicker">{{ i18n.t('business.heroKicker') }}</p>
+        <h1 class="text-gradient">{{ i18n.t('business.heroTitle') }}</h1>
         <p class="hero-subtitle">
-          Vi skaber tryghed og orden på p-pladsen med traditionel og fair parkering. 
-          Professionel kontrol med fokus på dialog og fairness. 🤝
+          {{ i18n.t('business.heroSubtitle') }}
         </p>
 
         <div class="hero-actions">
-          <RouterLink :to="{ name: 'contact' }" class="btn primary">
-            Få et uforpligtende tilbud
-          </RouterLink>
-          <RouterLink :to="{ name: 'ticket' }" class="btn secondary">
-            Har du fået en afgift?
-          </RouterLink>
+          <RouterLink :to="{ name: 'contact' }" class="btn primary-gold lg">{{ i18n.t('business.heroCtaPrimary') }}</RouterLink>
+          <a href="#solutions" class="btn secondary lg">{{ i18n.t('business.heroCtaSecondary') }}</a>
         </div>
       </div>
     </section>
 
-    <!-- LØSNINGER / CARDS -->
-    <section class="cards-section" id="solutions">
-      <div class="cards-inner">
-        <h2 class="section-title centered">Specialiserede løsninger 🏢</h2>
+    <!-- B2B SOLUTIONS -->
+    <section class="cards-section reveal" id="solutions">
+      <div class="container--standard">
+        <div class="section-badge">{{ i18n.t('business.sectionBadge') }}</div>
+        <h2 class="section-title centered">{{ i18n.t('business.solutionsTitle') }}</h2>
 
         <div class="cards-grid">
           <RouterLink :to="{ name: 'service-residential' }" class="card">
             <div class="card-image-wrapper">
-              <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=800&auto=format&fit=crop" alt="Boligforeninger" class="card-image" loading="lazy" />
+              <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=800&auto=format&fit=crop" :alt="i18n.t('business.solutions.residential.title')" class="card-image" loading="lazy" />
             </div>
-            <h3>Boligforeninger</h3>
+            <h3>{{ i18n.t('business.solutions.residential.title') }}</h3>
             <p>
-              Få styr på gæsteparkering og beboerlicenser med vores brugervenlige app-løsninger. 📲
+              {{ i18n.t('business.solutions.residential.desc') }}
             </p>
-            <span class="link">Læs mere →</span>
+            <span class="link">{{ i18n.t('business.solutions.residential.link') }}</span>
           </RouterLink>
 
           <RouterLink :to="{ name: 'service-business' }" class="card">
             <div class="card-image-wrapper">
-              <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800&auto=format&fit=crop" alt="Erhverv & Retail" class="card-image" loading="lazy" />
+              <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800&auto=format&fit=crop" :alt="i18n.t('business.solutions.business.title')" class="card-image" loading="lazy" />
             </div>
-            <h3>Erhverv & Retail</h3>
+            <h3>{{ i18n.t('business.solutions.business.title') }}</h3>
             <p>
-              Optimér pladsen for jeres kunder og undgå langtidsparkering med traditionel og fair kontrol. 🛍️
+              {{ i18n.t('business.solutions.business.desc') }}
             </p>
-            <span class="link">Læs mere →</span>
+            <span class="link">{{ i18n.t('business.solutions.business.link') }}</span>
           </RouterLink>
 
           <RouterLink :to="{ name: 'service-private' }" class="card">
             <div class="card-image-wrapper">
-              <img src="https://images.unsplash.com/photo-1506521781263-d8422e82f27a?w=800" alt="Privat kontrol" class="card-image" loading="lazy" />
+              <img src="https://images.unsplash.com/photo-1506521781263-d8422e82f27a?w=800" :alt="i18n.t('business.solutions.private.title')" class="card-image" loading="lazy" />
             </div>
-            <h3>Privat kontrol</h3>
+            <h3>{{ i18n.t('business.solutions.private.title') }}</h3>
             <p>
-              Beskyt jeres private arealer mod uvedkommende parkering med tydelig skiltning. 🛡️
+              {{ i18n.t('business.solutions.private.desc') }}
             </p>
-            <span class="link">Læs mere →</span>
+            <span class="link">{{ i18n.t('business.solutions.private.link') }}</span>
           </RouterLink>
         </div>
       </div>
@@ -66,42 +62,39 @@
     <!-- WHY / HVORFOR VÆLGE OS -->
     <section class="why-section" id="why">
       <div class="why-inner">
-        <h2 class="section-title centered">Hvorfor vælge NordicPark?</h2>
+        <h2 class="section-title centered">{{ i18n.t('business.whyTitle') }}</h2>
 
         <div class="why-layout">
           <div class="why-list">
             <article class="why-card">
               <h3>
                 <span class="why-icon">✅</span>
-                Traditionel kontrol
+                {{ i18n.t('business.whyCards.traditional.title') }}
               </h3>
-              <p>Fysisk og nærværende parkeringskontrol udført af professionelle vagter.</p>
+              <p>{{ i18n.t('business.whyCards.traditional.desc') }}</p>
             </article>
 
             <article class="why-card">
               <h3>
                 <span class="why-icon">⚖️</span>
-                Fair kontrol
+                {{ i18n.t('business.whyCards.fair.title') }}
               </h3>
-              <p>Fokus på dialog og tydelig skiltning – ikke på bøder for enhver pris.</p>
+              <p>{{ i18n.t('business.whyCards.fair.desc') }}</p>
             </article>
-
-
 
             <article class="why-card">
               <h3>
                 <span class="why-icon">🤝</span>
-                Skræddersyede aftaler
+                {{ i18n.t('business.whyCards.custom.title') }}
               </h3>
-              <p>Vi tilpasser ordningen til netop jeres gæster, beboere og kunder.</p>
+              <p>{{ i18n.t('business.whyCards.custom.desc') }}</p>
             </article>
           </div>
 
           <aside class="why-highlight">
-            <h3>Tryg parkering – uden ekstra arbejde</h3>
+            <h3>{{ i18n.t('business.whyHighlight.title') }}</h3>
             <p>
-              Vi tager os af alt fra opsætning af skilte til løbende kontrol og dialog med
-              bilisterne. Du får én fast kontaktperson og fuldt overblik over din P-plads.
+              {{ i18n.t('business.whyHighlight.desc') }}
             </p>
           </aside>
         </div>
@@ -111,38 +104,34 @@
     <!-- PROCESS / SÅDAN ARBEJDER VI -->
     <section class="process-section" id="process">
       <div class="process-inner">
-        <p class="section-kicker">Proces</p>
-        <h2 class="section-title centered">Sådan arbejder vi ✨</h2>
+        <p class="section-kicker">{{ i18n.t('business.processBadge') }}</p>
+        <h2 class="section-title centered">{{ i18n.t('business.processTitle') }}</h2>
         <p class="process-intro">
-          Vi gør det nemt at få styr på parkering – uden ekstra bøvl for jer.
-          Fra første møde til løbende drift har I en fast kontaktperson.
+          {{ i18n.t('business.processIntro') }}
         </p>
 
         <div class="process-grid">
           <article class="process-card">
             <div class="process-badge">1</div>
-            <h3>Analyse</h3>
+            <h3>{{ i18n.t('business.processSteps.analysis.title') }}</h3>
             <p>
-              Vi gennemgår pladsen, gæsteparkering, regler og jeres behov.
-              I får et klart overblik og en konkret anbefaling.
+              {{ i18n.t('business.processSteps.analysis.desc') }}
             </p>
           </article>
 
           <article class="process-card">
             <div class="process-badge">2</div>
-            <h3>Opsætning</h3>
+            <h3>{{ i18n.t('business.processSteps.setup.title') }}</h3>
             <p>
-              Skiltning og p-zoner sættes op.
-              Vi hjælper også med kommunikation til beboere og brugere.
+              {{ i18n.t('business.processSteps.setup.desc') }}
             </p>
           </article>
 
           <article class="process-card">
             <div class="process-badge">3</div>
-            <h3>Løbende kontrol</h3>
+            <h3>{{ i18n.t('business.processSteps.operation.title') }}</h3>
             <p>
-              Daglig kontrol og sparring.
-              I kan altid følge med i udviklingen og justere ordningen efter behov.
+              {{ i18n.t('business.processSteps.operation.desc') }}
             </p>
           </article>
         </div>
@@ -152,18 +141,17 @@
     <!-- CTA / KONTAKT -->
     <section class="cta-section" id="contact-cta">
       <div class="cta-inner">
-        <h2>Klar til at få styr på parkeringen?</h2>
+        <h2>{{ i18n.t('business.ctaTitle') }}</h2>
         <p>
-          Kontakt os for en uforpligtende snak om mulighederne på jeres P-plads –
-          vi vender hurtigt tilbage.
+          {{ i18n.t('business.ctaDesc') }}
         </p>
 
         <div class="cta-actions">
           <RouterLink :to="{ name: 'contact' }" class="btn cta-primary">
-            Kontakt os
+            {{ i18n.t('business.ctaBtnPrimary') }}
           </RouterLink>
-          <RouterLink :to="{ name: 'home', hash: '#solutions' }" class="btn cta-secondary">
-            Se løsninger
+          <RouterLink :to="{ name: 'erhverv', hash: '#solutions' }" class="btn cta-secondary">
+            {{ i18n.t('business.ctaBtnSecondary') }}
           </RouterLink>
         </div>
       </div>
@@ -173,4 +161,18 @@
 
 <script setup>
 import { RouterLink } from 'vue-router'
+import { i18n } from '../i18n.js'
 </script>
+
+<style scoped>
+.hero {
+  /* Ensure hero fills space well on the Erhverv page */
+  min-height: 80vh;
+}
+
+@media (max-width: 900px) {
+  .hero-content h1 {
+    font-size: 2.2rem;
+  }
+}
+</style>

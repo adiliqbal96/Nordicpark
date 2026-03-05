@@ -1,15 +1,15 @@
 <template>
   <div class="page legal-page">
-    <Backlink :to="{ name: 'home' }" label="Til forsiden" />
+    <Backlink :to="{ name: 'home' }" :label="i18n.t('services.back')" />
     
     <article class="legal-content">
       <header class="legal-header">
-        <h1>Handelsbetingelser ⚖️</h1>
+        <h1>{{ i18n.t('footer.terms') }} ⚖️</h1>
         <p class="company-name">Nordic Park ApS</p>
       </header>
 
       <div class="legal-intro">
-        <p>Parkering på området udgør en bindende civilretlig aftale. Ved parkering accepteres nedenstående vilkår.</p>
+        <p>{{ i18n.t('legal.introParking') }}</p>
       </div>
 
       <section>
@@ -42,10 +42,10 @@
       </section>
 
       <section>
-        <h2>3. Parkeringsafgift</h2>
+        <h2>3. {{ i18n.t('legal.feeTitle') }}</h2>
         <div class="highlight-box">
-          <p><strong>Parkeringsafgift: 950 kr.</strong></p>
-          <p>Beløbet forfalder til betaling senest 10 dage fra udstedelsesdatoen via betalingsoplysninger angivet på opkrævningen.</p>
+          <p><strong>{{ i18n.t('legal.feeTitle') }}: {{ i18n.t('legal.feeAmount') }}</strong></p>
+          <p>{{ i18n.t('legal.feeDue') }}</p>
         </div>
       </section>
 
@@ -88,15 +88,16 @@
       </section>
 
       <footer class="legal-footer">
-        <h3>Virksomhedsoplysninger</h3>
+        <h3>{{ i18n.t('legal.companyInfoTitle') }}</h3>
         <p>Nordic Park ApS · CVR: 45900436</p>
-        <p>Email: kontakt@nordicpark.eu · Tlf: 71 61 36 21</p>
+        <p>Email: kontakt@nordicpark.eu · {{ i18n.locale === 'da' ? 'Tlf' : 'Tel' }}: 71 61 36 21</p>
       </footer>
     </article>
   </div>
 </template>
 
 <script setup>
+import { i18n } from '../i18n.js'
 import Backlink from '../components/Backlink.vue'
 </script>
 

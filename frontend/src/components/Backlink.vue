@@ -10,8 +10,8 @@ import { RouterLink } from 'vue-router'
 
 const props = defineProps({
   to: {
-    type: [String, Object],
-    default: () => ({ name: 'home' })
+    type: Object,
+    default: () => ({ name: 'erhverv' })
   },
   label: {
     type: String,

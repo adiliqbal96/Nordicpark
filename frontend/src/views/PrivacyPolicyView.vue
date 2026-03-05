@@ -1,11 +1,11 @@
 <template>
   <div class="page legal-page">
-    <Backlink :to="{ name: 'home' }" label="Til forsiden" />
+    <Backlink :to="{ name: 'home' }" :label="i18n.t('services.back')" />
     
     <article class="legal-content">
       <header class="legal-header">
-        <h1>Privatlivspolitik 🛡️</h1>
-        <p class="last-updated">Gældende fra: 13. februar 2026</p>
+        <h1>{{ i18n.t('footer.privacy') }} 🔒</h1>
+        <p class="company-name">Nordic Park ApS</p>
       </header>
 
       <section>
@@ -17,8 +17,8 @@
         <div class="contact-card">
           <p><strong>Nordic Park ApS</strong></p>
           <p>Ny Mæglergårds Allé 66 · 2660 Brøndby Strand</p>
-          <p>CVR-nr.: 45900436 · Tlf: 71 61 36 21</p>
-          <p>Email: <a href="mailto:kontakt@nordicpark.eu">kontakt@nordicpark.eu</a></p>
+          <p>CVR-nr.: 45900436 · {{ i18n.locale === 'da' ? 'Tlf' : 'Tel' }}: 71 61 36 21</p>
+          <p>{{ i18n.t('legal.email') }}: <a href="mailto:kontakt@nordicpark.eu">kontakt@nordicpark.eu</a></p>
         </div>
       </section>
 
@@ -98,6 +98,9 @@
       </section>
 
       <footer class="legal-footer">
+        <h3>{{ i18n.t('legal.companyInfoTitle') }}</h3>
+        <p>Nordic Park ApS · CVR: 45900436</p>
+        <p>{{ i18n.t('legal.email') }}: kontakt@nordicpark.eu · {{ i18n.locale === 'da' ? 'Tlf' : 'Tel' }}: 71 61 36 21</p>
         <h2>9. Datasikkerhed</h2>
         <p>
           Nordic Park ApS har implementeret tekniske og organisatoriske sikkerhedsforanstaltninger for at beskytte
@@ -109,6 +112,7 @@
 </template>
 
 <script setup>
+import { i18n } from '../i18n.js'
 import Backlink from '../components/Backlink.vue'
 </script>
 
