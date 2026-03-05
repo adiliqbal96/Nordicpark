@@ -8,7 +8,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Support both JSON (php://input) and FormData ($_POST)
     $input = json_decode(file_get_contents('php://input'), true);
+    if (!$input) {
+        $input = $_POST;
+    }
 
     $type = $input['type'] ?? 'contact'; // 'complaint', 'photo', or 'contact'
 
@@ -20,7 +24,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         if (!$ticketNumber || !$licensePlate || !$email) {
             http_response_code(400);
-            echo json_encode(['error' => 'Alle påkrævede felter skal udfyldes.']);
+            $missing = [];
+            if (!$ticketNumber)
+                $missing[] = 'Afgiftsnummer';
+            if (!$licensePlate)
+                $missing[] = 'Nummerplade';
+            if (!$email)
+                $missing[] = 'E-mail';
+            echo json_encode(['error' => 'Alle påkrævede felter skal udfyldes. Mangler: ' . implode(', ', $missing)]);
             exit;
         }
 
@@ -53,7 +64,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         if (!$name || !$email || !$message) {
             http_response_code(400);
-            echo json_encode(['error' => 'Navn, e-mail og besked skal udfyldes.']);
+            $missing = [];
+            if (!$name)
+                $missing[] = 'Navn';
+            if (!$email)
+                $missing[] = 'E-mail';
+            if (!$message)
+                $missing[] = 'Besked';
+            echo json_encode(['error' => 'Navn, e-mail og besked skal udfyldes. Mangler: ' . implode(', ', $missing)]);
             exit;
         }
 

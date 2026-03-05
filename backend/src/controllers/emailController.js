@@ -4,7 +4,11 @@ exports.sendContactEmail = async (req, res) => {
     const { name, email, company, message } = req.body;
 
     if (!name || !email || !message) {
-        return res.status(400).json({ error: 'Navn, e-mail og besked skal udfyldes.' });
+        let missing = [];
+        if (!name) missing.push('Navn');
+        if (!email) missing.push('E-mail');
+        if (!message) missing.push('Besked');
+        return res.status(400).json({ error: 'Navn, e-mail og besked skal udfyldes. Mangler: ' + missing.join(', ') });
     }
 
     const mailOptions = {
@@ -43,7 +47,11 @@ exports.sendTicketEmail = async (req, res) => {
     const { type, ticketNumber, licensePlate, email, message } = req.body;
 
     if (!ticketNumber || !licensePlate || !email) {
-        return res.status(400).json({ error: 'Afgiftsnummer, nummerplade og e-mail skal udfyldes.' });
+        let missing = [];
+        if (!ticketNumber) missing.push('Afgiftsnummer');
+        if (!licensePlate) missing.push('Nummerplade');
+        if (!email) missing.push('E-mail');
+        return res.status(400).json({ error: 'Afgiftsnummer, nummerplade og e-mail skal udfyldes. Mangler: ' + missing.join(', ') });
     }
 
     // Message is required for complaints, optional for photo requests
