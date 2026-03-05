@@ -258,8 +258,7 @@ const submitPortalForm = async () => {
       message: form.message
     }
 
-    const apiUrl = import.meta.env.VITE_API_URL || '/api';
-    const response = await fetch(`${apiUrl}/ticket`, {
+    const response = await fetch('/contact.php', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload)

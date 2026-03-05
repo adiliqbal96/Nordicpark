@@ -123,8 +123,7 @@ const handleSubmit = async () => {
   status.message = ''
   
   try {
-    const apiUrl = import.meta.env.VITE_API_URL || '/api';
-    const response = await fetch(`${apiUrl}/contact`, {
+    const response = await fetch('/contact.php', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
