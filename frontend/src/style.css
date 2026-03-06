@@ -1031,42 +1031,28 @@ section {
   }
 
   .topbar-inner {
-    flex-direction: column;
-    gap: 0.75rem;
-    padding: 0 1rem;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0 1.25rem;
   }
 
   .logo-img {
-    height: 28px;
+    height: 38px;
   }
 
   .logo-text {
-    font-size: 1.25rem;
-  }
-
-  .main-nav {
-    gap: 0.25rem;
-    width: 100%;
-    justify-content: center;
-    flex-wrap: wrap;
-    background: rgba(255, 255, 255, 0.04);
-    padding: 0.25rem;
-    border-radius: var(--radius-md);
-    border: 1px solid var(--glass-border);
-  }
-
-  .main-nav a {
-    font-size: 0.75rem;
-    padding: 0.35rem 0.5rem;
+    font-size: 1.5rem;
   }
 
   /* --- HERO MOBILE --- */
   .hero {
     min-height: auto;
-    margin-top: 130px;
-    /* Massive push to clear the tall stacked mobile navbar */
+    margin-top: 80px;
+    /* Thinner navbar with hamburger */
     padding: 3rem 1.25rem 3rem;
-    /* Tighter padding since margin handles the clearance */
   }
 
   .hero-kicker {
@@ -1103,10 +1089,8 @@ section {
 
   /* --- SECTIONS MOBILE --- */
   section {
-    padding: 6rem 1.25rem 4rem !important;
-    /* Force larger top padding (was 4rem) */
-    scroll-margin-top: 130px;
-    /* Push click-scrolls even further down */
+    padding: 4rem 1.25rem 3rem !important;
+    scroll-margin-top: 80px;
   }
 
   .section-title {
@@ -1139,7 +1123,7 @@ section {
 
   /* --- FORMS & LEGAL MOBILE --- */
   .page {
-    padding: 6.5rem 1.25rem 4rem;
+    padding: 5rem 1.25rem 3rem;
   }
 
   .form {

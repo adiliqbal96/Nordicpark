@@ -664,11 +664,14 @@ const resetPortal = () => {
 }
 
 @media (max-width: 650px) {
+  .portal-page { padding: 5rem 1.25rem; }
   .portal-card { padding: 2.5rem 1.5rem; }
   .amount-grid { grid-template-columns: 1fr; }
   .options-grid { grid-template-columns: 1fr; }
-  .payment-card-premium { padding: 2rem; }
-  .card-icon-main { font-size: 3rem; }
-  .card-text-main h3 { font-size: 1.5rem; }
+  .payment-card-premium { padding: 2rem 1.5rem; }
+  .card-icon-main { font-size: 2.5rem; }
+  .card-text-main h3 { font-size: 1.4rem; }
+  .wow-title { font-size: 2rem; }
+  .wow-subtitle { font-size: 1rem; }
 }
 </style>

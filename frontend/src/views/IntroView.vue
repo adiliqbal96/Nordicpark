@@ -265,15 +265,70 @@ import { i18n } from '../i18n.js'
 
 @media (max-width: 900px) {
   .gateway-grid {
-    grid-template-columns: 1fr;
+    display: flex;
+    gap: 1.5rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding: 1rem 1.5rem 2rem 1.5rem;
+    margin: 0 -2rem; /* Bleed edge */
+    scroll-padding-left: 1.5rem;
+    -ms-overflow-style: none; /* Hide scrollbar IE/Edge */
+    scrollbar-width: none; /* Hide scrollbar Firefox */
+  }
+
+  .gateway-grid::-webkit-scrollbar {
+    display: none; /* Hide scrollbar Safari/Chrome */
+  }
+
+  .gateway-card {
+    flex: 0 0 85%; /* Card width */
+    scroll-snap-align: start;
+    padding: 2.5rem 1.5rem;
   }
   
   .intro-header {
     margin-bottom: 3.5rem;
   }
   
-  .wow-title {
-    font-size: 3rem;
+  .brand-wrapper {
+    gap: 1rem;
+    margin-bottom: 1.5rem;
   }
+
+  .main-logo {
+    height: 40px; /* even smaller for mobile */
+  }
+
+  .logo-divider {
+    height: 20px;
+  }
+
+  .premium-label {
+    font-size: 0.7rem;
+  }
+  
+  .wow-title {
+    font-size: 2.25rem; /* Better wrapping on iPhone */
+  }
+
+
+  .card-icon-wrapper {
+    font-size: 3.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .gateway-card h2 {
+    font-size: 1.75rem;
+  }
+
+  .gateway-card p {
+    font-size: 1rem; /* Slightly smaller text */
+    margin-bottom: 2.5rem;
+  }
+}
+@media (max-width: 400px) {
+    .wow-title {
+        font-size: 2rem;
+    }
 }
 </style>

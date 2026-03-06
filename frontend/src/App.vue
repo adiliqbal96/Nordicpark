@@ -18,7 +18,8 @@
             <span class="logo-text">NordicPark</span>
           </RouterLink>
 
-          <nav class="main-nav">
+          <!-- Desktop Nav -->
+          <nav class="main-nav desktop-nav">
             <template v-if="route.name === 'ticket'">
               <RouterLink :to="{ name: 'intro' }">{{ i18n.t('nav.home') }}</RouterLink>
               <RouterLink :to="{ name: 'ticket' }" class="nav-cta active">{{ i18n.t('nav.ticket') }}</RouterLink>
@@ -64,8 +65,39 @@
             </div>
           </button>
         </div>
+
+        <!-- Hamburger Button -->
+        <button 
+          v-if="route.name !== 'intro'" 
+          class="mobile-toggle" 
+          @click="toggleMobileMenu" 
+          :class="{ 'is-active': mobileMenuOpen }"
+          aria-label="Toggle menu"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
       </div>
     </header>
+
+    <!-- Mobile Menu Overlay -->
+    <Transition name="mobile-menu">
+      <div v-if="mobileMenuOpen && route.name !== 'intro'" class="mobile-menu-overlay">
+        <nav class="mobile-nav-links">
+          <template v-if="route.name === 'ticket'">
+            <RouterLink @click="closeMobileMenu" :to="{ name: 'intro' }">{{ i18n.t('nav.home') }}</RouterLink>
+            <RouterLink @click="closeMobileMenu" :to="{ name: 'ticket' }" class="nav-cta active">{{ i18n.t('nav.ticket') }}</RouterLink>
+          </template>
+          <template v-else>
+            <RouterLink @click="closeMobileMenu" :to="{ name: 'erhverv', hash: '#solutions' }">{{ i18n.t('nav.solutions') }}</RouterLink>
+            <RouterLink @click="closeMobileMenu" :to="{ name: 'erhverv', hash: '#why' }">{{ i18n.t('nav.why') }}</RouterLink>
+            <RouterLink @click="closeMobileMenu" :to="{ name: 'erhverv', hash: '#process' }">{{ i18n.t('nav.process') }}</RouterLink>
+            <RouterLink @click="closeMobileMenu" :to="{ name: 'contact' }" class="nav-cta">{{ i18n.t('nav.contact') }}</RouterLink>
+          </template>
+        </nav>
+      </div>
+    </Transition>
 
     <main class="content" :class="{ 'content-blur': showingSplash, 'is-intro': route.name === 'intro' }">
       <RouterView />
@@ -85,7 +117,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, watch } from 'vue'
 import { RouterLink, RouterView, useRoute } from 'vue-router'
 import FaqChatBubble from './components/FaqChatBubble.vue'
 import { i18n } from './i18n.js'
@@ -94,9 +126,29 @@ const route = useRoute()
 
 const year = new Date().getFullYear()
 const showingSplash = ref(true)
+const mobileMenuOpen = ref(false)
+
+const toggleMobileMenu = () => {
+  mobileMenuOpen.value = !mobileMenuOpen.value
+  if (mobileMenuOpen.value) {
+    document.body.style.overflow = 'hidden'
+  } else {
+    document.body.style.overflow = ''
+  }
+}
+
+const closeMobileMenu = () => {
+  mobileMenuOpen.value = false
+  document.body.style.overflow = ''
+}
+
+// Close menu when route changes
+watch(() => route.path, () => {
+  closeMobileMenu()
+})
 
 onMounted(() => {
-  // Simulate load time for splash screen effect - shortened for performance
+  // Simulate load time for splash screen effect
   setTimeout(() => {
     showingSplash.value = false
   }, 800)
@@ -226,6 +278,83 @@ onMounted(() => {
   display: block;
 }
 
+/* Mobile Toggle Button */
+.mobile-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 32px;
+  height: 24px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 10001; /* Above the overlay */
+}
+
+.mobile-toggle span {
+  width: 32px;
+  height: 3px;
+  background: var(--color-white);
+  border-radius: 10px;
+  transition: all 0.3s linear;
+  position: relative;
+  transform-origin: 1px;
+}
+
+.mobile-toggle.is-active span:first-child { transform: rotate(45deg); }
+.mobile-toggle.is-active span:nth-child(2) { opacity: 0; transform: translateX(20px); }
+.mobile-toggle.is-active span:nth-child(3) { transform: rotate(-45deg); }
+
+/* Mobile Menu Overlay */
+.mobile-menu-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(5, 10, 24, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mobile-nav-links {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  text-align: center;
+}
+
+.mobile-nav-links a {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--color-white);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.mobile-nav-links a:hover,
+.mobile-nav-links a.active {
+  color: var(--color-primary);
+}
+
+.mobile-nav-links .nav-cta {
+  color: var(--color-accent);
+}
+
+/* Animations */
+.mobile-menu-enter-active,
+.mobile-menu-leave-active {
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.mobile-menu-enter-from,
+.mobile-menu-leave-to {
+  opacity: 0;
+  transform: translateY(-20px);
+}
+
 .topbar-left-group {
   display: flex;
   align-items: center;
@@ -233,9 +362,23 @@ onMounted(() => {
 }
 
 @media (max-width: 900px) {
-  .topbar-inner {
-    justify-content: space-between;
+  .topbar-left-group {
+    gap: 1rem;
   }
 }
 
+@media (max-width: 768px) {
+  .topbar-left-group {
+    display: contents; /* Allows logo and main-nav to be direct flex children of topbar-inner */
+  }
+  .desktop-nav {
+    display: none !important;
+  }
+  .mobile-toggle {
+    display: flex;
+  }
+  .lang-selector-pill {
+    margin-left: auto; /* Force to the right edge always */
+  }
+}
 </style>

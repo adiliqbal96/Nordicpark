@@ -19,7 +19,7 @@
     <!-- B2B SOLUTIONS -->
     <section class="cards-section reveal" id="solutions">
       <div class="container--standard">
-        <div class="section-badge">{{ i18n.t('business.sectionBadge') }}</div>
+        <div class="section-kicker">{{ i18n.t('business.sectionBadge') }}</div>
         <h2 class="section-title centered">{{ i18n.t('business.solutionsTitle') }}</h2>
 
         <div class="cards-grid">
