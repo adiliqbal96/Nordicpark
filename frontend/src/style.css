@@ -830,8 +830,13 @@ section {
 .page {
   /* Removed max-width to allow internal containers to manage width */
   margin: 0 auto;
-  padding: 6rem 0;
-  /* Reduced from 8rem to move EVERYTHING up */
+  padding: 4rem 0;
+  /* Reduced from 6rem for tighter feel */
+}
+
+.header-nav-group {
+  margin-bottom: 2rem;
+  text-align: left;
 }
 
 /* --- SERVICES VIEW REFINEMENTS --- */
@@ -849,8 +854,9 @@ section {
 .service-header h1 {
   font-size: clamp(2.5rem, 5vw, 4rem);
   margin-bottom: 0.5rem;
-  /* Reduced from 1rem */
   letter-spacing: -0.02em;
+  text-align: left;
+  /* Ensure left alignment */
 }
 
 .service-intro {
@@ -858,8 +864,8 @@ section {
   color: var(--color-text-muted);
   line-height: 1.6;
   max-width: 700px;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 0;
+  /* Left align */
 }
 
 .service-grid {
@@ -881,14 +887,18 @@ section {
   }
 }
 
-.container {
-  max-width: 1200px;
+.container,
+.container--standard {
+  max-width: var(--container-max);
   margin: 0 auto;
   padding: 0 4rem;
+  width: 100%;
 }
 
 @media (max-width: 768px) {
-  .container {
+
+  .container,
+  .container--standard {
     padding: 0 1.5rem;
   }
 }

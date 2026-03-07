@@ -1,7 +1,9 @@
 <template>
   <div class="page hub-page">
     <div class="container--standard">
-      <Backlink :to="{ name: 'erhverv', hash: '#solutions' }" :label="i18n.t('services.back')" />
+      <div class="header-nav-group pt-8">
+        <Backlink :to="{ name: 'erhverv', hash: '#solutions' }" :label="i18n.t('services.back')" />
+      </div>
 
       <header class="service-header hub reveal">
         <h1 class="text-gradient">{{ i18n.t('services.hubTitle') }}</h1>

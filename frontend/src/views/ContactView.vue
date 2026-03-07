@@ -8,7 +8,9 @@
     </div>
 
     <div class="container--standard relative z-10 pt-8">
-      <Backlink :to="{ name: 'erhverv' }" :label="i18n.t('services.back')" />
+      <div class="header-nav-group">
+        <Backlink :to="{ name: 'erhverv' }" :label="i18n.t('services.back')" />
+      </div>
 
       <div class="contact-grid">
         <!-- CONTACT INFO -->

@@ -67,13 +67,15 @@
             </div>
           </div>
 
-          <button class="btn-text-link mt-4" @click="step = 'identify'">← {{ i18n.t('portal.findAnother') }}</button>
+          <div class="mt-8 flex justify-center">
+            <Backlink @click="step = 'identify'" :label="i18n.t('portal.findAnother')" />
+          </div>
         </div>
 
         <!-- STEP 3: SPECIFIC FORMS -->
         <div v-else :key="step" class="portal-step">
           <header class="form-header">
-            <button class="back-nav" @click="step = 'portal'">← {{ i18n.t('portal.backToOverview') }}</button>
+            <Backlink @click="step = 'portal'" :label="i18n.t('portal.backToOverview')" />
           </header>
 
           <!-- PAYMENT FORM -->
@@ -556,8 +558,8 @@ onMounted(() => {
 
 /* HEADER STYLES */
 .portal-header {
-  text-align: center;
-  margin-bottom: 4rem;
+  text-align: left; /* Changed from center */
+  margin-bottom: 2.5rem; /* Reduced from 4rem */
 }
 
 .wow-title {
@@ -577,7 +579,7 @@ onMounted(() => {
   font-size: 1.15rem;
   color: var(--color-slate);
   max-width: 500px;
-  margin: 0 auto;
+  margin: 0; /* Changed from margin: 0 auto */
 }
 
 /* CARDS */
@@ -818,6 +820,11 @@ onMounted(() => {
   color: rgba(255, 255, 255, 0.9);
 }
 
+.flex-center {
+  display: flex;
+  justify-content: center;
+}
+
 /* DROP AREA */
 .drop-area {
   border: 2px dashed var(--glass-border);
@@ -861,32 +868,6 @@ onMounted(() => {
 .overlay-icon { font-size: 4rem; margin-bottom: 2rem; }
 
 /* MISC */
-.btn-text-link {
-  background: none;
-  border: none;
-  color: var(--color-slate);
-  cursor: pointer;
-  text-decoration: underline;
-  font-weight: 500;
-  margin: 0 auto;
-  display: block;
-}
-
-.back-nav {
-  background: none;
-  border: none;
-  color: var(--color-slate);
-  font-weight: 600;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  margin-bottom: 3rem;
-  transition: color 0.3s ease;
-}
-
-.back-nav:hover { color: var(--color-white); }
-
 .reveal {
   opacity: 0;
   animation: revealUp 0.6s cubic-bezier(0.23, 1, 0.32, 1) forwards;

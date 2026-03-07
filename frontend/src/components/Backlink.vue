@@ -1,6 +1,6 @@
 <template>
   <div class="back-link-wrapper">
-    <RouterLink class="back-link glass" :to="to">
+    <RouterLink v-if="to" class="back-link glass" :to="to">
       <div class="back-arrow-container">
         <svg class="back-arrow-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M19 12H5M5 12L12 19M5 12L12 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -8,6 +8,14 @@
       </div>
       <span class="back-label">{{ label }}</span>
     </RouterLink>
+    <button v-else class="back-link glass" @click="$emit('click')">
+      <div class="back-arrow-container">
+        <svg class="back-arrow-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M19 12H5M5 12L12 19M5 12L12 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <span class="back-label">{{ label }}</span>
+    </button>
   </div>
 </template>
 
@@ -16,20 +24,22 @@ import { RouterLink } from 'vue-router'
 
 const props = defineProps({
   to: {
-    type: Object,
-    default: () => ({ name: 'erhverv' })
+    type: [Object, String, null],
+    default: null
   },
   label: {
     type: String,
     default: 'Til forsiden'
   }
 })
+
+defineEmits(['click'])
 </script>
 
 <style scoped>
 .back-link-wrapper {
-  margin-bottom: 2rem;
-  display: inline-block;
+  margin-bottom: 1.5rem;
+  display: inline-flex;
 }
 
 .back-link {
@@ -44,6 +54,9 @@ const props = defineProps({
   font-size: 0.9rem;
   transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
   border: 1px solid rgba(255, 255, 255, 0.1);
+  cursor: pointer;
+  background: none;
+  font-family: inherit;
 }
 
 .back-link.glass {
@@ -100,6 +113,11 @@ const props = defineProps({
   .back-link {
     padding: 0.5rem 1rem 0.5rem 0.6rem;
     font-size: 0.85rem;
+    border: none;
+    background: rgba(255, 255, 255, 0.05);
+    cursor: pointer;
+    font-family: inherit;
+    width: auto;
   }
   .back-arrow-container {
     width: 24px;
