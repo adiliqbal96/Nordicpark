@@ -490,14 +490,19 @@ section {
   position: relative;
 }
 
-.process-card:last-child {
-  border-right: none;
-}
+/* Removed border-right: none to ensure consistent borders */
 
 .process-card:hover {
   background: #142145;
   border-color: var(--color-accent);
   transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(251, 191, 36, 0.2);
+}
+
+.process-card:hover .process-badge {
+  background: var(--color-accent);
+  color: var(--color-base);
+  transform: scale(1.1);
 }
 
 .process-badge {
