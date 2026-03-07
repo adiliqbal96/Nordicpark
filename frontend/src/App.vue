@@ -12,10 +12,10 @@
     <header class="topbar glass" :class="{ 'topbar-hidden': showingSplash }">
       <div class="topbar-inner">
         <!-- Brand & Nav Group - Hidden on Intro -->
-        <div class="topbar-left-group" v-if="route.name !== 'intro'">
-          <RouterLink :to="{ name: 'intro' }" class="logo-link">
+        <div class="topbar-left-group">
+          <RouterLink :to="{ name: 'intro' }" class="logo-link" :class="{ 'is-intro-logo': route.name === 'intro' }">
             <img src="/logoNPHvidt.svg" alt="NordicPark" class="logo-img" />
-            <span class="logo-text">NordicPark</span>
+            <span class="logo-text" v-show="route.name !== 'intro'">NordicPark</span>
           </RouterLink>
 
           <!-- Desktop Nav -->
@@ -68,7 +68,6 @@
 
         <!-- Hamburger Button -->
         <button 
-          v-if="route.name !== 'intro'" 
           class="mobile-toggle" 
           @click="toggleMobileMenu" 
           :class="{ 'is-active': mobileMenuOpen }"
@@ -83,9 +82,15 @@
 
     <!-- Mobile Menu Overlay -->
     <Transition name="mobile-menu">
-      <div v-if="mobileMenuOpen && route.name !== 'intro'" class="mobile-menu-overlay">
+      <div v-if="mobileMenuOpen" class="mobile-menu-overlay">
         <nav class="mobile-nav-links">
-          <template v-if="route.name === 'ticket'">
+          <template v-if="route.name === 'intro'">
+            <RouterLink @click="closeMobileMenu" :to="{ name: 'intro' }">{{ i18n.t('nav.home') }}</RouterLink>
+            <RouterLink @click="closeMobileMenu" :to="{ name: 'ticket' }">{{ i18n.t('nav.ticket') }}</RouterLink>
+            <RouterLink @click="closeMobileMenu" :to="{ name: 'erhverv' }">{{ i18n.t('nav.solutions') }}</RouterLink>
+            <RouterLink @click="closeMobileMenu" :to="{ name: 'contact' }" class="nav-cta">{{ i18n.t('nav.contact') }}</RouterLink>
+          </template>
+          <template v-else-if="route.name === 'ticket'">
             <RouterLink @click="closeMobileMenu" :to="{ name: 'intro' }">{{ i18n.t('nav.home') }}</RouterLink>
             <RouterLink @click="closeMobileMenu" :to="{ name: 'ticket' }" class="nav-cta active">{{ i18n.t('nav.ticket') }}</RouterLink>
           </template>
@@ -369,16 +374,25 @@ onMounted(() => {
 
 @media (max-width: 768px) {
   .topbar-left-group {
-    display: contents; /* Allows logo and main-nav to be direct flex children of topbar-inner */
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
   }
   .desktop-nav {
     display: none !important;
   }
   .mobile-toggle {
     display: flex;
+    margin-left: 1rem;
   }
   .lang-selector-pill {
-    margin-left: auto; /* Force to the right edge always */
+    margin-left: auto;
+    padding: 0.25rem;
+    gap: 0.25rem;
+  }
+  .lang-item {
+    width: 38px;
+    height: 38px;
   }
 }
 </style>

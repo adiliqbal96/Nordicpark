@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@stripe/stripe-js": "^8.9.0",
     "basic-ftp": "^5.2.0",
     "readline-sync": "^1.4.10",
     "ssh2-sftp-client": "^12.0.1",

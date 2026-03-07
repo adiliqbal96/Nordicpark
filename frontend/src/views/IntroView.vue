@@ -281,9 +281,9 @@ import { i18n } from '../i18n.js'
   }
 
   .gateway-card {
-    flex: 0 0 85%; /* Card width */
-    scroll-snap-align: start;
-    padding: 2.5rem 1.5rem;
+    flex: 0 0 82%; /* Slightly smaller for a peek next card */
+    scroll-snap-align: center; /* Center snap feels more premium */
+    padding: 3rem 2rem;
   }
   
   .intro-header {

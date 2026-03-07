@@ -94,3 +94,47 @@ exports.sendTicketEmail = async (req, res) => {
         res.status(500).json({ error: 'Der opstod en fejl under afsendelse. Prøv venligst igen senere.' });
     }
 };
+
+exports.sendPaymentConfirmation = async (req, res) => {
+    const { ticketNumber, licensePlate, amount, paymentIntentId } = req.body;
+
+    console.log('--- Incoming Payment Confirmation ---');
+    console.log(`Ticket: ${ticketNumber}, Plate: ${licensePlate}, Amount: ${amount}, ID: ${paymentIntentId}`);
+
+    const mailOptions = {
+        from: '"NordicPark Betaling" <onboarding@resend.dev>',
+        to: 'kontakt@nordicpark.eu',
+        subject: `💰 Ny betaling modtaget: #${ticketNumber}`,
+        text: `
+      En ny betaling er blevet gennemført via hjemmesiden:
+      
+      Afgiftsnummer: ${ticketNumber}
+      Nummerplade: ${licensePlate}
+      Beløb: ${amount} DKK
+      Stripe ID: ${paymentIntentId}
+      
+      Dette er en automatisk bekræftelse.
+    `,
+        html: `
+      <div style="font-family: sans-serif; max-width: 600px; border: 1px solid #eee; padding: 20px;">
+        <h2 style="color: #2e7d32;">💰 Ny betaling modtaget</h2>
+        <p>En ny parkeringsafgift er blevet betalt via Stripe:</p>
+        <hr style="border: none; border-top: 1px solid #eee;">
+        <p><strong>Afgiftsnummer:</strong> #${ticketNumber}</p>
+        <p><strong>Nummerplade:</strong> ${licensePlate}</p>
+        <p><strong>Beløb:</strong> <span style="font-size: 1.2em; font-weight: bold;">${amount} DKK</span></p>
+        <p><strong>Stripe Payment ID:</strong> <code>${paymentIntentId}</code></p>
+        <hr style="border: none; border-top: 1px solid #eee;">
+        <p style="font-size: 0.8em; color: #666;">Dette er en automatisk besked fra NordicPark systemet.</p>
+      </div>
+    `,
+    };
+
+    try {
+        await transporter.sendMail(mailOptions);
+        res.status(200).json({ success: true });
+    } catch (error) {
+        console.error('Email error:', error);
+        res.status(500).json({ error: 'Kunne ikke sende bekræftelses-email.' });
+    }
+};

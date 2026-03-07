@@ -3,173 +3,210 @@
     <div class="bg-glow"></div>
     
     <div class="portal-container reveal">
-      <Backlink v-if="step === 'identify'" :to="{ name: 'intro' }" label="Til forsiden" />
-
-      <!-- STEP 1: IDENTIFICATION -->
-      <div v-if="step === 'identify'" class="portal-step">
-        <header class="portal-header">
-          <h1 class="wow-title" v-html="i18n.t('portal.findTitle', { type: '<span class=\'text-gradient\'>' + i18n.t('nav.ticket').toLowerCase() + '</span>' })"></h1>
-          <p class="wow-subtitle">{{ i18n.t('portal.findSubtitle') }}</p>
-        </header>
-
-        <form @submit.prevent="proceedToPortal" class="portal-card glass">
-          <div class="form-group">
-            <label>{{ i18n.t('portal.ticketNum') }}</label>
-            <input type="text" v-model="form.ticketNumber" placeholder="F.eks. 123456" class="premium-input" required />
-          </div>
-
-          <div class="form-group">
-            <label>{{ i18n.t('portal.licensePlate') }}</label>
-            <input type="text" v-model="form.licensePlate" placeholder="AA 12 345" class="premium-input" required />
-          </div>
-
-          <div v-if="validationError" class="validation-msg">
-            {{ validationError }}
-          </div>
-
-          <button type="submit" class="btn primary-gold lg">{{ i18n.t('portal.findBtn') }}</button>
-        </form>
-      </div>
-
-      <!-- STEP 2: PORTAL HUB (ACTIONS) -->
-      <div v-if="step === 'portal'" class="portal-step">
-        <header class="portal-header">
-          <div class="ticket-status-badge">{{ i18n.t('nav.ticket') }}: #{{ form.ticketNumber }}</div>
-          <h1 class="wow-title" v-html="i18n.t('portal.actionTitle', { action: '<span class=\'text-gradient\'>' + (i18n.locale.value === 'da' ? 'at gøre' : 'to do') + '?</span>' })"></h1>
-          <p class="wow-subtitle">{{ i18n.t('portal.foundVehicle', { plate: form.licensePlate }) }}</p>
-        </header>
-
-        <div class="portal-main-action">
-          <button class="payment-card-premium" @click="goToForm('payment')">
-            <div class="payment-card-glow"></div>
-            <div class="card-content">
-              <div class="card-icon-main">💳</div>
-              <div class="card-text-main">
-                <h3>{{ i18n.t('portal.payNow') }}</h3>
-                <p>{{ i18n.t('portal.payDesc') }}</p>
-              </div>
-              <div class="card-arrow">→</div>
-            </div>
-          </button>
-        </div>
-
-        <div class="portal-secondary-options">
-          <p class="options-label">{{ i18n.t('portal.otherOptions') }}</p>
-          <div class="options-grid">
-            <button class="option-card glass" @click="goToForm('photo')">
-              <span class="option-icon">📸</span>
-              <span>{{ i18n.t('portal.docs') }}</span>
-            </button>
-            <button class="option-card glass" @click="goToForm('complaint')">
-              <span class="option-icon">⚖️</span>
-              <span>{{ i18n.t('portal.complaint') }}</span>
-            </button>
-          </div>
-        </div>
-
-        <button class="btn-text-link mt-4" @click="step = 'identify'">← {{ i18n.t('portal.findAnother') }}</button>
-      </div>
-
-      <!-- STEP 3: SPECIFIC FORMS -->
-      <div v-if="['payment', 'complaint', 'photo'].includes(step)" class="portal-step">
-        <header class="form-header">
-          <button class="back-nav" @click="step = 'portal'">← {{ i18n.t('portal.backToOverview') }}</button>
-        </header>
-
-        <!-- PAYMENT FORM -->
-        <div v-if="step === 'payment'" class="form-body">
+      <Transition name="fade-slide" mode="out-in">
+        <!-- STEP 1: IDENTIFICATION -->
+        <div v-if="step === 'identify'" :key="'identify'" class="portal-step">
+          <Backlink :to="{ name: 'intro' }" :label="i18n.t('services.back')" />
           <header class="portal-header">
-            <h1 class="wow-title" v-html="i18n.t('portal.payment.title', { type: '<span class=\'text-gradient\'>' + i18n.t('nav.ticket').toLowerCase() + '</span>' })"></h1>
-            <p class="wow-subtitle">{{ i18n.t('portal.payment.subtitle') }}</p>
+            <h1 class="wow-title" v-html="i18n.t('portal.findTitle', { type: '<span class=\'text-gradient\'>' + i18n.t('nav.ticket').toLowerCase() + '</span>' })"></h1>
+            <p class="wow-subtitle">{{ i18n.t('portal.findSubtitle') }}</p>
           </header>
 
-          <div class="portal-card glass">
-            <div class="payment-selector">
-              <label class="premium-label">{{ i18n.t('portal.payment.selectType') }}</label>
-              <div class="amount-grid">
-                <button :class="{ active: payment.amountType === 950 }" @click="payment.amountType = 950" class="amount-btn">
-                  <span class="val">950,-</span>
-                  <span class="lab">{{ i18n.t('portal.payment.standard') }}</span>
-                </button>
-                <button :class="{ active: payment.amountType === 1900 }" @click="payment.amountType = 1900" class="amount-btn">
-                  <span class="val">1900,-</span>
-                  <span class="lab">{{ i18n.t('portal.payment.handicap') }}</span>
-                </button>
-                <button :class="{ active: payment.amountType === 'custom' }" @click="payment.amountType = 'custom'" class="amount-btn">
-                  <span class="val">{{ i18n.t('portal.payment.custom') }}</span>
-                  <span class="lab">Custom</span>
-                </button>
-              </div>
-
-              <div v-if="payment.amountType === 'custom'" class="custom-amount-field fadeIn">
-                <label>{{ i18n.t('portal.payment.customLabel') }}</label>
-                <input type="number" v-model="payment.customAmount" placeholder="F.eks. 500" class="premium-input" min="1" required />
-              </div>
-            </div>
-
-            <div class="payment-alert">
-              <div class="alert-icon">ℹ️</div>
-              <p>{{ i18n.t('portal.payment.alert') }}</p>
-            </div>
-
-            <button class="btn primary-gold lg full-width" :disabled="!isPaymentReady">
-              {{ i18n.t('portal.payment.payBtn') }}
-            </button>
-          </div>
-        </div>
-
-        <!-- COMPLAINT FORM -->
-        <div v-if="step === 'complaint'" class="form-body">
-          <header class="portal-header">
-            <h1 class="wow-title" v-html="i18n.t('portal.complaintForm.title', { type: '<span class=\'text-gradient\'>' + i18n.t('portal.complaint').toLowerCase().split(' ')[1] + '</span>' })"></h1>
-            <p class="wow-subtitle">{{ i18n.t('portal.complaintForm.subtitle') }}</p>
-          </header>
-
-          <form @submit.prevent="submitPortalForm" class="portal-card glass">
+          <form @submit.prevent="proceedToPortal" class="portal-card glass">
             <div class="form-group">
-              <label>{{ i18n.t('portal.complaintForm.email') }}</label>
-              <input type="email" v-model="form.email" placeholder="din@email.dk" class="premium-input" required />
+              <label>{{ i18n.t('portal.ticketNum') }}</label>
+              <input type="text" v-model="form.ticketNumber" :placeholder="i18n.t('portal.ticketPlaceholder')" class="premium-input" required />
             </div>
 
             <div class="form-group">
-              <label>{{ i18n.t('portal.complaintForm.desc') }}</label>
-              <textarea v-model="form.message" rows="5" placeholder="Skriv din begrundelse her..." class="premium-input" required></textarea>
+              <label>{{ i18n.t('portal.licensePlate') }}</label>
+              <input type="text" v-model="form.licensePlate" :placeholder="i18n.t('portal.licensePlatePlaceholder')" class="premium-input" required />
             </div>
 
-            <div class="form-group">
-              <label>{{ i18n.t('portal.complaintForm.upload') }}</label>
-              <div class="drop-area" @click="$refs.fileInput.click()">
-                <span class="drop-icon">📁</span>
-                <span>{{ form.files.length > 0 ? i18n.t('portal.complaintForm.filesSelected', { count: form.files.length }) : i18n.t('portal.complaintForm.uploadBtn') }}</span>
-                <input type="file" ref="fileInput" @change="handleFileUpload" multiple accept="image/*" hidden />
-              </div>
+            <div v-if="validationError" class="validation-msg">
+              {{ validationError }}
             </div>
 
-            <button type="submit" class="btn primary-gold lg full-width" :disabled="loading">
-              {{ loading ? i18n.t('portal.complaintForm.sending') : i18n.t('portal.complaintForm.submitBtn') }}
-            </button>
+            <button type="submit" class="btn primary-gold lg">{{ i18n.t('portal.findBtn') }}</button>
           </form>
         </div>
 
-        <!-- PHOTO REQUEST FORM -->
-        <div v-if="step === 'photo'" class="form-body">
+        <!-- STEP 2: PORTAL HUB (ACTIONS) -->
+        <div v-else-if="step === 'portal'" :key="'portal'" class="portal-step">
           <header class="portal-header">
-            <h1 class="wow-title" v-html="i18n.t('portal.photoForm.title', { type: '<span class=\'text-gradient\'>' + i18n.t('portal.photoForm.title').toLowerCase().split(' ')[1] + '</span>' })"></h1>
-            <p class="wow-subtitle">{{ i18n.t('portal.photoForm.subtitle') }}</p>
+            <div class="ticket-status-badge">{{ i18n.t('nav.ticket') }}: #{{ form.ticketNumber }}</div>
+            <h1 class="wow-title" v-html="i18n.t('portal.actionTitle', { action: '<span class=\'text-gradient\'>' + (i18n.locale.value === 'da' ? 'at gøre' : 'to do') + '</span>' })"></h1>
+            <p class="wow-subtitle">{{ i18n.t('portal.foundVehicle', { plate: form.licensePlate }) }}</p>
           </header>
 
-          <form @submit.prevent="submitPortalForm" class="portal-card glass">
-            <div class="form-group">
-              <label>{{ i18n.t('portal.photoForm.email') }}</label>
-              <input type="email" v-model="form.email" placeholder="din@email.dk" class="premium-input" required />
-            </div>
-
-            <button type="submit" class="btn primary-gold lg full-width" :disabled="loading">
-              {{ loading ? i18n.t('portal.complaintForm.sending') : i18n.t('portal.photoForm.submitBtn') }}
+          <div class="portal-main-action">
+            <button class="payment-card-premium" @click="goToForm('payment')">
+              <div class="payment-card-glow"></div>
+              <div class="card-content">
+                <div class="card-icon-main">💳</div>
+                <div class="card-text-main">
+                  <h3>{{ i18n.t('portal.payNow') }}</h3>
+                  <p>{{ i18n.t('portal.payDesc') }}</p>
+                </div>
+                <div class="card-arrow">→</div>
+              </div>
             </button>
-          </form>
+          </div>
+
+          <div class="portal-secondary-options">
+            <p class="options-label">{{ i18n.t('portal.otherOptions') }}</p>
+            <div class="options-grid">
+              <button class="option-card glass" @click="goToForm('photo')">
+                <span class="option-icon">📸</span>
+                <span>{{ i18n.t('portal.docs') }}</span>
+              </button>
+              <button class="option-card glass" @click="goToForm('complaint')">
+                <span class="option-icon">⚖️</span>
+                <span>{{ i18n.t('portal.complaint') }}</span>
+              </button>
+            </div>
+          </div>
+
+          <button class="btn-text-link mt-4" @click="step = 'identify'">← {{ i18n.t('portal.findAnother') }}</button>
         </div>
-      </div>
+
+        <!-- STEP 3: SPECIFIC FORMS -->
+        <div v-else :key="step" class="portal-step">
+          <header class="form-header">
+            <button class="back-nav" @click="step = 'portal'">← {{ i18n.t('portal.backToOverview') }}</button>
+          </header>
+
+          <!-- PAYMENT FORM -->
+          <div v-if="step === 'payment'" class="form-body">
+            <header class="portal-header">
+              <h1 class="wow-title" v-html="i18n.t('portal.payment.title', { type: '<span class=\'text-gradient\'>' + i18n.t('nav.ticket').toLowerCase() + '</span>' })"></h1>
+              <p class="wow-subtitle">{{ i18n.t('portal.payment.subtitle') }}</p>
+            </header>
+
+            <div class="portal-card glass">
+              <!-- STAGE 1: AMOUNT ENTRY -->
+              <div v-if="!isPaymentReady && !loading" class="amount-entry-flow fadeIn">
+                <div class="form-group">
+                    <label class="premium-label">{{ i18n.t('portal.payment.customLabel') }}</label>
+                    <div class="flex-row">
+                      <input type="number" v-model="payment.customAmount" :placeholder="i18n.t('portal.payment.customPlaceholder')" class="premium-input lg" min="1" />
+                      <button class="btn primary-gold lg" @click="initStripe" :disabled="!payment.customAmount">{{ i18n.t('portal.status.okBtn') }}</button>
+                    </div>
+                </div>
+                
+                <div class="quick-select mt-4">
+                    <p class="text-sm opacity-60 mb-2">{{ i18n.t('portal.payment.selectType') }}:</p>
+                    <div class="quick-options">
+                      <button class="chip" @click="selectType('standard')">950,- (Standard)</button>
+                      <button class="chip" @click="selectType('handicap')">1900,- (Handicap)</button>
+                      <button class="chip" @click="selectType('emergency')">1100,- (Brandvej)</button>
+                    </div>
+                </div>
+              </div>
+
+              <!-- STAGE 2: RECEIPT & STRIPE (Shown together for a professional feel) -->
+              <div v-else class="payment-active-flow">
+                  <!-- RECEIPT SUMMARY -->
+                  <div class="payment-summary glass fadeIn">
+                    <div class="summary-header">
+                      <span class="summary-title">{{ i18n.t('portal.payment.totalLabel') }}</span>
+                      <span class="summary-amount text-gradient">{{ currentAmount }},- DKK</span>
+                    </div>
+                    
+                    <div class="summary-details">
+                      <div class="summary-row">
+                        <span>{{ i18n.t('nav.ticket') }} #</span>
+                        <span class="highlight">{{ form.ticketNumber }}</span>
+                      </div>
+                      <div class="summary-row">
+                        <span>{{ i18n.t('portal.licensePlate') }}</span>
+                        <span class="highlight">{{ form.licensePlate }}</span>
+                      </div>
+                      <div class="divider-dashed"></div>
+                      <div class="summary-row">
+                        <span>{{ i18n.t('portal.payment.subTotal') }}</span>
+                        <span>{{ currentAmount }},-</span>
+                      </div>
+                    </div>
+
+                    <div class="summary-footer">
+                      <button class="edit-amount-link" @click="isPaymentReady = false; payment.customAmount = null">
+                        ✎ {{ i18n.t('services.back') }}
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- STRIPE CONTAINER -->
+                  <div v-show="isPaymentReady" class="stripe-payment-container fadeIn">
+                    <label class="premium-label">{{ i18n.t('portal.payment.cardLabel') }}</label>
+                    <div id="payment-element" class="mt-2">
+                      <!-- Stripe Element will be mounted here -->
+                    </div>
+                  </div>
+
+                  <div v-if="paymentError" class="payment-error-msg mt-3 fadeIn">{{ paymentError }}</div>
+
+                  <button class="btn primary-gold lg full-width mt-6" @click="processPayment" :disabled="loading || !isPaymentReady">
+                    <span v-if="loading" class="spinner"></span>
+                    {{ loading ? i18n.t('portal.payment.processing') : i18n.t('portal.payment.payBtn') }}
+                  </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- COMPLAINT FORM -->
+          <div v-if="step === 'complaint'" class="form-body">
+            <header class="portal-header">
+              <h1 class="wow-title" v-html="i18n.t('portal.complaintForm.title', { type: '<span class=\'text-gradient\'>' + i18n.t('portal.complaint').toLowerCase().split(' ')[1] + '</span>' })"></h1>
+              <p class="wow-subtitle">{{ i18n.t('portal.complaintForm.subtitle') }}</p>
+            </header>
+
+            <form @submit.prevent="submitPortalForm" class="portal-card glass">
+              <div class="form-group">
+                <label>{{ i18n.t('portal.complaintForm.email') }}</label>
+                <input type="email" v-model="form.email" :placeholder="i18n.t('portal.complaintForm.emailPlaceholder')" class="premium-input" required />
+              </div>
+
+              <div class="form-group">
+                <label>{{ i18n.t('portal.complaintForm.desc') }}</label>
+                <textarea v-model="form.message" rows="5" :placeholder="i18n.t('portal.complaintForm.descPlaceholder')" class="premium-input" required></textarea>
+              </div>
+
+              <div class="form-group">
+                <label>{{ i18n.t('portal.complaintForm.upload') }}</label>
+                <div class="drop-area" @click="$refs.fileInput.click()">
+                  <span class="drop-icon">📁</span>
+                  <span>{{ form.files.length > 0 ? i18n.t('portal.complaintForm.filesSelected', { count: form.files.length }) : i18n.t('portal.complaintForm.uploadBtn') }}</span>
+                  <input type="file" ref="fileInput" @change="handleFileUpload" multiple accept="image/*" hidden />
+                </div>
+              </div>
+
+              <button type="submit" class="btn primary-gold lg full-width" :disabled="loading">
+                {{ loading ? i18n.t('portal.complaintForm.sending') : i18n.t('portal.complaintForm.submitBtn') }}
+              </button>
+            </form>
+          </div>
+
+          <!-- PHOTO REQUEST FORM -->
+          <div v-if="step === 'photo'" class="form-body">
+            <header class="portal-header">
+              <h1 class="wow-title" v-html="i18n.t('portal.photoForm.title', { type: '<span class=\'text-gradient\'>' + i18n.t('portal.photoForm.title').toLowerCase().split(' ')[1] + '</span>' })"></h1>
+              <p class="wow-subtitle">{{ i18n.t('portal.photoForm.subtitle') }}</p>
+            </header>
+
+            <form @submit.prevent="submitPortalForm" class="portal-card glass">
+              <div class="form-group">
+                <label>{{ i18n.t('portal.photoForm.email') }}</label>
+                <input type="email" v-model="form.email" :placeholder="i18n.t('portal.photoForm.emailPlaceholder')" class="premium-input" required />
+              </div>
+
+              <button type="submit" class="btn primary-gold lg full-width" :disabled="loading">
+                {{ loading ? i18n.t('portal.complaintForm.sending') : i18n.t('portal.photoForm.submitBtn') }}
+              </button>
+            </form>
+          </div>
+        </div>
+      </Transition>
 
       <!-- STATUS MESSAGES -->
       <div v-if="status.message" class="overlay-full" :class="status.type">
@@ -185,12 +222,20 @@
 </template>
 
 <script setup>
-import { ref, reactive, computed } from 'vue'
+import { ref, reactive, computed, onMounted, nextTick } from 'vue'
 import Backlink from '../components/Backlink.vue'
 import { i18n } from '../i18n.js'
+import { loadStripe } from '@stripe/stripe-js'
 
 const step = ref('identify') // identify, portal, payment, complaint, photo
 const loading = ref(false)
+const paymentError = ref('')
+
+// Initialize Stripe
+const stripePromise = loadStripe('pk_test_51T6tLqGaj12XPZpKaJrOG1jrZ54g37cmgNBypsXwGclcUSxPjllFC7JeulQ1Y5ui1eo47zAphNFSuioN2srkBeYp00NHOdiXxs')
+let stripe = null
+let elements = null
+let paymentElement = null
 
 const form = reactive({
   ticketNumber: '',
@@ -201,8 +246,19 @@ const form = reactive({
 })
 
 const payment = reactive({
-  amountType: 950,
+  amountType: 'standard', // standard, handicap, emergency, custom
   customAmount: null
+})
+
+const fineTypes = {
+  standard: 950,
+  handicap: 1900,
+  emergency: 1100
+}
+
+const currentAmount = computed(() => {
+  if (payment.amountType === 'custom') return payment.customAmount || 0
+  return fineTypes[payment.amountType] || 950
 })
 
 const status = reactive({
@@ -210,10 +266,7 @@ const status = reactive({
   type: ''
 })
 
-const isPaymentReady = computed(() => {
-  if (payment.amountType === 'custom') return payment.customAmount > 0
-  return true
-})
+const isPaymentReady = ref(false)
 
 const validationError = ref('')
 
@@ -236,9 +289,138 @@ const proceedToPortal = () => {
   step.value = 'portal'
 }
 
+const selectType = (type) => {
+  payment.amountType = type
+  if (type !== 'custom') {
+    payment.customAmount = null
+    initStripe()
+  }
+}
+
 const goToForm = (type) => {
   step.value = type
   status.message = ''
+  if (type === 'payment') {
+    initStripe()
+  }
+}
+
+const initStripe = async () => {
+  const amount = currentAmount.value
+  if (!amount || amount <= 0) {
+    isPaymentReady.value = false
+    return
+  }
+
+  loading.value = true
+  paymentError.value = ''
+
+  try {
+    const response = await fetch('/api/payment-intent', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        amount: amount,
+        ticketNumber: form.ticketNumber,
+        licensePlate: form.licensePlate
+      })
+    })
+
+    const data = await response.json()
+    const clientSecret = data.clientSecret
+    const error = data.error
+
+    if (error) {
+      paymentError.value = error
+      return
+    }
+
+    stripe = await stripePromise
+    const appearance = { 
+      theme: 'night',
+      variables: {
+        colorPrimary: '#3366ff',
+        colorBackground: '#0a0f18',
+        colorText: '#ffffff',
+        colorDanger: '#ff4d4d',
+        fontFamily: 'Inter, system-ui, sans-serif',
+        borderRadius: '12px',
+      }
+    }
+
+    // Unmount old element if it exists
+    if (paymentElement) {
+      paymentElement.unmount()
+      paymentElement = null
+    }
+
+    elements = stripe.elements({ clientSecret, appearance })
+    paymentElement = elements.create('payment')
+
+    await nextTick()
+    
+    // Check if element exists in DOM before mounting
+    const el = document.getElementById('payment-element')
+    if (el) {
+      paymentElement.mount('#payment-element')
+      isPaymentReady.value = true
+    } else {
+      console.warn('Payment element container not found in DOM')
+      // Try again in case of transition delay
+      setTimeout(() => {
+        paymentElement.mount('#payment-element')
+        isPaymentReady.value = true
+      }, 500)
+    }
+  } catch (e) {
+    paymentError.value = 'Kunne ikke initialisere betaling.'
+    console.error(e)
+  } finally {
+    loading.value = false
+  }
+}
+
+const processPayment = async () => {
+  if (!stripe || !elements) return
+
+  loading.value = true
+  paymentError.value = ''
+
+  const { error, paymentIntent } = await stripe.confirmPayment({
+    elements,
+    confirmParams: {
+      return_url: window.location.origin + '/ticket?success=true',
+    },
+    redirect: 'if_required'
+  })
+
+  if (error) {
+    paymentError.value = error.message
+    loading.value = false
+  } else {
+    // Payment successful!
+    console.log('Payment success, sending confirmation email...')
+    
+    // Send email confirmation to the business
+    try {
+      fetch('/api/payment-confirm', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          ticketNumber: form.ticketNumber,
+          licensePlate: form.licensePlate,
+          amount: currentAmount.value,
+          paymentIntentId: paymentIntent?.id || 'TEST_ID'
+        })
+      })
+    } catch (e) {
+      console.error('Failed to send confirmation email', e)
+    }
+
+    status.message = i18n.t('portal.payment.success')
+    status.type = 'success'
+    loading.value = false
+  }
 }
 
 const handleFileUpload = (e) => {
@@ -258,7 +440,7 @@ const submitPortalForm = async () => {
       message: form.message
     }
 
-    const response = await fetch('/contact.php', {
+    const response = await fetch('/api/contact', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload)
@@ -288,8 +470,17 @@ const resetPortal = () => {
     form.email = ''
     form.message = ''
     form.files = []
+    isPaymentReady.value = false
   }
 }
+
+onMounted(() => {
+  const urlParams = new URLSearchParams(window.location.search);
+  if (urlParams.get('success') === 'true') {
+    status.message = i18n.t('portal.payment.success');
+    status.type = 'success';
+  }
+})
 </script>
 
 <style scoped>
@@ -376,35 +567,36 @@ const resetPortal = () => {
 .payment-card-premium {
   width: 100%;
   position: relative;
-  padding: 3rem;
+  padding: 3.5rem 3rem;
   border-radius: var(--radius-xl);
-  border: 1px solid rgba(51, 102, 255, 0.4);
-  background: linear-gradient(135deg, rgba(51, 102, 255, 0.1), rgba(5, 10, 24, 0.8));
+  border: 1px solid rgba(51, 102, 255, 0.3);
+  background: linear-gradient(135deg, rgba(51, 102, 255, 0.08) 0%, rgba(5, 10, 24, 0.6) 100%);
   overflow: hidden;
   cursor: pointer;
-  transition: var(--transition-smooth);
+  transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
   text-align: left;
 }
 
 .payment-card-glow {
   position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(circle, rgba(51, 102, 255, 0.2) 0%, transparent 60%);
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at center, rgba(51, 102, 255, 0.15), transparent 70%);
   pointer-events: none;
-  transition: transform 0.6s ease;
+  opacity: 0;
+  transition: opacity 0.5s ease;
 }
 
 .payment-card-premium:hover {
-  transform: translateY(-8px) scale(1.02);
+  transform: translateY(-8px);
   border-color: var(--color-primary);
-  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5), var(--shadow-premium);
+  box-shadow: 0 40px 80px rgba(0, 0, 0, 0.6), 0 0 20px rgba(51, 102, 255, 0.2);
 }
 
 .payment-card-premium:hover .payment-card-glow {
-  transform: translate(10%, 10%);
+  opacity: 1;
 }
 
 .card-content {
@@ -412,36 +604,39 @@ const resetPortal = () => {
   z-index: 1;
   display: flex;
   align-items: center;
-  gap: 2rem;
+  gap: 2.5rem;
 }
 
 .card-icon-main {
-  font-size: 4rem;
-  filter: drop-shadow(0 0 15px var(--color-primary));
+  font-size: 3.5rem;
+  filter: drop-shadow(0 0 20px rgba(51, 102, 255, 0.6));
+  flex-shrink: 0;
 }
 
 .card-text-main h3 {
-  font-size: 2rem;
+  font-size: 1.85rem;
   font-weight: 800;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.75rem;
   color: var(--color-white);
+  line-height: 1.1;
 }
 
 .card-text-main p {
-  font-size: 1.1rem;
+  font-size: 1.05rem;
   color: var(--color-slate);
+  opacity: 0.85;
 }
 
 .card-arrow {
   margin-left: auto;
-  font-size: 1.5rem;
+  font-size: 1.8rem;
   color: var(--color-primary);
-  opacity: 0.8;
-  transition: transform 0.3s ease;
+  opacity: 0.6;
+  transition: all 0.4s ease;
 }
 
 .payment-card-premium:hover .card-arrow {
-  transform: translateX(10px);
+  transform: translateX(12px) scale(1.1);
   opacity: 1;
 }
 
@@ -663,15 +858,200 @@ const resetPortal = () => {
   to { opacity: 1; transform: translateY(0); }
 }
 
+/* PAYMENT SUMMARY / RECEIPT */
+.payment-summary {
+  padding: 1.5rem;
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--glass-border);
+  margin-bottom: 2rem;
+}
+
+.summary-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px dashed var(--glass-border);
+}
+
+.summary-title {
+  font-size: 0.9rem;
+  font-weight: 500;
+  opacity: 0.7;
+}
+
+.summary-amount {
+  font-size: 1.75rem;
+  font-weight: 800;
+}
+
+.summary-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.95rem;
+  opacity: 0.8;
+}
+
+.summary-row .highlight {
+  font-weight: 600;
+  color: #fff;
+  opacity: 1;
+}
+
+.divider-dashed {
+  height: 1px;
+  border-top: 1px dashed var(--glass-border);
+  margin: 0.5rem 0;
+}
+
+.summary-footer {
+  text-align: right;
+}
+
+.edit-amount-link {
+  background: none;
+  border: none;
+  color: var(--primary-gold);
+  font-size: 0.85rem;
+  cursor: pointer;
+  opacity: 0.6;
+  transition: opacity 0.2s;
+  padding: 0;
+}
+
+.edit-amount-link:hover {
+  opacity: 1;
+  text-decoration: underline;
+}
+
+.quick-select .chip {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--glass-border);
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 100px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.quick-select .chip:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: var(--primary-gold);
+}
+
+.quick-options {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.premium-input.lg {
+  padding: 1rem 1.25rem;
+  font-size: 1.1rem;
+}
+
+.btn.sm {
+  padding: 0.5rem 1rem;
+  font-size: 0.85rem;
+}
+
+/* STRIPE STYLES */
+.stripe-payment-container {
+  margin-top: 1rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--glass-border);
+}
+
+.payment-error-msg {
+  color: #ff4d4d;
+  font-size: 0.9rem;
+  font-weight: 600;
+  background: rgba(255, 77, 77, 0.1);
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius-md);
+  border-left: 3px solid #ff4d4d;
+}
+
+.flex-row {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.flex-row .premium-input {
+  flex: 1;
+}
+
+.mt-6 { margin-top: 2.5rem; }
+
+.spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: #fff;
+  animation: spin 0.8s linear infinite;
+  display: inline-block;
+  margin-right: 10px;
+  vertical-align: middle;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
 @media (max-width: 650px) {
-  .portal-page { padding: 5rem 1.25rem; }
-  .portal-card { padding: 2.5rem 1.5rem; }
+  .portal-page { padding: 4rem 1.25rem; }
+  .portal-card { padding: 2.5rem 1.25rem; }
   .amount-grid { grid-template-columns: 1fr; }
   .options-grid { grid-template-columns: 1fr; }
-  .payment-card-premium { padding: 2rem 1.5rem; }
+  .payment-card-premium { padding: 2.5rem 1.5rem; }
+  .card-content { gap: 1.5rem; }
   .card-icon-main { font-size: 2.5rem; }
-  .card-text-main h3 { font-size: 1.4rem; }
-  .wow-title { font-size: 2rem; }
+  .card-text-main h3 { font-size: 1.5rem; }
+  .card-text-main p { font-size: 0.95rem; }
+  .card-arrow { font-size: 1.5rem; }
+  .wow-title { font-size: 2.1rem; }
   .wow-subtitle { font-size: 1rem; }
+}
+
+@media (max-width: 380px) {
+    .portal-card { padding: 2rem 1rem; }
+    .quick-options { 
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+    .chip { 
+        font-size: 0.75rem; 
+        padding: 0.4rem 0.75rem;
+    }
+    .summary-title { font-size: 1.25rem; }
+    .summary-amount { font-size: 1.5rem; }
+}
+/* TRANSITIONS */
+.fade-slide-enter-active,
+.fade-slide-leave-active {
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.fade-slide-enter-from {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.fade-slide-leave-to {
+  opacity: 0;
+  transform: translateY(-20px);
 }
 </style>
