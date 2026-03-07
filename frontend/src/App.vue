@@ -82,8 +82,8 @@
 
     <!-- Mobile Menu Overlay -->
     <Transition name="mobile-menu">
-      <div v-if="mobileMenuOpen" class="mobile-menu-overlay">
-        <nav class="mobile-nav-links">
+      <div v-if="mobileMenuOpen" class="mobile-menu-overlay" @click="closeMobileMenu">
+        <nav class="mobile-nav-links" @click.stop>
           <template v-if="route.name === 'intro'">
             <RouterLink @click="closeMobileMenu" :to="{ name: 'intro' }">
               <span class="nav-icon">🏠</span> {{ i18n.t('nav.home') }}

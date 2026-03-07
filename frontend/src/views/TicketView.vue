@@ -880,11 +880,24 @@ onMounted(() => {
 
 /* PAYMENT SUMMARY / RECEIPT */
 .payment-summary {
-  padding: 1.5rem;
-  border-radius: var(--radius-md);
-  background: rgba(255, 255, 255, 0.03);
+  background: rgba(255, 255, 255, 0.05);
   border: 1px solid var(--glass-border);
-  margin-bottom: 2rem;
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  margin-bottom: 2.5rem;
+  box-shadow: var(--shadow-md);
+  position: relative;
+  overflow: hidden;
+}
+
+.payment-summary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: var(--color-primary);
 }
 
 .summary-header {
@@ -1125,6 +1138,13 @@ onMounted(() => {
   .card-arrow { font-size: 1.5rem; }
   .wow-title { font-size: 2.1rem; }
   .wow-subtitle { font-size: 1rem; }
+  
+  /* Payment Stage 2 Refinements */
+  .payment-summary { padding: 1.25rem; }
+  .summary-header { flex-direction: column; align-items: flex-start; gap: 0.52rem; }
+  .summary-amount { font-size: 1.5rem; }
+  .summary-row { font-size: 0.85rem; }
+  .stripe-payment-container { padding-top: 1rem; }
 }
 
 @media (max-width: 380px) {
