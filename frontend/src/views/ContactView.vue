@@ -498,7 +498,14 @@ textarea:focus ~ .input-glow {
     margin-inline: auto;
   }
   .info-cards {
-    align-items: center;
+    align-items: flex-start; /* Unified left alignment within the center */
+    max-width: 280px; /* Constraining width to keep them tight together */
+    margin-inline: auto;
+  }
+  .info-item {
+    gap: 1.25rem;
+    width: 100%;
+    justify-content: flex-start;
   }
 }
 

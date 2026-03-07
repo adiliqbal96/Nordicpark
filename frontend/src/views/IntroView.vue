@@ -102,8 +102,14 @@ import { i18n } from '../i18n.js'
 }
 
 .main-logo {
-  height: 70px;
-  filter: drop-shadow(0 0 20px rgba(51, 102, 255, 0.2));
+  height: 80px; /* Increased from 70px */
+  filter: drop-shadow(0 0 20px rgba(51, 102, 255, 0.3));
+  animation: logo-pulse-glow 3s infinite ease-in-out;
+}
+
+@keyframes logo-pulse-glow {
+  0%, 100% { transform: scale(1); filter: drop-shadow(0 0 20px rgba(51, 102, 255, 0.3)); }
+  50% { transform: scale(1.05); filter: drop-shadow(0 0 35px rgba(51, 102, 255, 0.5)); }
 }
 
 .logo-divider {
@@ -296,7 +302,7 @@ import { i18n } from '../i18n.js'
   }
 
   .main-logo {
-    height: 40px; /* even smaller for mobile */
+    height: 70px; /* Much larger than the previous 40px */
   }
 
   .logo-divider {
@@ -308,7 +314,9 @@ import { i18n } from '../i18n.js'
   }
   
   .wow-title {
-    font-size: 2.25rem; /* Better wrapping on iPhone */
+    font-size: 2.25rem; 
+    line-height: 1.1;
+    margin-top: 1rem;
   }
 
 
