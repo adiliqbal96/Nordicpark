@@ -130,8 +130,9 @@
                     </div>
 
                     <div class="summary-footer">
-                      <button class="edit-amount-link" @click="isPaymentReady = false; payment.customAmount = null">
-                        ✎ {{ i18n.t('services.back') }}
+                      <button class="edit-amount-btn" @click="isPaymentReady = false; payment.customAmount = null">
+                        <span class="icon">✎</span>
+                        <span class="text">{{ i18n.t('services.back') }}</span>
                       </button>
                     </div>
                   </div>
@@ -917,20 +918,32 @@ onMounted(() => {
   text-align: right;
 }
 
-.edit-amount-link {
-  background: none;
-  border: none;
-  color: var(--primary-gold);
+.edit-amount-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 0.5rem 1.25rem;
+  border-radius: var(--radius-full);
+  color: var(--color-white);
   font-size: 0.85rem;
+  font-weight: 700;
   cursor: pointer;
-  opacity: 0.6;
-  transition: opacity 0.2s;
-  padding: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  margin: 0 auto;
 }
 
-.edit-amount-link:hover {
-  opacity: 1;
-  text-decoration: underline;
+.edit-amount-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: var(--color-primary);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.edit-amount-btn .icon {
+  font-size: 1rem;
+  color: var(--color-primary);
 }
 
 .quick-select .chip {
