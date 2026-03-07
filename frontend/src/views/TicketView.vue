@@ -94,12 +94,50 @@
                     </div>
                 </div>
                 
-                <div class="quick-select mt-4">
-                    <p class="text-sm opacity-60 mb-2">{{ i18n.t('portal.payment.selectType') }}:</p>
-                    <div class="quick-options">
-                      <button class="chip" @click="selectType('standard')">950,- (Standard)</button>
-                      <button class="chip" @click="selectType('handicap')">1900,- (Handicap)</button>
-                      <button class="chip" @click="selectType('emergency')">1100,- (Brandvej)</button>
+                <div class="ticket-selection-flow mt-6">
+                    <p class="selection-label">{{ i18n.t('portal.payment.selectType') }}</p>
+                    <div class="ticket-type-carousel">
+                      <div 
+                        class="ticket-type-card" 
+                        :class="{ active: payment.amountType === 'standard' }"
+                        @click="selectType('standard')"
+                      >
+                        <div class="card-glow"></div>
+                        <div class="type-icon">🛡️</div>
+                        <div class="type-info">
+                          <span class="type-name">{{ i18n.t('portal.payment.standard') }}</span>
+                          <span class="type-price">950,-</span>
+                        </div>
+                        <div class="selection-indicator"></div>
+                      </div>
+
+                      <div 
+                        class="ticket-type-card" 
+                        :class="{ active: payment.amountType === 'handicap' }"
+                        @click="selectType('handicap')"
+                      >
+                        <div class="card-glow"></div>
+                        <div class="type-icon">♿</div>
+                        <div class="type-info">
+                          <span class="type-name">{{ i18n.t('portal.payment.handicap') }}</span>
+                          <span class="type-price">1900,-</span>
+                        </div>
+                        <div class="selection-indicator"></div>
+                      </div>
+
+                      <div 
+                        class="ticket-type-card" 
+                        :class="{ active: payment.amountType === 'emergency' }"
+                        @click="selectType('emergency')"
+                      >
+                        <div class="card-glow"></div>
+                        <div class="type-icon">🚒</div>
+                        <div class="type-info">
+                          <span class="type-name">{{ i18n.t('portal.payment.emergency') }}</span>
+                          <span class="type-price">1900,-</span>
+                        </div>
+                        <div class="selection-indicator"></div>
+                      </div>
                     </div>
                 </div>
               </div>
@@ -254,7 +292,7 @@ const payment = reactive({
 const fineTypes = {
   standard: 950,
   handicap: 1900,
-  emergency: 1100
+  emergency: 1900
 }
 
 const currentAmount = computed(() => {
@@ -946,26 +984,96 @@ onMounted(() => {
   color: var(--color-primary);
 }
 
-.quick-select .chip {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid var(--glass-border);
-  color: #fff;
-  padding: 0.5rem 1rem;
-  border-radius: 100px;
-  font-size: 0.85rem;
-  cursor: pointer;
-  transition: all 0.2s;
+/* TICKET TYPE CAROUSEL */
+.selection-label {
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-slate);
+    margin-bottom: 1.5rem;
+    text-align: center;
 }
 
-.quick-select .chip:hover {
-  background: rgba(255, 255, 255, 0.1);
-  border-color: var(--primary-gold);
+.ticket-type-carousel {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+    margin-bottom: 1rem;
 }
 
-.quick-options {
-  display: flex;
-  gap: 0.75rem;
-  flex-wrap: wrap;
+.ticket-type-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    padding: 2.5rem 1.5rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.ticket-type-card:hover {
+    background: rgba(255, 255, 255, 0.06);
+    transform: translateY(-5px);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.ticket-type-card.active {
+    background: rgba(51, 102, 255, 0.08);
+    border: 2px solid var(--color-accent);
+    box-shadow: 0 15px 35px rgba(251, 191, 36, 0.15), 0 0 15px rgba(251, 191, 36, 0.1);
+    transform: translateY(-8px);
+}
+
+.type-icon {
+    font-size: 2.5rem;
+    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.1));
+    transition: transform 0.4s ease;
+}
+
+.ticket-type-card.active .type-icon {
+    transform: scale(1.2);
+    filter: drop-shadow(0 0 15px rgba(251, 191, 36, 0.4));
+}
+
+.type-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.type-name {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #fff;
+    white-space: nowrap;
+}
+
+.type-price {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: var(--color-accent);
+}
+
+.selection-indicator {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: var(--color-accent);
+    transform: scaleX(0);
+    transition: transform 0.4s ease;
+}
+
+.ticket-type-card.active .selection-indicator {
+    transform: scaleX(1);
 }
 
 .premium-input.lg {
@@ -1040,14 +1148,20 @@ onMounted(() => {
 
 @media (max-width: 380px) {
     .portal-card { padding: 2rem 1rem; }
-    .quick-options { 
+    .ticket-type-carousel {
         display: flex;
-        flex-wrap: wrap;
-        gap: 0.5rem;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        padding: 1.5rem 1.5rem 2.5rem 1.5rem;
+        margin: -1.5rem -2rem 0 -2rem; /* Bleed & Clearance */
+        scrollbar-width: none;
     }
-    .chip { 
-        font-size: 0.75rem; 
-        padding: 0.4rem 0.75rem;
+    .ticket-type-carousel::-webkit-scrollbar { display: none; }
+    
+    .ticket-type-card {
+        flex: 0 0 75%;
+        scroll-snap-align: center;
+        padding: 3rem 2rem;
     }
     .summary-title { font-size: 1.25rem; }
     .summary-amount { font-size: 1.5rem; }
