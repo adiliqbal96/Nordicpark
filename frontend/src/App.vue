@@ -85,20 +85,43 @@
       <div v-if="mobileMenuOpen" class="mobile-menu-overlay">
         <nav class="mobile-nav-links">
           <template v-if="route.name === 'intro'">
-            <RouterLink @click="closeMobileMenu" :to="{ name: 'intro' }">{{ i18n.t('nav.home') }}</RouterLink>
-            <RouterLink @click="closeMobileMenu" :to="{ name: 'ticket' }">{{ i18n.t('nav.ticket') }}</RouterLink>
-            <RouterLink @click="closeMobileMenu" :to="{ name: 'erhverv' }">{{ i18n.t('nav.solutions') }}</RouterLink>
-            <RouterLink @click="closeMobileMenu" :to="{ name: 'contact' }" class="nav-cta">{{ i18n.t('nav.contact') }}</RouterLink>
+            <RouterLink @click="closeMobileMenu" :to="{ name: 'intro' }">
+              <span class="nav-icon">🏠</span> {{ i18n.t('nav.home') }}
+            </RouterLink>
+            <RouterLink @click="closeMobileMenu" :to="{ name: 'ticket' }">
+              <span class="nav-icon">💳</span> {{ i18n.t('nav.ticket') }}
+            </RouterLink>
+            <RouterLink @click="closeMobileMenu" :to="{ name: 'erhverv' }">
+              <span class="nav-icon">🏢</span> {{ i18n.t('nav.solutions') }}
+            </RouterLink>
+            <RouterLink @click="closeMobileMenu" :to="{ name: 'contact' }" class="nav-cta gold">
+              <span class="nav-icon">📧</span> {{ i18n.t('nav.contact') }}
+            </RouterLink>
           </template>
           <template v-else-if="route.name === 'ticket'">
-            <RouterLink @click="closeMobileMenu" :to="{ name: 'intro' }">{{ i18n.t('nav.home') }}</RouterLink>
-            <RouterLink @click="closeMobileMenu" :to="{ name: 'ticket' }" class="nav-cta active">{{ i18n.t('nav.ticket') }}</RouterLink>
+            <RouterLink @click="closeMobileMenu" :to="{ name: 'intro' }">
+              <span class="nav-icon">🏠</span> {{ i18n.t('nav.home') }}
+            </RouterLink>
+            <RouterLink @click="closeMobileMenu" :to="{ name: 'ticket' }" class="active">
+              <span class="nav-icon">💳</span> {{ i18n.t('nav.ticket') }}
+            </RouterLink>
+            <RouterLink @click="closeMobileMenu" :to="{ name: 'contact' }" class="nav-cta gold">
+              <span class="nav-icon">📧</span> {{ i18n.t('nav.contact') }}
+            </RouterLink>
           </template>
           <template v-else>
-            <RouterLink @click="closeMobileMenu" :to="{ name: 'erhverv', hash: '#solutions' }">{{ i18n.t('nav.solutions') }}</RouterLink>
-            <RouterLink @click="closeMobileMenu" :to="{ name: 'erhverv', hash: '#why' }">{{ i18n.t('nav.why') }}</RouterLink>
-            <RouterLink @click="closeMobileMenu" :to="{ name: 'erhverv', hash: '#process' }">{{ i18n.t('nav.process') }}</RouterLink>
-            <RouterLink @click="closeMobileMenu" :to="{ name: 'contact' }" class="nav-cta">{{ i18n.t('nav.contact') }}</RouterLink>
+            <RouterLink @click="closeMobileMenu" :to="{ name: 'intro' }">
+              <span class="nav-icon">🏠</span> {{ i18n.t('nav.home') }}
+            </RouterLink>
+            <RouterLink @click="closeMobileMenu" :to="{ name: 'erhverv', hash: '#solutions' }">
+              <span class="nav-icon">⚙️</span> {{ i18n.t('nav.solutions') }}
+            </RouterLink>
+            <RouterLink @click="closeMobileMenu" :to="{ name: 'erhverv', hash: '#why' }">
+              <span class="nav-icon">💎</span> {{ i18n.t('nav.why') }}
+            </RouterLink>
+            <RouterLink @click="closeMobileMenu" :to="{ name: 'contact' }" class="nav-cta gold">
+              <span class="nav-icon">📧</span> {{ i18n.t('nav.contact') }}
+            </RouterLink>
           </template>
         </nav>
       </div>
@@ -332,20 +355,37 @@ onMounted(() => {
 }
 
 .mobile-nav-links a {
-  font-size: 2rem;
-  font-weight: 700;
+  font-size: 1.75rem;
+  font-weight: 800;
   color: var(--color-white);
   text-decoration: none;
-  transition: color 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+  letter-spacing: -0.02em;
+}
+
+.nav-icon {
+  font-size: 1.5rem;
+  opacity: 0.8;
+  filter: grayscale(0.2);
 }
 
 .mobile-nav-links a:hover,
 .mobile-nav-links a.active {
-  color: var(--color-primary);
+  color: var(--color-accent);
+  transform: scale(1.05);
 }
 
-.mobile-nav-links .nav-cta {
+.mobile-nav-links .nav-cta.gold {
   color: var(--color-accent);
+  background: rgba(252, 211, 77, 0.1);
+  padding: 0.8rem 2.5rem;
+  border-radius: var(--radius-full);
+  border: 1px solid rgba(252, 211, 77, 0.2);
+  margin-top: 1rem;
 }
 
 /* Animations */
