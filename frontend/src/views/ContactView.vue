@@ -488,19 +488,64 @@ textarea:focus ~ .input-glow {
 @media (max-width: 1100px) {
   .contact-grid {
     grid-template-columns: 1fr;
-    gap: 4rem;
+    gap: 3rem;
+  }
+  .contact-header {
+    margin-bottom: 2.5rem;
+    text-align: center;
+  }
+  .subtitle {
+    margin-inline: auto;
+  }
+  .info-cards {
+    align-items: center;
   }
 }
 
 @media (max-width: 600px) {
+  .page { padding-top: 5rem; }
   .card-inner {
-    padding: 2rem;
+    padding: 2rem 1.5rem;
+  }
+  .contact-form {
+    gap: 1.25rem;
   }
   .form-row {
     grid-template-columns: 1fr;
+    gap: 1.25rem;
   }
   .wow-title {
-    font-size: 2.5rem;
+    font-size: 2.25rem;
+    margin-bottom: 1rem;
+  }
+  .subtitle {
+    font-size: 1.1rem;
+  }
+  .info-item {
+    gap: 1rem;
+  }
+  .info-icon-wrapper {
+    width: 50px;
+    height: 50px;
+    border-radius: 14px;
+  }
+  .info-icon-wrapper svg {
+    width: 20px;
+    height: 20px;
+  }
+  .info-text label {
+    font-size: 0.65rem;
+  }
+  .info-text a, .info-text span {
+    font-size: 1.05rem;
+  }
+  input, textarea {
+    padding: 1rem 1.25rem;
+    font-size: 1rem;
+  }
+  .wow-submit-btn {
+    padding: 1rem;
+    font-size: 1rem;
   }
 }
 </style>
