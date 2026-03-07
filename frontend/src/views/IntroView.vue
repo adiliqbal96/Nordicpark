@@ -62,7 +62,7 @@ import { i18n } from '../i18n.js'
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 4rem 2rem;
+  padding: 2rem 1.5rem; /* Reduced from 4rem 2rem */
   color: var(--color-white);
   position: relative;
   overflow: hidden;
@@ -287,36 +287,37 @@ import { i18n } from '../i18n.js'
   }
 
   .gateway-card {
-    flex: 0 0 82%; /* Slightly smaller for a peek next card */
-    scroll-snap-align: center; /* Center snap feels more premium */
-    padding: 3rem 2rem;
+    flex: 0 0 82%;
+    scroll-snap-align: center;
+    padding: 2rem 1.5rem; /* Reduced from 3rem 2rem */
   }
   
   .intro-header {
-    margin-bottom: 3.5rem;
+    margin-bottom: 2rem; /* Reduced from 3.5rem */
   }
   
   .brand-wrapper {
-    gap: 1rem;
-    margin-bottom: 1.5rem;
+    gap: 0.75rem; /* Reduced from 1rem */
+    margin-bottom: 1rem; /* Reduced from 1.5rem */
   }
 
   .main-logo {
-    height: 70px; /* Much larger than the previous 40px */
+    height: 50px; /* Reduced from 70px to save vertical space */
   }
 
   .logo-divider {
-    height: 20px;
+    height: 16px; /* Reduced from 20px */
   }
 
   .premium-label {
-    font-size: 0.7rem;
+    font-size: 0.65rem; /* Slightly smaller */
   }
   
   .wow-title {
-    font-size: 2.25rem; 
+    font-size: 2rem; /* Reduced from 2.25rem */
     line-height: 1.1;
-    margin-top: 1rem;
+    margin-top: 0.5rem;
+    margin-bottom: 0.75rem; /* Tighter title-subtitle gap */
   }
 
 
