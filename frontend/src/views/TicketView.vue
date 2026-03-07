@@ -172,7 +172,7 @@
                     <div class="summary-footer">
                       <button class="edit-amount-btn" @click="isPaymentReady = false; payment.customAmount = null">
                         <span class="icon">✎</span>
-                        <span class="text">{{ i18n.t('services.back') }}</span>
+                        <span class="text">{{ i18n.t('portal.payment.editSelection') }}</span>
                       </button>
                     </div>
                   </div>
@@ -1147,7 +1147,7 @@ onMounted(() => {
   .stripe-payment-container { padding-top: 1rem; }
 }
 
-@media (max-width: 380px) {
+@media (max-width: 768px) {
     .portal-card { padding: 2rem 1rem; }
     .ticket-type-carousel {
         display: flex;
@@ -1156,16 +1156,17 @@ onMounted(() => {
         padding: 1.5rem 1.5rem 2.5rem 1.5rem;
         margin: -1.5rem -2rem 0 -2rem; /* Bleed & Clearance */
         scrollbar-width: none;
+        gap: 1.25rem;
     }
     .ticket-type-carousel::-webkit-scrollbar { display: none; }
     
     .ticket-type-card {
-        flex: 0 0 75%;
+        flex: 0 0 85%;
         scroll-snap-align: center;
-        padding: 3rem 2rem;
+        padding: 2.5rem 1.5rem;
     }
-    .summary-title { font-size: 1.25rem; }
-    .summary-amount { font-size: 1.5rem; }
+    .summary-title { font-size: 1.1rem; }
+    .summary-amount { font-size: 1.4rem; }
 }
 /* TRANSITIONS */
 .fade-slide-enter-active,

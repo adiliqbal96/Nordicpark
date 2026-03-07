@@ -1,6 +1,8 @@
 <template>
-  <div class="page legal-page">
-    <Backlink :to="{ name: 'home' }" :label="i18n.t('services.back')" />
+  <div class="page legal-page container--standard">
+    <div class="header-nav-group">
+      <Backlink :to="{ name: 'home' }" :label="i18n.t('services.back')" />
+    </div>
     
     <article class="legal-content">
       <header class="legal-header">

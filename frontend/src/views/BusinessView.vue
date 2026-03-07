@@ -1,7 +1,9 @@
 <template>
   <div class="page">
-    <div class="container">
-      <Backlink :to="{ name: 'erhverv' }" :label="i18n.t('services.back')" />
+    <div class="container--standard">
+      <div class="header-nav-group">
+        <Backlink :to="{ name: 'erhverv' }" :label="i18n.t('services.back')" />
+      </div>
 
       <header class="service-header">
         <h1>{{ i18n.t('services.business.title') }}</h1>
