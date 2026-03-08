@@ -90,9 +90,9 @@
               <div v-if="!isPaymentReady && !loading" class="amount-entry-flow fadeIn">
                 <div class="form-group">
                     <label class="premium-label">{{ i18n.t('portal.payment.customLabel') }}</label>
-                    <div class="flex-row">
-                      <input type="number" v-model="payment.customAmount" :placeholder="i18n.t('portal.payment.customPlaceholder')" class="premium-input lg" min="1" />
-                      <button class="btn primary-gold lg" @click="initStripe" :disabled="!payment.customAmount">{{ i18n.t('portal.status.okBtn') }}</button>
+                    <div class="flex-row amount-input-wrapper">
+                      <input type="number" v-model="payment.customAmount" :placeholder="i18n.t('portal.payment.customPlaceholder')" class="premium-input" min="1" />
+                      <button class="btn primary-gold" @click="initStripe" :disabled="!payment.customAmount">{{ i18n.t('portal.status.okBtn') }}</button>
                     </div>
                 </div>
                 
@@ -171,7 +171,7 @@
 
                     <div class="summary-footer">
                       <button class="edit-amount-btn" @click="isPaymentReady = false; payment.customAmount = null">
-                        <span class="icon">✎</span>
+                        <span class="icon">←</span>
                         <span class="text">{{ i18n.t('portal.payment.editSelection') }}</span>
                       </button>
                     </div>
@@ -1101,6 +1101,33 @@ onMounted(() => {
   display: flex;
   gap: 1rem;
   align-items: center;
+}
+
+.amount-input-wrapper {
+  background: rgba(255, 255, 255, 0.03);
+  padding: 0.4rem;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--glass-border);
+  transition: all 0.3s ease;
+}
+
+.amount-input-wrapper:focus-within {
+  border-color: var(--color-primary);
+  background: rgba(255, 255, 255, 0.06);
+  box-shadow: 0 0 15px rgba(51, 102, 255, 0.1);
+}
+
+.amount-input-wrapper .premium-input {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding-left: 1rem;
+}
+
+.amount-input-wrapper .btn {
+  white-space: nowrap;
+  border-radius: var(--radius-md);
+  padding: 0.7rem 1.5rem;
 }
 
 .flex-row .premium-input {

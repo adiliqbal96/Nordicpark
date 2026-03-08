@@ -60,7 +60,7 @@ const translations = {
                 customPlaceholder: 'F.eks. 500',
                 alert: 'Sikker betaling via Stripe. Dine oplysninger behandles fortroligt.',
                 payBtn: 'Betal nu',
-                editSelection: 'Ret valg',
+                editSelection: 'Tilbage',
                 totalLabel: 'Total beløb at betale',
                 subTotal: 'Parkeringsafgift',
                 fee: 'Transaktionsgebyr',
@@ -98,7 +98,7 @@ const translations = {
             status: {
                 successTitle: 'Modtaget!',
                 errorTitle: 'Fejl',
-                okBtn: 'Forstået'
+                okBtn: 'Videre'
             }
         },
         business: {
@@ -328,7 +328,7 @@ const translations = {
                 customPlaceholder: 'E.g. 500',
                 alert: 'Secure payment via Stripe. Your information is processed confidentially.',
                 payBtn: 'Pay Now',
-                editSelection: 'Change selection',
+                editSelection: 'Back',
                 totalLabel: 'Total amount to pay',
                 subTotal: 'Parking fine',
                 fee: 'Transaction fee',
@@ -366,7 +366,7 @@ const translations = {
             status: {
                 successTitle: 'Received!',
                 errorTitle: 'Error',
-                okBtn: 'Got it'
+                okBtn: 'Next'
             }
         },
         business: {
