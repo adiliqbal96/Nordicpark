@@ -246,6 +246,24 @@
         <rect x="22" y="54" width="6" height="3" rx="1" fill="#ff4422" fill-opacity="0.5"/>
       </g>
 
+      <!-- ═══ BADLY PARKED CAR (rotated, sticking out into lane) ═══ -->
+      <!-- Centered at (368, 148), rotated 22° — clearly not in any bay -->
+      <g class="bad-park" transform="translate(368, 148) rotate(22)" filter="url(#vf)">
+        <rect x="-16" y="-29" width="32" height="58" rx="5" fill="#252535"/>
+        <!-- windshield (top) -->
+        <rect x="-11" y="-24" width="22" height="10" rx="2" fill="#303048" fill-opacity="0.7"/>
+        <!-- rear window (bottom) -->
+        <rect x="-10" y="15"  width="20" height="10" rx="2" fill="#1e1e30" fill-opacity="0.55"/>
+        <!-- front lights -->
+        <rect x="-16" y="-28" width="6" height="3" rx="1" fill="#ffffaa" fill-opacity="0.6"/>
+        <rect x="10"  y="-28" width="6" height="3" rx="1" fill="#ffffaa" fill-opacity="0.6"/>
+        <!-- rear lights -->
+        <rect x="-16" y="25"  width="6" height="3" rx="1" fill="#ff2200" fill-opacity="0.9"/>
+        <rect x="10"  y="25"  width="6" height="3" rx="1" fill="#ff2200" fill-opacity="0.9"/>
+      </g>
+      <!-- Pulsing ring around bad parker -->
+      <ellipse class="bad-ring" cx="368" cy="148" rx="24" ry="36" fill="none" stroke="#ff6600" stroke-width="2"/>
+
       <!-- ═══ NORDICPARK PATROL CAR (animated in lane) ═══ -->
       <!-- Horizontal car: 62px long, 26px wide, facing right, centered at origin -->
       <g class="patrol-car">
@@ -367,6 +385,27 @@
 @keyframes scan-sweep {
   from { transform: translateY(-28px); }
   to   { transform: translateY(300px); }
+}
+
+/* Badly parked car */
+.bad-park {
+  animation: bad-pulse 2.3s ease-in-out infinite;
+}
+
+@keyframes bad-pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.65; }
+}
+
+.bad-ring {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: bad-ring-pulse 2.3s ease-in-out infinite;
+}
+
+@keyframes bad-ring-pulse {
+  0%, 100% { opacity: 0.7; transform: scale(1);    stroke-width: 2; }
+  50%       { opacity: 0.1; transform: scale(1.2);  stroke-width: 3; }
 }
 
 /* Status dot */
