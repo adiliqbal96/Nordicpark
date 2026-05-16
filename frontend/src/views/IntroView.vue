@@ -70,6 +70,7 @@
       <footer class="intro-footer reveal" style="animation-delay: 0.35s">
         <div class="footer-line"></div>
         <p>{{ i18n.t('footer.copyright', { year: new Date().getFullYear() }) }}</p>
+        <p class="footer-meta">CVR: 45 90 04 36 · C/O Værftet, Carlsensvej 4, 4600 Køge</p>
       </footer>
     </div>
   </div>
@@ -345,6 +346,13 @@ import { i18n } from '../i18n.js'
   letter-spacing: 0.04em;
 }
 
+.footer-meta {
+  margin-top: 0.4rem;
+  font-size: 0.72rem !important;
+  letter-spacing: 0.02em !important;
+  opacity: 0.7;
+}
+
 /* ANIMATIONS */
 .reveal {
   opacity: 0;
@@ -361,7 +369,7 @@ import { i18n } from '../i18n.js'
   .intro-page {
     padding: 2rem 1.25rem;
     align-items: flex-start;
-    padding-top: 3rem;
+    padding-top: 5.5rem;
   }
 
   .gateway-grid {

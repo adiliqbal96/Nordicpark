@@ -32,31 +32,28 @@
           </nav>
         </template>
 
-        <!-- Spacer -->
-        <div class="nav-flex-spacer"></div>
+        <!-- Right group: lang + CTA + hamburger -->
+        <div class="nav-right">
+          <div class="lang-selector-pill">
+            <button class="lang-item" :class="{ active: i18n.locale.value === 'da' }" @click="i18n.setLocale('da')" title="Dansk">DA</button>
+            <button class="lang-item" :class="{ active: i18n.locale.value === 'en' }" @click="i18n.setLocale('en')" title="English">EN</button>
+          </div>
 
-        <!-- Lang selector -->
-        <div class="lang-selector-pill">
-          <button class="lang-item" :class="{ active: i18n.locale.value === 'da' }" @click="i18n.setLocale('da')" title="Dansk">DA</button>
-          <button class="lang-item" :class="{ active: i18n.locale.value === 'en' }" @click="i18n.setLocale('en')" title="English">EN</button>
+          <RouterLink v-if="route.name !== 'contact'" :to="{ name: 'contact' }" class="nav-pill-cta desktop-nav">
+            {{ i18n.t('nav.contact') }}
+          </RouterLink>
+
+          <button
+            class="mobile-toggle"
+            @click="toggleMobileMenu"
+            :class="{ 'is-active': mobileMenuOpen }"
+            aria-label="Toggle menu"
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
         </div>
-
-        <!-- Kontakt CTA (desktop only) -->
-        <RouterLink v-if="route.name !== 'contact'" :to="{ name: 'contact' }" class="nav-pill-cta desktop-nav">
-          {{ i18n.t('nav.contact') }}
-        </RouterLink>
-
-        <!-- Mobile hamburger -->
-        <button
-          class="mobile-toggle"
-          @click="toggleMobileMenu"
-          :class="{ 'is-active': mobileMenuOpen }"
-          aria-label="Toggle menu"
-        >
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
       </div>
     </header>
 
@@ -309,10 +306,12 @@ onMounted(() => {
   color: #fff;
 }
 
-/* Flex spacer to push lang+cta to right */
-.nav-flex-spacer {
-  flex: 1;
-  min-width: 1.5rem;
+/* Right group pushes itself to the right */
+.nav-right {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
 }
 
 /* Mobile Toggle Button */
@@ -415,10 +414,6 @@ onMounted(() => {
   }
   .mobile-toggle {
     display: flex;
-    margin-left: 0.25rem;
-  }
-  .nav-flex-spacer {
-    min-width: 0.5rem;
   }
 }
 </style>
