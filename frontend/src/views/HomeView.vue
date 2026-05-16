@@ -272,14 +272,14 @@ import ParkingVisual from '../components/ParkingVisual.vue'
 const solutionCards = [
   {
     route: 'service-residential',
-    img: 'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?q=80&w=800&auto=format&fit=crop',
+    img: 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=800&auto=format&fit=crop',
     titleKey: 'business.solutions.residential.title',
     descKey:  'business.solutions.residential.desc',
     linkKey:  'business.solutions.residential.link'
   },
   {
     route: 'service-business',
-    img: 'https://images.unsplash.com/photo-1604014237800-1c9102c219da?q=80&w=800&auto=format&fit=crop',
+    img: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800&auto=format&fit=crop',
     titleKey: 'business.solutions.business.title',
     descKey:  'business.solutions.business.desc',
     linkKey:  'business.solutions.business.link'
