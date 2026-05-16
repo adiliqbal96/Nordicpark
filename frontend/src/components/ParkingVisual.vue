@@ -326,15 +326,21 @@
   height: auto;
 }
 
-/* Patrol car drives left → right across center lane (y=156) */
+/* Patrol car drives left → right, stops at badly parked car, then continues */
 .patrol-car {
   transform: translate(-90px, 156px);
-  animation: drive 9s linear infinite;
+  animation: drive 13s linear infinite;
 }
 
 @keyframes drive {
-  from { transform: translate(-90px, 156px); }
-  to   { transform: translate(530px, 156px); }
+  0%   { transform: translate(-90px, 156px); }  /* start off-screen left */
+  45%  { transform: translate(280px, 156px); }  /* normal cruising speed */
+  51%  { transform: translate(318px, 156px); }  /* slowing down */
+  54%  { transform: translate(328px, 156px); }  /* slowing more */
+  56%  { transform: translate(330px, 156px); }  /* stopped — front bumper ~10px from bad car */
+  72%  { transform: translate(330px, 156px); }  /* issuing ticket (~2s pause) */
+  78%  { transform: translate(400px, 156px); }  /* drives past, back to speed */
+  100% { transform: translate(530px, 156px); }  /* exit off-screen right */
 }
 
 /* Violation car glow pulses */
