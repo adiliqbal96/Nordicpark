@@ -3,6 +3,23 @@
 
     <!-- HERO -->
     <section class="hero" id="top">
+      <!-- Spotlight effect -->
+      <svg class="hero-spotlight" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3787 2842" fill="none" aria-hidden="true">
+        <g filter="url(#spotlight-filter)">
+          <ellipse cx="1924.71" cy="273.501" rx="1924.71" ry="273.501"
+            transform="matrix(-0.822377 -0.568943 -0.568943 0.822377 3631.88 2291.09)"
+            fill="white" fill-opacity="0.18"/>
+        </g>
+        <defs>
+          <filter id="spotlight-filter" x="0.86" y="0.84" width="3785.16" height="2840.26"
+            filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+            <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+            <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+            <feGaussianBlur stdDeviation="151" result="effect1_foregroundBlur"/>
+          </filter>
+        </defs>
+      </svg>
+
       <div class="hero-inner hero-inner--wide">
         <div class="hero-split">
 
@@ -26,52 +43,12 @@
             </div>
           </div>
 
-          <!-- RIGHT: Parking sign visual -->
+          <!-- RIGHT: Spline 3D scene -->
           <div class="hero-visual" aria-hidden="true">
-            <div class="sign-scene">
-              <div class="sign-glow"></div>
-
-              <div class="sign-wrapper">
-                <!-- Realistic Danish parking sign -->
-                <svg class="sign-svg" viewBox="0 0 200 272" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <!-- Sign face -->
-                  <rect width="200" height="232" rx="9" fill="#003FA0"/>
-                  <!-- Inner border (standard road sign detail) -->
-                  <rect x="7" y="7" width="186" height="218" rx="5" fill="none" stroke="rgba(255,255,255,0.22)" stroke-width="1.5"/>
-                  <!-- The P -->
-                  <text x="100" y="161" text-anchor="middle" fill="white"
-                    font-size="144" font-weight="900"
-                    font-family="Arial Black, Arial, system-ui, sans-serif"
-                    letter-spacing="-3">P</text>
-                  <!-- White time restriction strip -->
-                  <rect x="0" y="195" width="200" height="37" rx="0" fill="white"/>
-                  <path d="M0 195 H200 V228 Q200 232 196 232 H4 Q0 232 0 228 Z" fill="white"/>
-                  <text x="100" y="210" text-anchor="middle" fill="#003FA0"
-                    font-size="9" font-weight="600"
-                    font-family="Arial, system-ui, sans-serif"
-                    letter-spacing="0.8">MANDAG – FREDAG</text>
-                  <text x="100" y="225" text-anchor="middle" fill="#003FA0"
-                    font-size="13.5" font-weight="800"
-                    font-family="Arial, system-ui, sans-serif">08:00 – 17:00</text>
-                  <!-- Post -->
-                  <rect x="91" y="232" width="18" height="30" fill="#1E293B"/>
-                  <!-- Base plate -->
-                  <rect x="76" y="260" width="48" height="12" rx="5" fill="#1E293B"/>
-                </svg>
-
-                <!-- NordicPark plate under sign -->
-                <div class="sign-plate">
-                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                  NordicPark
-                </div>
-              </div>
-
-              <!-- Floating badge: active zone -->
-              <div class="zone-badge">
-                <span class="zone-dot"></span>
-                Aktiv kontrolzone
-              </div>
-            </div>
+            <SplineScene
+              scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
+              class-name="hero-spline"
+            />
           </div>
 
         </div>
@@ -294,6 +271,7 @@
 <script setup>
 import { RouterLink } from 'vue-router'
 import { i18n } from '../i18n.js'
+import SplineScene from '../components/SplineScene.vue'
 
 const solutionCards = [
   {
@@ -329,111 +307,65 @@ const processSteps = [
 <style scoped>
 /* ── HERO SPLIT LAYOUT ── */
 .hero {
-  min-height: 78vh;
+  min-height: 82vh;
+  overflow: hidden;
 }
 
 :deep(.hero-inner--wide) {
-  max-width: 1140px;
+  max-width: 1200px;
   padding: 0 2rem;
+}
+
+.hero-spotlight {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 138%;
+  height: 169%;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 0;
+  animation: spotlight-in 1.2s 0.3s ease forwards;
+}
+
+@keyframes spotlight-in {
+  to { opacity: 1; }
 }
 
 .hero-split {
   display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 5rem;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
   align-items: center;
+  min-height: 500px;
+  position: relative;
+  z-index: 1;
 }
 
 .hero-text {
   min-width: 0;
 }
 
-/* ── PARKING SIGN VISUAL ── */
+/* ── SPLINE 3D VISUAL ── */
 .hero-visual {
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.sign-scene {
+  height: 500px;
+  border-radius: 1rem;
+  overflow: hidden;
   position: relative;
-  width: 200px;
 }
 
-.sign-glow {
-  position: absolute;
-  inset: -60px;
-  background: radial-gradient(circle, rgba(0, 63, 160, 0.18) 0%, transparent 70%);
-  pointer-events: none;
-  z-index: 0;
+:deep(.hero-spline) {
+  width: 100%;
+  height: 100%;
 }
 
-.sign-wrapper {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.sign-svg {
-  width: 200px;
-  height: auto;
-  filter: drop-shadow(0 12px 32px rgba(0, 63, 160, 0.35)) drop-shadow(0 2px 8px rgba(0,0,0,0.4));
-}
-
-.sign-plate {
-  margin-top: -2px;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  color: rgba(255, 255, 255, 0.5);
-  font-size: 0.65rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  padding: 0.3rem 0.85rem;
-  border-radius: 999px;
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-}
-
-.sign-plate svg {
-  color: var(--color-primary);
-}
-
-.zone-badge {
-  position: absolute;
-  bottom: 28px;
-  right: -72px;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  background: rgba(10, 20, 40, 0.85);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(8px);
-  border-radius: 999px;
-  padding: 0.35rem 0.85rem 0.35rem 0.6rem;
-  font-size: 0.72rem;
-  font-weight: 600;
-  color: rgba(255, 255, 255, 0.75);
-  white-space: nowrap;
-}
-
-.zone-dot {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: #22c55e;
-  box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.2);
-  animation: pulse-dot 2s infinite;
-  flex-shrink: 0;
-}
-
-@keyframes pulse-dot {
-  0%, 100% { box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.2); }
-  50%       { box-shadow: 0 0 0 6px rgba(34, 197, 94, 0.08); }
+@media (max-width: 900px) {
+  .hero-split {
+    grid-template-columns: 1fr;
+  }
+  .hero-visual {
+    height: 340px;
+  }
 }
 
 /* ── HERO BUTTON OVERRIDES ── */

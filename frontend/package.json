@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@splinetool/runtime": "^1.12.94",
     "@stripe/stripe-js": "^8.9.0",
     "@vueuse/motion": "^3.0.3",
     "basic-ftp": "^5.2.0",
