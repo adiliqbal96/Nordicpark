@@ -1,394 +1,382 @@
 <template>
-  <div ref="container" class="parking-3d"></div>
+  <div class="parking-wrap">
+    <svg
+      class="lot-svg"
+      viewBox="0 0 440 290"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+    >
+      <defs>
+        <filter id="vf" x="-60%" y="-60%" width="220%" height="220%">
+          <feGaussianBlur in="SourceGraphic" stdDeviation="6" result="b"/>
+          <feColorMatrix in="b" type="matrix"
+            values="1.8 0 0 0 0.4  0 0 0 0 0  0 0 0 0 0  0 0 0 1.8 0"
+            result="r"/>
+          <feMerge>
+            <feMergeNode in="r"/>
+            <feMergeNode in="SourceGraphic"/>
+          </feMerge>
+        </filter>
+        <linearGradient id="asphalt" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#0b1422"/>
+          <stop offset="1" stop-color="#0e1b2e"/>
+        </linearGradient>
+        <linearGradient id="scan-grad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0"   stop-color="rgba(59,130,246,0)"/>
+          <stop offset="0.5" stop-color="rgba(59,130,246,0.07)"/>
+          <stop offset="1"   stop-color="rgba(59,130,246,0)"/>
+        </linearGradient>
+        <radialGradient id="vignette" cx="50%" cy="50%" r="65%">
+          <stop offset="55%" stop-color="transparent"/>
+          <stop offset="100%" stop-color="#040a14" stop-opacity="0.8"/>
+        </radialGradient>
+      </defs>
+
+      <!-- BACKGROUND -->
+      <rect width="440" height="290" fill="#060d1a"/>
+
+      <!-- BUILDING SILHOUETTES -->
+      <rect x="0"   y="0"  width="440" height="37" fill="#060d1a"/>
+      <rect x="6"   y="3"  width="54"  height="34" rx="2" fill="#0a1525"/>
+      <rect x="68"  y="7"  width="46"  height="30" rx="2" fill="#0c1830"/>
+      <rect x="122" y="1"  width="74"  height="36" rx="2" fill="#091320"/>
+      <rect x="204" y="5"  width="48"  height="32" rx="2" fill="#0a1525"/>
+      <rect x="260" y="0"  width="40"  height="37" rx="2" fill="#0d1c30"/>
+      <rect x="308" y="4"  width="64"  height="33" rx="2" fill="#0c1830"/>
+      <rect x="380" y="2"  width="60"  height="35" rx="2" fill="#091320"/>
+      <!-- Building windows -->
+      <g fill="#1e4070" fill-opacity="0.6">
+        <rect x="14" y="7"  width="6" height="8" rx="1"/><rect x="26" y="7"  width="6" height="8" rx="1"/>
+        <rect x="38" y="7"  width="6" height="8" rx="1"/><rect x="50" y="7"  width="6" height="8" rx="1"/>
+        <rect x="14" y="19" width="6" height="8" rx="1"/><rect x="38" y="19" width="6" height="8" rx="1"/>
+        <rect x="76" y="11" width="6" height="7" rx="1"/><rect x="88" y="11" width="6" height="7" rx="1"/>
+        <rect x="100" y="11" width="6" height="7" rx="1"/>
+        <rect x="130" y="5"  width="6" height="8" rx="1"/><rect x="142" y="5" width="6" height="8" rx="1"/>
+        <rect x="154" y="5"  width="6" height="8" rx="1"/><rect x="166" y="5" width="6" height="8" rx="1"/>
+        <rect x="178" y="5"  width="6" height="8" rx="1"/>
+        <rect x="130" y="17" width="6" height="8" rx="1"/><rect x="154" y="17" width="6" height="8" rx="1"/>
+        <rect x="166" y="17" width="6" height="8" rx="1"/>
+        <rect x="212" y="9" width="6" height="7" rx="1"/><rect x="224" y="9" width="6" height="7" rx="1"/>
+        <rect x="236" y="9" width="6" height="7" rx="1"/>
+        <rect x="268" y="4" width="6" height="8" rx="1"/><rect x="280" y="4" width="6" height="8" rx="1"/>
+        <rect x="292" y="4" width="6" height="8" rx="1"/>
+        <rect x="316" y="8" width="6" height="7" rx="1"/><rect x="328" y="8" width="6" height="7" rx="1"/>
+        <rect x="340" y="8" width="6" height="7" rx="1"/><rect x="352" y="8" width="6" height="7" rx="1"/>
+        <rect x="316" y="19" width="6" height="7" rx="1"/><rect x="340" y="19" width="6" height="7" rx="1"/>
+        <rect x="388" y="6" width="6" height="8" rx="1"/><rect x="400" y="6" width="6" height="8" rx="1"/>
+        <rect x="412" y="6" width="6" height="8" rx="1"/><rect x="424" y="6" width="6" height="8" rx="1"/>
+        <rect x="388" y="18" width="6" height="8" rx="1"/><rect x="412" y="18" width="6" height="8" rx="1"/>
+      </g>
+
+      <!-- ASPHALT SURFACE -->
+      <rect x="0" y="37" width="440" height="235" fill="url(#asphalt)"/>
+      <!-- Curb edges -->
+      <rect x="0" y="37"  width="440" height="2.5" fill="white" fill-opacity="0.16"/>
+      <rect x="0" y="269" width="440" height="2.5" fill="white" fill-opacity="0.16"/>
+
+      <!-- ═══ ROW 1 (y: 43–123) ═══ -->
+      <line x1="0" y1="43"  x2="440" y2="43"  stroke="white" stroke-opacity="0.22" stroke-width="1"/>
+      <line x1="0" y1="123" x2="440" y2="123" stroke="white" stroke-opacity="0.22" stroke-width="1"/>
+      <!-- Space dividers: 8 spaces of 50px starting at x=20 -->
+      <line x1="20"  y1="43" x2="20"  y2="123" stroke="white" stroke-opacity="0.15" stroke-width="1"/>
+      <line x1="70"  y1="43" x2="70"  y2="123" stroke="white" stroke-opacity="0.15" stroke-width="1"/>
+      <line x1="120" y1="43" x2="120" y2="123" stroke="white" stroke-opacity="0.15" stroke-width="1"/>
+      <line x1="170" y1="43" x2="170" y2="123" stroke="white" stroke-opacity="0.15" stroke-width="1"/>
+      <line x1="220" y1="43" x2="220" y2="123" stroke="white" stroke-opacity="0.15" stroke-width="1"/>
+      <line x1="270" y1="43" x2="270" y2="123" stroke="white" stroke-opacity="0.15" stroke-width="1"/>
+      <line x1="320" y1="43" x2="320" y2="123" stroke="white" stroke-opacity="0.15" stroke-width="1"/>
+      <line x1="370" y1="43" x2="370" y2="123" stroke="white" stroke-opacity="0.15" stroke-width="1"/>
+      <line x1="420" y1="43" x2="420" y2="123" stroke="white" stroke-opacity="0.15" stroke-width="1"/>
+
+      <!-- Cars Row 1: hood faces DOWN (toward lane) -->
+      <!-- Space 0: navy -->
+      <g transform="translate(29,53)">
+        <rect width="32" height="58" rx="5" fill="#1a3a6c"/>
+        <rect x="4" y="44" width="24" height="11" rx="2" fill="#2a5498" fill-opacity="0.7"/>
+        <rect x="5" y="4"  width="22" height="9"  rx="2" fill="#1e4888" fill-opacity="0.45"/>
+        <rect x="4"  y="54" width="6" height="3" rx="1" fill="#ffffaa" fill-opacity="0.55"/>
+        <rect x="22" y="54" width="6" height="3" rx="1" fill="#ffffaa" fill-opacity="0.55"/>
+        <rect x="4"  y="2"  width="6" height="3" rx="1" fill="#ff4422" fill-opacity="0.65"/>
+        <rect x="22" y="2"  width="6" height="3" rx="1" fill="#ff4422" fill-opacity="0.65"/>
+      </g>
+      <!-- Space 1: charcoal -->
+      <g transform="translate(79,53)">
+        <rect width="32" height="58" rx="5" fill="#142030"/>
+        <rect x="4" y="44" width="24" height="11" rx="2" fill="#1a2e44" fill-opacity="0.7"/>
+        <rect x="5" y="4"  width="22" height="9"  rx="2" fill="#162840" fill-opacity="0.45"/>
+        <rect x="4"  y="54" width="6" height="3" rx="1" fill="#ffffaa" fill-opacity="0.45"/>
+        <rect x="22" y="54" width="6" height="3" rx="1" fill="#ffffaa" fill-opacity="0.45"/>
+        <rect x="4"  y="2"  width="6" height="3" rx="1" fill="#ff4422" fill-opacity="0.55"/>
+        <rect x="22" y="2"  width="6" height="3" rx="1" fill="#ff4422" fill-opacity="0.55"/>
+      </g>
+      <!-- Space 2: VIOLATION -->
+      <g class="violation-car" transform="translate(129,53)" filter="url(#vf)">
+        <rect width="32" height="58" rx="5" fill="#3a1212"/>
+        <rect x="4" y="44" width="24" height="11" rx="2" fill="#4a1c1c" fill-opacity="0.9"/>
+        <rect x="5" y="4"  width="22" height="9"  rx="2" fill="#3e1818" fill-opacity="0.5"/>
+        <rect x="4"  y="54" width="6" height="3" rx="1" fill="#ff3300" fill-opacity="0.9"/>
+        <rect x="22" y="54" width="6" height="3" rx="1" fill="#ff3300" fill-opacity="0.9"/>
+        <rect x="4"  y="2"  width="6" height="3" rx="1" fill="#ff2200"/>
+        <rect x="22" y="2"  width="6" height="3" rx="1" fill="#ff2200"/>
+      </g>
+      <ellipse class="viol-ring" cx="145" cy="82" rx="22" ry="34" fill="none" stroke="#ff4422" stroke-width="2"/>
+      <!-- Space 3: empty -->
+      <text x="195" y="89" text-anchor="middle" fill="white" fill-opacity="0.07" font-size="22" font-weight="900" font-family="Arial Black,Arial,sans-serif">P</text>
+      <!-- Space 4: dark navy -->
+      <g transform="translate(229,53)">
+        <rect width="32" height="58" rx="5" fill="#1a3050"/>
+        <rect x="4" y="44" width="24" height="11" rx="2" fill="#223868" fill-opacity="0.7"/>
+        <rect x="5" y="4"  width="22" height="9"  rx="2" fill="#1c3460" fill-opacity="0.45"/>
+        <rect x="4"  y="54" width="6" height="3" rx="1" fill="#ffffaa" fill-opacity="0.45"/>
+        <rect x="22" y="54" width="6" height="3" rx="1" fill="#ffffaa" fill-opacity="0.45"/>
+        <rect x="4"  y="2"  width="6" height="3" rx="1" fill="#ff4422" fill-opacity="0.5"/>
+        <rect x="22" y="2"  width="6" height="3" rx="1" fill="#ff4422" fill-opacity="0.5"/>
+      </g>
+      <!-- Space 5 -->
+      <g transform="translate(279,53)">
+        <rect width="32" height="58" rx="5" fill="#1d3555"/>
+        <rect x="4" y="44" width="24" height="11" rx="2" fill="#263d65" fill-opacity="0.7"/>
+        <rect x="5" y="4"  width="22" height="9"  rx="2" fill="#1f3860" fill-opacity="0.45"/>
+        <rect x="4"  y="54" width="6" height="3" rx="1" fill="#ffffaa" fill-opacity="0.5"/>
+        <rect x="22" y="54" width="6" height="3" rx="1" fill="#ffffaa" fill-opacity="0.5"/>
+        <rect x="4"  y="2"  width="6" height="3" rx="1" fill="#ff4422" fill-opacity="0.45"/>
+        <rect x="22" y="2"  width="6" height="3" rx="1" fill="#ff4422" fill-opacity="0.45"/>
+      </g>
+      <!-- Space 6 -->
+      <g transform="translate(329,53)">
+        <rect width="32" height="58" rx="5" fill="#0f1c2e"/>
+        <rect x="4" y="44" width="24" height="11" rx="2" fill="#182536" fill-opacity="0.7"/>
+        <rect x="5" y="4"  width="22" height="9"  rx="2" fill="#122030" fill-opacity="0.45"/>
+        <rect x="4"  y="54" width="6" height="3" rx="1" fill="#ffffaa" fill-opacity="0.4"/>
+        <rect x="22" y="54" width="6" height="3" rx="1" fill="#ffffaa" fill-opacity="0.4"/>
+        <rect x="4"  y="2"  width="6" height="3" rx="1" fill="#ff4422" fill-opacity="0.45"/>
+        <rect x="22" y="2"  width="6" height="3" rx="1" fill="#ff4422" fill-opacity="0.45"/>
+      </g>
+      <!-- Space 7: empty -->
+      <text x="395" y="89" text-anchor="middle" fill="white" fill-opacity="0.07" font-size="22" font-weight="900" font-family="Arial Black,Arial,sans-serif">P</text>
+
+      <!-- ═══ CENTRAL LANE (y: 123–189) ═══ -->
+      <line x1="0" y1="156" x2="440" y2="156" stroke="white" stroke-opacity="0.2" stroke-dasharray="16 10" stroke-width="1.5"/>
+
+      <!-- ═══ ROW 2 (y: 189–269) — hood faces UP (toward lane) ═══ -->
+      <line x1="0" y1="189" x2="440" y2="189" stroke="white" stroke-opacity="0.22" stroke-width="1"/>
+      <line x1="0" y1="269" x2="440" y2="269" stroke="white" stroke-opacity="0.22" stroke-width="1"/>
+      <line x1="20"  y1="189" x2="20"  y2="269" stroke="white" stroke-opacity="0.15" stroke-width="1"/>
+      <line x1="70"  y1="189" x2="70"  y2="269" stroke="white" stroke-opacity="0.15" stroke-width="1"/>
+      <line x1="120" y1="189" x2="120" y2="269" stroke="white" stroke-opacity="0.15" stroke-width="1"/>
+      <line x1="170" y1="189" x2="170" y2="269" stroke="white" stroke-opacity="0.15" stroke-width="1"/>
+      <line x1="220" y1="189" x2="220" y2="269" stroke="white" stroke-opacity="0.15" stroke-width="1"/>
+      <line x1="270" y1="189" x2="270" y2="269" stroke="white" stroke-opacity="0.15" stroke-width="1"/>
+      <line x1="320" y1="189" x2="320" y2="269" stroke="white" stroke-opacity="0.15" stroke-width="1"/>
+      <line x1="370" y1="189" x2="370" y2="269" stroke="white" stroke-opacity="0.15" stroke-width="1"/>
+      <line x1="420" y1="189" x2="420" y2="269" stroke="white" stroke-opacity="0.15" stroke-width="1"/>
+
+      <!-- Cars Row 2: hood at top (y=197), tail at bottom -->
+      <!-- Space 0 -->
+      <g transform="translate(29,197)">
+        <rect width="32" height="58" rx="5" fill="#142030"/>
+        <rect x="4" y="4"  width="24" height="11" rx="2" fill="#1a2e44" fill-opacity="0.7"/>
+        <rect x="5" y="44" width="22" height="9"  rx="2" fill="#162840" fill-opacity="0.45"/>
+        <rect x="4"  y="0"  width="6" height="3" rx="1" fill="#ffffaa" fill-opacity="0.45"/>
+        <rect x="22" y="0"  width="6" height="3" rx="1" fill="#ffffaa" fill-opacity="0.45"/>
+        <rect x="4"  y="54" width="6" height="3" rx="1" fill="#ff4422" fill-opacity="0.55"/>
+        <rect x="22" y="54" width="6" height="3" rx="1" fill="#ff4422" fill-opacity="0.55"/>
+      </g>
+      <!-- Space 1: empty -->
+      <text x="95" y="241" text-anchor="middle" fill="white" fill-opacity="0.07" font-size="22" font-weight="900" font-family="Arial Black,Arial,sans-serif">P</text>
+      <!-- Space 2 -->
+      <g transform="translate(129,197)">
+        <rect width="32" height="58" rx="5" fill="#1a3a6c"/>
+        <rect x="4" y="4"  width="24" height="11" rx="2" fill="#2a5498" fill-opacity="0.7"/>
+        <rect x="5" y="44" width="22" height="9"  rx="2" fill="#1e4888" fill-opacity="0.45"/>
+        <rect x="4"  y="0"  width="6" height="3" rx="1" fill="#ffffaa" fill-opacity="0.55"/>
+        <rect x="22" y="0"  width="6" height="3" rx="1" fill="#ffffaa" fill-opacity="0.55"/>
+        <rect x="4"  y="54" width="6" height="3" rx="1" fill="#ff4422" fill-opacity="0.65"/>
+        <rect x="22" y="54" width="6" height="3" rx="1" fill="#ff4422" fill-opacity="0.65"/>
+      </g>
+      <!-- Space 3 -->
+      <g transform="translate(179,197)">
+        <rect width="32" height="58" rx="5" fill="#1d3555"/>
+        <rect x="4" y="4"  width="24" height="11" rx="2" fill="#263d65" fill-opacity="0.7"/>
+        <rect x="5" y="44" width="22" height="9"  rx="2" fill="#1f3860" fill-opacity="0.45"/>
+        <rect x="4"  y="0"  width="6" height="3" rx="1" fill="#ffffaa" fill-opacity="0.5"/>
+        <rect x="22" y="0"  width="6" height="3" rx="1" fill="#ffffaa" fill-opacity="0.5"/>
+        <rect x="4"  y="54" width="6" height="3" rx="1" fill="#ff4422" fill-opacity="0.5"/>
+        <rect x="22" y="54" width="6" height="3" rx="1" fill="#ff4422" fill-opacity="0.5"/>
+      </g>
+      <!-- Space 4 -->
+      <g transform="translate(229,197)">
+        <rect width="32" height="58" rx="5" fill="#1a3050"/>
+        <rect x="4" y="4"  width="24" height="11" rx="2" fill="#223868" fill-opacity="0.7"/>
+        <rect x="5" y="44" width="22" height="9"  rx="2" fill="#1c3460" fill-opacity="0.45"/>
+        <rect x="4"  y="0"  width="6" height="3" rx="1" fill="#ffffaa" fill-opacity="0.45"/>
+        <rect x="22" y="0"  width="6" height="3" rx="1" fill="#ffffaa" fill-opacity="0.45"/>
+        <rect x="4"  y="54" width="6" height="3" rx="1" fill="#ff4422" fill-opacity="0.5"/>
+        <rect x="22" y="54" width="6" height="3" rx="1" fill="#ff4422" fill-opacity="0.5"/>
+      </g>
+      <!-- Space 5 -->
+      <g transform="translate(279,197)">
+        <rect width="32" height="58" rx="5" fill="#0f1c2e"/>
+        <rect x="4" y="4"  width="24" height="11" rx="2" fill="#182536" fill-opacity="0.7"/>
+        <rect x="5" y="44" width="22" height="9"  rx="2" fill="#122030" fill-opacity="0.45"/>
+        <rect x="4"  y="0"  width="6" height="3" rx="1" fill="#ffffaa" fill-opacity="0.4"/>
+        <rect x="22" y="0"  width="6" height="3" rx="1" fill="#ffffaa" fill-opacity="0.4"/>
+        <rect x="4"  y="54" width="6" height="3" rx="1" fill="#ff4422" fill-opacity="0.45"/>
+        <rect x="22" y="54" width="6" height="3" rx="1" fill="#ff4422" fill-opacity="0.45"/>
+      </g>
+      <!-- Space 6 -->
+      <g transform="translate(329,197)">
+        <rect width="32" height="58" rx="5" fill="#142030"/>
+        <rect x="4" y="4"  width="24" height="11" rx="2" fill="#1a2e44" fill-opacity="0.7"/>
+        <rect x="5" y="44" width="22" height="9"  rx="2" fill="#162840" fill-opacity="0.45"/>
+        <rect x="4"  y="0"  width="6" height="3" rx="1" fill="#ffffaa" fill-opacity="0.45"/>
+        <rect x="22" y="0"  width="6" height="3" rx="1" fill="#ffffaa" fill-opacity="0.45"/>
+        <rect x="4"  y="54" width="6" height="3" rx="1" fill="#ff4422" fill-opacity="0.55"/>
+        <rect x="22" y="54" width="6" height="3" rx="1" fill="#ff4422" fill-opacity="0.55"/>
+      </g>
+      <!-- Space 7 -->
+      <g transform="translate(379,197)">
+        <rect width="32" height="58" rx="5" fill="#1d3555"/>
+        <rect x="4" y="4"  width="24" height="11" rx="2" fill="#263d65" fill-opacity="0.7"/>
+        <rect x="5" y="44" width="22" height="9"  rx="2" fill="#1f3860" fill-opacity="0.45"/>
+        <rect x="4"  y="0"  width="6" height="3" rx="1" fill="#ffffaa" fill-opacity="0.5"/>
+        <rect x="22" y="0"  width="6" height="3" rx="1" fill="#ffffaa" fill-opacity="0.5"/>
+        <rect x="4"  y="54" width="6" height="3" rx="1" fill="#ff4422" fill-opacity="0.5"/>
+        <rect x="22" y="54" width="6" height="3" rx="1" fill="#ff4422" fill-opacity="0.5"/>
+      </g>
+
+      <!-- ═══ NORDICPARK PATROL CAR (animated in lane) ═══ -->
+      <!-- Horizontal car: 62px long, 26px wide, facing right, centered at origin -->
+      <g class="patrol-car">
+        <rect x="-31" y="-13" width="62" height="26" rx="5" fill="#003fa0"/>
+        <!-- Gold stripe -->
+        <rect x="-31" y="-3" width="62" height="6" fill="#facc15" fill-opacity="0.92"/>
+        <!-- Windshield (front/right) -->
+        <rect x="13"  y="-10" width="14" height="20" rx="3" fill="#5599cc" fill-opacity="0.42"/>
+        <!-- Rear window -->
+        <rect x="-27" y="-9"  width="12" height="18" rx="2" fill="#253550" fill-opacity="0.6"/>
+        <!-- Light bar housing -->
+        <rect x="-13" y="-18" width="26" height="5.5" rx="2.5" fill="#0a1a34"/>
+        <!-- Flashing lights -->
+        <rect class="flash-blue" x="-12" y="-17" width="11" height="3.5" rx="1.5" fill="#3b82f6"/>
+        <rect class="flash-red"  x="1"   y="-17" width="11" height="3.5" rx="1.5" fill="#ef4444"/>
+        <!-- Front headlights -->
+        <rect x="27"  y="-10" width="4" height="4" rx="1" fill="#ffffcc" fill-opacity="0.9"/>
+        <rect x="27"  y="6"   width="4" height="4" rx="1" fill="#ffffcc" fill-opacity="0.9"/>
+        <!-- Rear lights -->
+        <rect x="-31" y="-10" width="4" height="4" rx="1" fill="#ff2200" fill-opacity="0.85"/>
+        <rect x="-31" y="6"   width="4" height="4" rx="1" fill="#ff2200" fill-opacity="0.85"/>
+        <!-- NP label -->
+        <text x="-6" y="4.5" text-anchor="middle" fill="white" fill-opacity="0.55"
+          font-size="7" font-weight="800" font-family="system-ui,sans-serif" letter-spacing="1">NP</text>
+      </g>
+
+      <!-- SCAN SWEEP LINE -->
+      <rect class="scan-line" x="0" y="0" width="440" height="28" fill="url(#scan-grad)"/>
+
+      <!-- VIGNETTE -->
+      <rect width="440" height="290" fill="url(#vignette)"/>
+
+      <!-- AKTIV KONTROLZONE badge -->
+      <g transform="translate(296,8)">
+        <rect width="136" height="20" rx="10" fill="rgba(16,185,129,0.1)" stroke="rgba(16,185,129,0.28)" stroke-width="0.8"/>
+        <circle class="status-dot" cx="11" cy="10" r="3.5" fill="#34d399"/>
+        <text x="21" y="14" fill="#6ee7b7" font-size="7.5" font-weight="700"
+          font-family="system-ui,sans-serif" letter-spacing="0.7">AKTIV KONTROLZONE</text>
+      </g>
+    </svg>
+  </div>
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
-import * as THREE from 'three'
-
-const container = ref(null)
-let renderer, scene, camera, animId, patrolCar
-
-function buildScene() {
-  const w = container.value.clientWidth
-  const h = container.value.clientHeight
-
-  // ── Renderer ──
-  renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false })
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
-  renderer.setSize(w, h)
-  renderer.shadowMap.enabled = true
-  renderer.shadowMap.type = THREE.PCFSoftShadowMap
-  renderer.toneMapping = THREE.ACESFilmicToneMapping
-  renderer.toneMappingExposure = 0.9
-  container.value.appendChild(renderer.domElement)
-
-  // ── Scene ──
-  scene = new THREE.Scene()
-  scene.background = new THREE.Color(0x080f1e)
-  scene.fog = new THREE.FogExp2(0x080f1e, 0.045)
-
-  // ── Camera ──
-  camera = new THREE.PerspectiveCamera(42, w / h, 0.1, 100)
-  camera.position.set(0, 14, 14)
-  camera.lookAt(0, 0, 0)
-
-  // ── Lights ──
-  const ambient = new THREE.AmbientLight(0x1a2a4a, 2.5)
-  scene.add(ambient)
-
-  const sun = new THREE.DirectionalLight(0x4488ff, 3.5)
-  sun.position.set(5, 14, 8)
-  sun.castShadow = true
-  sun.shadow.mapSize.set(2048, 2048)
-  sun.shadow.camera.near = 0.5
-  sun.shadow.camera.far = 60
-  sun.shadow.camera.left = -20
-  sun.shadow.camera.right = 20
-  sun.shadow.camera.top = 20
-  sun.shadow.camera.bottom = -20
-  sun.shadow.bias = -0.001
-  scene.add(sun)
-
-  const fill = new THREE.DirectionalLight(0x002244, 1.2)
-  fill.position.set(-8, 5, -5)
-  scene.add(fill)
-
-  // ── Ground (asphalt) ──
-  const groundGeo = new THREE.PlaneGeometry(40, 30)
-  const groundMat = new THREE.MeshStandardMaterial({
-    color: 0x0d1a2e,
-    roughness: 0.95,
-    metalness: 0.05,
-  })
-  const ground = new THREE.Mesh(groundGeo, groundMat)
-  ground.rotation.x = -Math.PI / 2
-  ground.receiveShadow = true
-  scene.add(ground)
-
-  // ── Parking space lines ──
-  addParkingLines()
-
-  // ── Buildings (backdrop) ──
-  addBuildings()
-
-  // ── Parked cars ──
-  const carDefs = [
-    // Row 1 (z = -4.5), facing camera
-    { x: -7.5, z: -4.5, color: 0x1a3a5c, violation: false },
-    { x: -4.5, z: -4.5, color: 0x0f1f32, violation: false },
-    { x: -1.5, z: -4.5, color: 0x2a0e0e, violation: true  },
-    { x:  1.5, z: -4.5, color: 0x122038, violation: false },
-    { x:  4.5, z: -4.5, color: 0x1d3650, violation: false },
-    { x:  7.5, z: -4.5, color: null,     violation: false }, // empty
-    // Row 2 (z = 4.5), facing away
-    { x: -7.5, z:  4.5, color: 0x0f1f32, violation: false },
-    { x: -4.5, z:  4.5, color: null,     violation: false }, // empty
-    { x: -1.5, z:  4.5, color: 0x1a3a5c, violation: false },
-    { x:  1.5, z:  4.5, color: 0x132035, violation: false },
-    { x:  4.5, z:  4.5, color: 0x1d3650, violation: false },
-    { x:  7.5, z:  4.5, color: 0x0f1f32, violation: false },
-  ]
-
-  carDefs.forEach(def => {
-    if (def.color !== null) addCar(def.x, def.z, def.color, def.violation)
-  })
-
-  // ── NordicPark patrol car ──
-  patrolCar = addPatrolCar()
-
-  // ── Violation indicator light ──
-  addViolationLight(-1.5, -4.5)
-}
-
-function addParkingLines() {
-  const mat = new THREE.MeshBasicMaterial({ color: 0xffffff })
-
-  // Lane dividers (rows of spaces)
-  for (let x = -9; x <= 9; x += 3) {
-    // Row 1 lines
-    const geo1 = new THREE.PlaneGeometry(0.06, 3.6)
-    const m1 = new THREE.Mesh(geo1, mat)
-    m1.rotation.x = -Math.PI / 2
-    m1.position.set(x, 0.01, -4.5)
-    m1.material = new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.18 })
-    scene.add(m1)
-
-    // Row 2 lines
-    const m2 = m1.clone()
-    m2.position.z = 4.5
-    scene.add(m2)
-  }
-
-  // Curb lines
-  const curbMat = new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.28 })
-  const curb1 = new THREE.Mesh(new THREE.PlaneGeometry(18, 0.07), curbMat)
-  curb1.rotation.x = -Math.PI / 2
-  curb1.position.set(0, 0.01, -2.7)
-  scene.add(curb1)
-
-  const curb2 = curb1.clone()
-  curb2.position.z = 2.7
-  scene.add(curb2)
-
-  // Lane center dashes
-  for (let x = -8.5; x < 9; x += 1.8) {
-    const dash = new THREE.Mesh(
-      new THREE.PlaneGeometry(0.9, 0.05),
-      new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.14 })
-    )
-    dash.rotation.x = -Math.PI / 2
-    dash.position.set(x, 0.01, 0)
-    scene.add(dash)
-  }
-}
-
-function addBuildings() {
-  const buildingConfigs = [
-    // Background buildings (far side)
-    { x: -11, z: -11, w: 5,  h: 8,  d: 4,  color: 0x0c1828 },
-    { x: -5,  z: -12, w: 4,  h: 12, d: 3.5, color: 0x0a1520 },
-    { x:  0,  z: -11, w: 6,  h: 7,  d: 4,  color: 0x0d1a2a },
-    { x:  6,  z: -12, w: 4,  h: 10, d: 3.5, color: 0x0b1624 },
-    { x:  11, z: -11, w: 5,  h: 9,  d: 4,  color: 0x0c1828 },
-    // Side buildings (left)
-    { x: -13, z: -4,  w: 3.5, h: 6, d: 5,  color: 0x0a1520 },
-    { x: -13, z:  2,  w: 3.5, h: 9, d: 5,  color: 0x0d1a2a },
-    // Side buildings (right)
-    { x:  13, z: -4,  w: 3.5, h: 7, d: 5,  color: 0x0a1520 },
-    { x:  13, z:  2,  w: 3.5, h: 5, d: 5,  color: 0x0c1828 },
-  ]
-
-  buildingConfigs.forEach(b => {
-    const geo = new THREE.BoxGeometry(b.w, b.h, b.d)
-    const mat = new THREE.MeshStandardMaterial({
-      color: b.color,
-      roughness: 0.9,
-      metalness: 0.1,
-    })
-    const mesh = new THREE.Mesh(geo, mat)
-    mesh.position.set(b.x, b.h / 2, b.z)
-    mesh.castShadow = true
-    mesh.receiveShadow = true
-    scene.add(mesh)
-
-    // Windows (emissive dots)
-    addWindows(mesh, b.w, b.h, b.d, b.x, b.z)
-  })
-}
-
-function addWindows(building, w, h, d, bx, bz) {
-  const winMat = new THREE.MeshBasicMaterial({ color: 0x4477aa, transparent: true, opacity: Math.random() * 0.4 + 0.2 })
-  const cols = Math.floor(w / 1.2)
-  const rows = Math.floor(h / 1.4)
-  for (let c = 0; c < cols; c++) {
-    for (let r = 0; r < rows; r++) {
-      if (Math.random() < 0.55) {
-        const win = new THREE.Mesh(new THREE.PlaneGeometry(0.35, 0.45), winMat.clone())
-        win.material.opacity = Math.random() * 0.5 + 0.15
-        win.position.set(
-          bx - w / 2 + 0.6 + c * 1.2,
-          r * 1.4 + 0.8,
-          bz + d / 2 + 0.01
-        )
-        scene.add(win)
-      }
-    }
-  }
-}
-
-function addCar(x, z, color, isViolation) {
-  const group = new THREE.Group()
-
-  // Body
-  const bodyMat = new THREE.MeshStandardMaterial({
-    color,
-    roughness: 0.35,
-    metalness: 0.6,
-    ...(isViolation ? { emissive: 0x440000, emissiveIntensity: 0.4 } : {}),
-  })
-  const body = new THREE.Mesh(new THREE.BoxGeometry(1.7, 0.42, 2.6), bodyMat)
-  body.position.y = 0.36
-  body.castShadow = true
-  group.add(body)
-
-  // Cabin
-  const cabinMat = new THREE.MeshStandardMaterial({
-    color: new THREE.Color(color).multiplyScalar(1.25),
-    roughness: 0.3,
-    metalness: 0.4,
-  })
-  const cabin = new THREE.Mesh(new THREE.BoxGeometry(1.4, 0.38, 1.5), cabinMat)
-  cabin.position.set(0, 0.76, -0.1)
-  cabin.castShadow = true
-  group.add(cabin)
-
-  // Windshields (glass)
-  const glassMat = new THREE.MeshStandardMaterial({
-    color: 0x4488cc,
-    transparent: true,
-    opacity: 0.25,
-    roughness: 0.05,
-    metalness: 0.2,
-  })
-  const windshield = new THREE.Mesh(new THREE.BoxGeometry(1.3, 0.3, 0.05), glassMat)
-  windshield.position.set(0, 0.72, 0.68)
-  group.add(windshield)
-
-  // Wheels
-  const wheelMat = new THREE.MeshStandardMaterial({ color: 0x111111, roughness: 0.9 })
-  const wheelGeo = new THREE.CylinderGeometry(0.22, 0.22, 0.18, 12)
-  const wheelPositions = [[-0.88, 0.18, 0.9], [0.88, 0.18, 0.9], [-0.88, 0.18, -0.9], [0.88, 0.18, -0.9]]
-  wheelPositions.forEach(([wx, wy, wz]) => {
-    const wheel = new THREE.Mesh(wheelGeo, wheelMat)
-    wheel.rotation.z = Math.PI / 2
-    wheel.position.set(wx, wy, wz)
-    group.add(wheel)
-  })
-
-  // Taillights
-  const lightMat = new THREE.MeshBasicMaterial({ color: isViolation ? 0xff2200 : 0xdd2200 })
-  const lightGeo = new THREE.BoxGeometry(0.28, 0.1, 0.05)
-  ;[-0.62, 0.62].forEach(lx => {
-    const light = new THREE.Mesh(lightGeo, lightMat)
-    light.position.set(lx, 0.38, -1.32)
-    group.add(light)
-  })
-
-  group.position.set(x, 0, z)
-  scene.add(group)
-  return group
-}
-
-function addPatrolCar() {
-  const group = new THREE.Group()
-
-  const bodyMat = new THREE.MeshStandardMaterial({ color: 0x003fa0, roughness: 0.3, metalness: 0.6 })
-  const body = new THREE.Mesh(new THREE.BoxGeometry(1.7, 0.42, 2.7), bodyMat)
-  body.position.y = 0.36
-  body.castShadow = true
-  group.add(body)
-
-  const cabinMat = new THREE.MeshStandardMaterial({ color: 0x0050cc, roughness: 0.3, metalness: 0.4 })
-  const cabin = new THREE.Mesh(new THREE.BoxGeometry(1.4, 0.38, 1.5), cabinMat)
-  cabin.position.set(0, 0.76, -0.1)
-  group.add(cabin)
-
-  // Yellow stripe
-  const stripeMat = new THREE.MeshBasicMaterial({ color: 0xfacc15 })
-  const stripe = new THREE.Mesh(new THREE.BoxGeometry(1.72, 0.09, 2.72), stripeMat)
-  stripe.position.set(0, 0.42, 0)
-  group.add(stripe)
-
-  // Windshield
-  const glassMat = new THREE.MeshStandardMaterial({ color: 0x88ccff, transparent: true, opacity: 0.3, roughness: 0.05 })
-  const ws = new THREE.Mesh(new THREE.BoxGeometry(1.3, 0.3, 0.05), glassMat)
-  ws.position.set(0, 0.72, 0.72)
-  group.add(ws)
-
-  // Wheels
-  const wheelMat = new THREE.MeshStandardMaterial({ color: 0x111111, roughness: 0.9 })
-  const wheelGeo = new THREE.CylinderGeometry(0.22, 0.22, 0.18, 12)
-  ;[[-0.88, 0.18, 0.9], [0.88, 0.18, 0.9], [-0.88, 0.18, -0.9], [0.88, 0.18, -0.9]].forEach(([wx, wy, wz]) => {
-    const w = new THREE.Mesh(wheelGeo, wheelMat)
-    w.rotation.z = Math.PI / 2
-    w.position.set(wx, wy, wz)
-    group.add(w)
-  })
-
-  // Light bar
-  const barMat = new THREE.MeshBasicMaterial({ color: 0x3b82f6 })
-  const bar = new THREE.Mesh(new THREE.BoxGeometry(0.9, 0.1, 0.25), barMat)
-  bar.position.set(0, 0.99, 0)
-  group.add(bar)
-
-  // Headlights
-  const hMat = new THREE.MeshBasicMaterial({ color: 0xffffcc })
-  ;[-0.6, 0.6].forEach(hx => {
-    const h = new THREE.Mesh(new THREE.BoxGeometry(0.22, 0.1, 0.05), hMat)
-    h.position.set(hx, 0.38, 1.36)
-    group.add(h)
-  })
-
-  group.position.set(-14, 0, 0)
-  group.rotation.y = Math.PI / 2  // face right (along x-axis)
-  scene.add(group)
-  return group
-}
-
-function addViolationLight(x, z) {
-  const light = new THREE.PointLight(0xff2200, 4, 5)
-  light.position.set(x, 2.5, z)
-  scene.add(light)
-
-  // Pulsing via animation
-  light.userData.pulse = true
-}
-
-let t = 0
-function animate() {
-  animId = requestAnimationFrame(animate)
-  t += 0.016
-
-  // Patrol car drives left → right, loops
-  if (patrolCar) {
-    patrolCar.position.x = -14 + ((t * 2.8) % 30)
-  }
-
-  // Flash bar on patrol car
-  if (patrolCar) {
-    const bar = patrolCar.children.find(c => c.geometry?.parameters?.width === 0.9)
-    if (bar) bar.material.color.set(Math.sin(t * 8) > 0 ? 0x3b82f6 : 0xef4444)
-  }
-
-  // Pulse violation point lights
-  scene.traverse(obj => {
-    if (obj.isPointLight && obj.userData.pulse) {
-      obj.intensity = 3 + Math.sin(t * 4) * 2
-    }
-  })
-
-  // Subtle camera sway
-  camera.position.x = Math.sin(t * 0.12) * 1.5
-  camera.position.y = 14 + Math.sin(t * 0.08) * 0.4
-  camera.lookAt(0, 0, 0)
-
-  renderer.render(scene, camera)
-}
-
-function onResize() {
-  if (!container.value) return
-  const w = container.value.clientWidth
-  const h = container.value.clientHeight
-  camera.aspect = w / h
-  camera.updateProjectionMatrix()
-  renderer.setSize(w, h)
-}
-
-onMounted(() => {
-  buildScene()
-  animate()
-  window.addEventListener('resize', onResize)
-})
-
-onUnmounted(() => {
-  cancelAnimationFrame(animId)
-  window.removeEventListener('resize', onResize)
-  renderer?.dispose()
-  if (container.value) container.value.innerHTML = ''
-})
+// Pure SVG + CSS — no JS runtime needed
 </script>
 
 <style scoped>
-.parking-3d {
+.parking-wrap {
   width: 100%;
-  height: 100%;
-  display: block;
+  max-width: 440px;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 28px 56px rgba(0, 0, 0, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.07);
 }
 
-.parking-3d canvas {
+.lot-svg {
   display: block;
-  width: 100% !important;
-  height: 100% !important;
+  width: 100%;
+  height: auto;
+}
+
+/* Patrol car drives left → right across center lane (y=156) */
+.patrol-car {
+  transform: translate(-90px, 156px);
+  animation: drive 9s linear infinite;
+}
+
+@keyframes drive {
+  from { transform: translate(-90px, 156px); }
+  to   { transform: translate(530px, 156px); }
+}
+
+/* Violation car glow pulses */
+.violation-car {
+  animation: viol-pulse 2s ease-in-out infinite;
+}
+
+@keyframes viol-pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.68; }
+}
+
+/* Violation ring expands and fades */
+.viol-ring {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: ring-pulse 2s ease-in-out infinite;
+}
+
+@keyframes ring-pulse {
+  0%, 100% { opacity: 0.6; transform: scale(1);    stroke-width: 2; }
+  50%       { opacity: 0.1; transform: scale(1.18); stroke-width: 3; }
+}
+
+/* Flashing light bar */
+.flash-blue {
+  animation: f-blue 0.55s ease-in-out infinite alternate;
+}
+.flash-red {
+  animation: f-red 0.55s ease-in-out infinite alternate-reverse;
+}
+
+@keyframes f-blue {
+  from { opacity: 1; }
+  to   { opacity: 0.06; }
+}
+
+@keyframes f-red {
+  from { opacity: 1; }
+  to   { opacity: 0.06; }
+}
+
+/* Scan sweep */
+.scan-line {
+  animation: scan-sweep 6s linear infinite;
+}
+
+@keyframes scan-sweep {
+  from { transform: translateY(-28px); }
+  to   { transform: translateY(300px); }
+}
+
+/* Status dot */
+.status-dot {
+  animation: dot-blink 2.5s ease-in-out infinite;
+}
+
+@keyframes dot-blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.3; }
 }
 </style>
