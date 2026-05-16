@@ -247,8 +247,8 @@
       </g>
 
       <!-- ═══ BADLY PARKED CAR (rotated, sticking out into lane) ═══ -->
-      <!-- Centered at (368, 148), rotated 22° — clearly not in any bay -->
-      <g class="bad-park" transform="translate(368, 148) rotate(22)" filter="url(#vf)">
+      <!-- Centered at (405, 148), rotated 22° — clearly not in any bay -->
+      <g class="bad-park" transform="translate(405, 148) rotate(22)" filter="url(#vf)">
         <rect x="-16" y="-29" width="32" height="58" rx="5" fill="#252535"/>
         <!-- windshield (top) -->
         <rect x="-11" y="-24" width="22" height="10" rx="2" fill="#303048" fill-opacity="0.7"/>
@@ -262,7 +262,7 @@
         <rect x="10"  y="25"  width="6" height="3" rx="1" fill="#ff2200" fill-opacity="0.9"/>
       </g>
       <!-- Pulsing ring around bad parker -->
-      <ellipse class="bad-ring" cx="368" cy="148" rx="24" ry="36" fill="none" stroke="#ff6600" stroke-width="2"/>
+      <ellipse class="bad-ring" cx="405" cy="148" rx="24" ry="36" fill="none" stroke="#ff6600" stroke-width="2"/>
 
       <!-- ═══ NORDICPARK PATROL CAR (animated in lane) ═══ -->
       <!-- Horizontal car: 62px long, 26px wide, facing right, centered at origin -->
@@ -334,12 +334,12 @@
 
 @keyframes drive {
   0%   { transform: translate(-90px, 156px); }  /* start off-screen left */
-  45%  { transform: translate(280px, 156px); }  /* normal cruising speed */
-  51%  { transform: translate(318px, 156px); }  /* slowing down */
-  54%  { transform: translate(328px, 156px); }  /* slowing more */
-  56%  { transform: translate(330px, 156px); }  /* stopped — front bumper ~10px from bad car */
-  72%  { transform: translate(330px, 156px); }  /* issuing ticket (~2s pause) */
-  78%  { transform: translate(400px, 156px); }  /* drives past, back to speed */
+  48%  { transform: translate(310px, 156px); }  /* normal cruising speed */
+  54%  { transform: translate(352px, 156px); }  /* slowing down */
+  57%  { transform: translate(363px, 156px); }  /* slowing more */
+  59%  { transform: translate(365px, 156px); }  /* stopped — front bumper ~9px from bad car */
+  74%  { transform: translate(365px, 156px); }  /* issuing ticket (~2s pause) */
+  80%  { transform: translate(440px, 156px); }  /* drives past, back to speed */
   100% { transform: translate(530px, 156px); }  /* exit off-screen right */
 }
 
