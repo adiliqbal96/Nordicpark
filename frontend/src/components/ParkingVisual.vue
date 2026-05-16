@@ -246,9 +246,9 @@
         <rect x="22" y="54" width="6" height="3" rx="1" fill="#ff4422" fill-opacity="0.5"/>
       </g>
 
-      <!-- ═══ BADLY PARKED CAR (rotated, sticking out into lane) ═══ -->
-      <!-- Centered at (405, 148), rotated 22° — clearly not in any bay -->
-      <g class="bad-park" transform="translate(405, 148) rotate(22)" filter="url(#vf)">
+      <!-- ═══ BADLY PARKED CAR (rotated, sticking out from row 1 into lane) ═══ -->
+      <!-- Centered at (405, 106) — mostly in space, bottom sticks into lane -->
+      <g class="bad-park" transform="translate(405, 106) rotate(20)" filter="url(#vf)">
         <rect x="-16" y="-29" width="32" height="58" rx="5" fill="#252535"/>
         <!-- windshield (top) -->
         <rect x="-11" y="-24" width="22" height="10" rx="2" fill="#303048" fill-opacity="0.7"/>
@@ -262,7 +262,7 @@
         <rect x="10"  y="25"  width="6" height="3" rx="1" fill="#ff2200" fill-opacity="0.9"/>
       </g>
       <!-- Pulsing ring around bad parker -->
-      <ellipse class="bad-ring" cx="405" cy="148" rx="24" ry="36" fill="none" stroke="#ff6600" stroke-width="2"/>
+      <ellipse class="bad-ring" cx="405" cy="106" rx="24" ry="36" fill="none" stroke="#ff6600" stroke-width="2"/>
 
       <!-- ═══ NORDICPARK PATROL CAR (animated in lane) ═══ -->
       <!-- Horizontal car: 62px long, 26px wide, facing right, centered at origin -->
