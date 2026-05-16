@@ -43,9 +43,32 @@
             </div>
           </div>
 
-          <!-- RIGHT: Parking lot visual -->
+          <!-- RIGHT: Parking sign -->
           <div class="hero-visual" aria-hidden="true">
-            <ParkingVisual />
+            <div class="sign-scene">
+              <div class="sign-glow"></div>
+              <div class="sign-wrapper">
+                <svg class="sign-svg" viewBox="0 0 200 272" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect width="200" height="232" rx="9" fill="#003FA0"/>
+                  <rect x="7" y="7" width="186" height="218" rx="5" fill="none" stroke="rgba(255,255,255,0.22)" stroke-width="1.5"/>
+                  <text x="100" y="161" text-anchor="middle" fill="white" font-size="144" font-weight="900" font-family="Arial Black, Arial, system-ui, sans-serif" letter-spacing="-3">P</text>
+                  <rect x="0" y="195" width="200" height="37" fill="white"/>
+                  <path d="M0 195 H200 V228 Q200 232 196 232 H4 Q0 232 0 228 Z" fill="white"/>
+                  <text x="100" y="210" text-anchor="middle" fill="#003FA0" font-size="9" font-weight="600" font-family="Arial, system-ui, sans-serif" letter-spacing="0.8">MANDAG – FREDAG</text>
+                  <text x="100" y="225" text-anchor="middle" fill="#003FA0" font-size="13.5" font-weight="800" font-family="Arial, system-ui, sans-serif">08:00 – 17:00</text>
+                  <rect x="91" y="232" width="18" height="30" fill="#1E293B"/>
+                  <rect x="76" y="260" width="48" height="12" rx="5" fill="#1E293B"/>
+                </svg>
+                <div class="sign-plate">
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                  NordicPark
+                </div>
+              </div>
+              <div class="zone-badge">
+                <span class="zone-dot"></span>
+                Aktiv kontrolzone
+              </div>
+            </div>
           </div>
 
         </div>
@@ -231,8 +254,7 @@
             :initial="{ opacity: 0, scale: 0.96, y: 20 }"
             :visible-once="{ opacity: 1, scale: 1, y: 0, transition: { duration: 480, delay: i * 130, ease: [0.16, 1, 0.3, 1] } }"
           >
-            <span class="process-number" aria-hidden="true">0{{ i + 1 }}</span>
-            <div class="process-badge">{{ i + 1 }}</div>
+            <div class="process-step-number">0{{ i + 1 }}</div>
             <h3>{{ i18n.t(step.titleKey) }}</h3>
             <p>{{ i18n.t(step.descKey) }}</p>
           </article>
@@ -268,7 +290,6 @@
 <script setup>
 import { RouterLink } from 'vue-router'
 import { i18n } from '../i18n.js'
-import ParkingVisual from '../components/ParkingVisual.vue'
 
 const solutionCards = [
   {
@@ -330,8 +351,8 @@ const processSteps = [
 
 .hero-split {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 3rem;
+  grid-template-columns: 1fr auto;
+  gap: 5rem;
   align-items: center;
   position: relative;
   z-index: 1;
@@ -342,20 +363,83 @@ const processSteps = [
 }
 
 .hero-visual {
-  height: 420px;
-  border-radius: 1rem;
-  overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.07);
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-@media (max-width: 960px) {
-  .hero-split {
-    grid-template-columns: 1fr;
-  }
-  .hero-visual {
-    height: 280px;
-  }
+/* ── PARKING SIGN ── */
+.sign-scene {
+  position: relative;
+  width: 200px;
+}
+
+.sign-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 320px;
+  height: 320px;
+  background: radial-gradient(circle, rgba(0, 63, 160, 0.38) 0%, transparent 68%);
+  pointer-events: none;
+}
+
+.sign-wrapper {
+  position: relative;
+  z-index: 1;
+  filter: drop-shadow(0 28px 56px rgba(0, 0, 0, 0.65));
+}
+
+.sign-svg {
+  width: 200px;
+  height: auto;
+  display: block;
+}
+
+.sign-plate {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  justify-content: center;
+  margin-top: 0.6rem;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.42);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.zone-badge {
+  position: absolute;
+  bottom: -2.25rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(16, 185, 129, 0.08);
+  border: 1px solid rgba(16, 185, 129, 0.22);
+  border-radius: 999px;
+  padding: 0.35rem 0.9rem;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: #6EE7B7;
+  white-space: nowrap;
+}
+
+.zone-dot {
+  width: 6px;
+  height: 6px;
+  background: #34D399;
+  border-radius: 50%;
+  animation: zone-pulse 2.2s ease infinite;
+}
+
+@keyframes zone-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.45; transform: scale(0.8); }
 }
 
 /* ── HERO BUTTON OVERRIDES ── */
@@ -437,26 +521,6 @@ const processSteps = [
   color: #93C5FD;
 }
 
-/* ── PROCESS ── */
-:deep(.process-card) {
-  border: 1px solid rgba(148, 163, 184, 0.12);
-  box-shadow: none;
-}
-
-:deep(.process-card:hover) {
-  border-color: rgba(96, 165, 250, 0.25);
-  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.3);
-  transform: translateY(-4px);
-}
-
-:deep(.process-number) {
-  color: rgba(255, 255, 255, 0.05);
-  font-size: clamp(3.5rem, 6vw, 5rem);
-}
-
-:deep(.process-card:hover .process-number) {
-  color: rgba(255, 255, 255, 0.08);
-}
 
 /* ── WHY ── */
 :deep(.why-card) {
@@ -500,4 +564,5 @@ const processSteps = [
     font-size: 1.9rem !important;
   }
 }
+
 </style>

@@ -620,101 +620,58 @@ section {
 .process-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
   max-width: var(--container-max);
   margin: 0 auto;
+  border-top: 1px solid rgba(148, 163, 184, 0.14);
 }
 
 .process-card {
-  padding: 4rem 2.5rem;
-  text-align: center;
-  background: var(--color-surface);
-  border: 1px solid var(--glass-border);
-  border-radius: var(--radius-lg);
-  transition: var(--transition-smooth);
+  padding: 3rem 3rem 3rem 0;
+  text-align: left;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  border-right: 1px solid rgba(148, 163, 184, 0.1);
+  transition: none;
   position: relative;
-  overflow: hidden;
+  overflow: visible;
 }
 
-.process-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, var(--color-primary), var(--color-gold-light));
-  opacity: 0.4;
-  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+.process-card:not(:first-child) {
+  padding-left: 3rem;
+  padding-right: 3rem;
 }
 
-/* Removed border-right: none to ensure consistent borders */
-
-.process-card:hover {
-  background: var(--color-surface-raised);
-  border-color: var(--gold-border);
-  transform: translateY(-6px);
-  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.4), var(--shadow-gold);
-  z-index: 2;
+.process-card:last-child {
+  border-right: none;
+  padding-right: 0;
 }
 
-.process-card:hover::before {
-  background: linear-gradient(90deg, var(--color-primary), var(--color-gold-light));
-  opacity: 1;
-}
-
-.process-card:hover .process-badge {
-  background: var(--color-primary);
-  color: #0f0900;
-  transform: scale(1.08);
-  box-shadow: 0 0 20px rgba(201, 168, 76, 0.4);
-}
-
-/* Editorial step number — the key differentiator */
-.process-number {
-  font-size: clamp(4rem, 8vw, 6.5rem);
-  font-weight: 900;
-  letter-spacing: -0.06em;
-  line-height: 1;
-  color: rgba(201, 168, 76, 0.12);
-  position: absolute;
-  top: 1.5rem;
-  right: 2rem;
-  pointer-events: none;
-  transition: color 0.4s ease;
-}
-
-.process-card:hover .process-number {
-  color: rgba(201, 168, 76, 0.2);
-}
-
-.process-badge {
-  width: 44px;
-  height: 44px;
-  background: var(--color-gold-muted);
-  color: var(--color-primary);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
+.process-step-number {
+  display: block;
+  font-size: 0.68rem;
   font-weight: 700;
-  font-size: 1rem;
-  margin: 0 auto 2rem;
-  border: 1px solid var(--gold-border);
-  transition: var(--transition-smooth);
+  letter-spacing: 0.22em;
+  color: var(--color-primary);
+  text-transform: uppercase;
+  margin-bottom: 1.75rem;
+  opacity: 0.7;
 }
 
 .process-card h3 {
-  font-size: 1.4rem;
+  font-size: 1.3rem;
   font-weight: 700;
-  margin-bottom: 1rem;
+  margin-bottom: 0.85rem;
   color: #fff;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
 }
 
 .process-card p {
   color: var(--color-text-muted);
-  font-size: 1rem;
-  line-height: 1.6;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  margin: 0;
 }
 
 /* --- CTA --- */
@@ -1254,30 +1211,28 @@ section {
 
   /* --- PROCESS MOBILE --- */
   .process-grid {
-    display: flex;
-    gap: 1rem;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    padding: 1.5rem 1.5rem 2.5rem 1.5rem;
-    /* Added padding-top for hover clearance */
-    margin: -1.5rem -2rem 0 -2rem;
-    /* Offsetting padding-top with margin to maintain layout */
-    /* Bleed to edges */
-    scroll-padding-left: 1.5rem;
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
-
-  .process-grid::-webkit-scrollbar {
-    display: none;
+    grid-template-columns: 1fr;
+    border-top: none;
   }
 
   .process-card {
-    flex: 0 0 78%;
-    /* Take up 78% of screen width to show next card */
-    scroll-snap-align: start;
-    padding: 2.5rem 1.5rem !important;
-    /* Force tighter padding on mobile */
+    padding: 2.25rem 0;
+    border-right: none;
+    border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+    border-top: 1px solid rgba(148, 163, 184, 0.1);
+  }
+
+  .process-card:first-child {
+    border-top: none;
+  }
+
+  .process-card:not(:first-child) {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .process-card:last-child {
+    border-bottom: none;
   }
 }
 
