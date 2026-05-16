@@ -9,67 +9,47 @@
       </div>
     </Transition>
 
-    <header class="topbar glass" :class="{ 'topbar-hidden': showingSplash }">
+    <header class="topbar" :class="{ 'topbar-hidden': showingSplash }">
       <div class="topbar-inner">
-        <!-- Brand & Nav Group - Hidden on Intro -->
-        <div class="topbar-left-group">
-          <RouterLink :to="{ name: 'intro' }" class="logo-link" :class="{ 'is-intro-logo': route.name === 'intro' }">
-            <img src="/logoNPHvidt.svg" alt="NordicPark" class="logo-img" />
-            <span class="logo-text" v-show="route.name !== 'intro'">NordicPark</span>
-          </RouterLink>
 
-          <!-- Desktop Nav -->
+        <!-- Logo -->
+        <RouterLink :to="{ name: 'intro' }" class="logo-link">
+          <img src="/logoNPHvidt.svg" alt="NordicPark" class="logo-img" />
+        </RouterLink>
+
+        <!-- Divider + Desktop Nav links -->
+        <template v-if="route.name !== 'intro'">
+          <div class="nav-divider desktop-nav"></div>
           <nav class="main-nav desktop-nav">
             <template v-if="route.name === 'ticket'">
               <RouterLink :to="{ name: 'intro' }">{{ i18n.t('nav.home') }}</RouterLink>
-              <RouterLink :to="{ name: 'ticket' }" class="nav-cta active">{{ i18n.t('nav.ticket') }}</RouterLink>
             </template>
             <template v-else>
               <RouterLink :to="{ name: 'erhverv', hash: '#solutions' }">{{ i18n.t('nav.solutions') }}</RouterLink>
               <RouterLink :to="{ name: 'erhverv', hash: '#why' }">{{ i18n.t('nav.why') }}</RouterLink>
               <RouterLink :to="{ name: 'erhverv', hash: '#process' }">{{ i18n.t('nav.process') }}</RouterLink>
-              <RouterLink :to="{ name: 'contact' }" class="nav-cta">{{ i18n.t('nav.contact') }}</RouterLink>
             </template>
           </nav>
-        </div>
+        </template>
 
-        <!-- ALWAYS VISIBLE LANG SELECTOR -->
+        <!-- Spacer -->
+        <div class="nav-flex-spacer"></div>
+
+        <!-- Lang selector -->
         <div class="lang-selector-pill">
-          <button 
-            class="lang-item" 
-            :class="{ active: i18n.locale.value === 'da' }" 
-            @click="i18n.setLocale('da')"
-            title="Dansk"
-          >
-            <div class="flag-circle-img">
-              <svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
-                <rect width="512" height="512" fill="#c8102e"/>
-                <path d="M146.3 0h73.1v512h-73.1zM0 219.4h512v73.1H0z" fill="#fff"/>
-              </svg>
-            </div>
-          </button>
-          <button 
-            class="lang-item" 
-            :class="{ active: i18n.locale.value === 'en' }" 
-            @click="i18n.setLocale('en')"
-            title="English"
-          >
-            <div class="flag-circle-img">
-              <svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
-                <rect width="512" height="512" fill="#012169"/>
-                <path d="m0 0 512 512M512 0 0 512" stroke="#fff" stroke-width="80"/>
-                <path d="m0 0 512 512M512 0 0 512" stroke="#c8102e" stroke-width="48"/>
-                <path d="M256 0v512M0 256h512" stroke="#fff" stroke-width="120"/>
-                <path d="M256 0v512M0 256h512" stroke="#c8102e" stroke-width="72"/>
-              </svg>
-            </div>
-          </button>
+          <button class="lang-item" :class="{ active: i18n.locale.value === 'da' }" @click="i18n.setLocale('da')" title="Dansk">DA</button>
+          <button class="lang-item" :class="{ active: i18n.locale.value === 'en' }" @click="i18n.setLocale('en')" title="English">EN</button>
         </div>
 
-        <!-- Hamburger Button -->
-        <button 
-          class="mobile-toggle" 
-          @click="toggleMobileMenu" 
+        <!-- Kontakt CTA (desktop only) -->
+        <RouterLink v-if="route.name !== 'contact'" :to="{ name: 'contact' }" class="nav-pill-cta desktop-nav">
+          {{ i18n.t('nav.contact') }}
+        </RouterLink>
+
+        <!-- Mobile hamburger -->
+        <button
+          class="mobile-toggle"
+          @click="toggleMobileMenu"
           :class="{ 'is-active': mobileMenuOpen }"
           aria-label="Toggle menu"
         >
@@ -86,41 +66,63 @@
         <nav class="mobile-nav-links" @click.stop>
           <template v-if="route.name === 'intro'">
             <RouterLink @click="closeMobileMenu" :to="{ name: 'intro' }">
-              <span class="nav-icon">🏠</span> {{ i18n.t('nav.home') }}
+              <span class="nav-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+              </span> {{ i18n.t('nav.home') }}
             </RouterLink>
             <RouterLink @click="closeMobileMenu" :to="{ name: 'ticket' }">
-              <span class="nav-icon">💳</span> {{ i18n.t('nav.ticket') }}
+              <span class="nav-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>
+              </span> {{ i18n.t('nav.ticket') }}
             </RouterLink>
             <RouterLink @click="closeMobileMenu" :to="{ name: 'erhverv' }">
-              <span class="nav-icon">🏢</span> {{ i18n.t('nav.solutions') }}
+              <span class="nav-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="16" height="20" x="4" y="2" rx="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01"/><path d="M16 6h.01"/><path d="M12 6h.01"/><path d="M12 10h.01"/><path d="M12 14h.01"/><path d="M16 10h.01"/><path d="M16 14h.01"/><path d="M8 10h.01"/><path d="M8 14h.01"/></svg>
+              </span> {{ i18n.t('nav.solutions') }}
             </RouterLink>
             <RouterLink @click="closeMobileMenu" :to="{ name: 'contact' }" class="nav-cta gold">
-              <span class="nav-icon">📧</span> {{ i18n.t('nav.contact') }}
+              <span class="nav-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+              </span> {{ i18n.t('nav.contact') }}
             </RouterLink>
           </template>
           <template v-else-if="route.name === 'ticket'">
             <RouterLink @click="closeMobileMenu" :to="{ name: 'intro' }">
-              <span class="nav-icon">🏠</span> {{ i18n.t('nav.home') }}
+              <span class="nav-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+              </span> {{ i18n.t('nav.home') }}
             </RouterLink>
             <RouterLink @click="closeMobileMenu" :to="{ name: 'ticket' }" class="active">
-              <span class="nav-icon">💳</span> {{ i18n.t('nav.ticket') }}
+              <span class="nav-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>
+              </span> {{ i18n.t('nav.ticket') }}
             </RouterLink>
             <RouterLink @click="closeMobileMenu" :to="{ name: 'contact' }" class="nav-cta gold">
-              <span class="nav-icon">📧</span> {{ i18n.t('nav.contact') }}
+              <span class="nav-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+              </span> {{ i18n.t('nav.contact') }}
             </RouterLink>
           </template>
           <template v-else>
             <RouterLink @click="closeMobileMenu" :to="{ name: 'intro' }">
-              <span class="nav-icon">🏠</span> {{ i18n.t('nav.home') }}
+              <span class="nav-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+              </span> {{ i18n.t('nav.home') }}
             </RouterLink>
             <RouterLink @click="closeMobileMenu" :to="{ name: 'erhverv', hash: '#solutions' }">
-              <span class="nav-icon">⚙️</span> {{ i18n.t('nav.solutions') }}
+              <span class="nav-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07M8.46 8.46a5 5 0 0 0 0 7.07"/></svg>
+              </span> {{ i18n.t('nav.solutions') }}
             </RouterLink>
             <RouterLink @click="closeMobileMenu" :to="{ name: 'erhverv', hash: '#why' }">
-              <span class="nav-icon">💎</span> {{ i18n.t('nav.why') }}
+              <span class="nav-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.7 10.3a2.41 2.41 0 0 0 0 3.41l7.59 7.57a2.41 2.41 0 0 0 3.41 0l7.59-7.57a2.41 2.41 0 0 0 0-3.41l-7.59-7.57a2.41 2.41 0 0 0-3.41 0Z"/></svg>
+              </span> {{ i18n.t('nav.why') }}
             </RouterLink>
             <RouterLink @click="closeMobileMenu" :to="{ name: 'contact' }" class="nav-cta gold">
-              <span class="nav-icon">📧</span> {{ i18n.t('nav.contact') }}
+              <span class="nav-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+              </span> {{ i18n.t('nav.contact') }}
             </RouterLink>
           </template>
         </nav>
@@ -137,6 +139,13 @@
         <RouterLink :to="{ name: 'parking-terms' }">{{ i18n.t('footer.parkingTerms') }}</RouterLink>
         <RouterLink :to="{ name: 'privacy' }">{{ i18n.t('footer.privacy') }}</RouterLink>
         <RouterLink :to="{ name: 'cookie' }">{{ i18n.t('footer.cookie') }}</RouterLink>
+      </div>
+      <div class="footer-info">
+        <span>CVR: 45 90 04 36</span>
+        <span class="footer-divider">·</span>
+        <span>Tlf: 91 42 54 24</span>
+        <span class="footer-divider">·</span>
+        <span>C/O Værftet, Carlsensvej 4, 4600 Køge</span>
       </div>
       <p>{{ i18n.t('footer.copyright', { year: year }) }}</p>
     </footer>
@@ -245,18 +254,12 @@ onMounted(() => {
   padding-top: 4rem;
 }
 
-/* Language Selector Pill Styles */
+/* Lang selector — borderless inside the pill */
 .lang-selector-pill {
   display: flex;
   align-items: center;
-  background: rgba(255, 255, 255, 0.08);
-  padding: 0.35rem;
-  border-radius: var(--radius-full);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  margin-left: auto;
-  position: relative;
-  gap: 0.5rem;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  gap: 0;
+  padding: 0 0.25rem;
 }
 
 .lang-item {
@@ -265,45 +268,51 @@ onMounted(() => {
   justify-content: center;
   background: none;
   border: none;
-  width: 44px;
-  height: 44px;
-  border-radius: var(--radius-full);
+  padding: 0.35rem 0.55rem;
+  border-radius: 999px;
   cursor: pointer;
-  transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-  z-index: 1;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  color: rgba(255, 255, 255, 0.38);
+  transition: color 0.2s ease, background 0.2s ease;
 }
 
 .lang-item.active {
-  background: linear-gradient(135deg, var(--color-accent) 0%, #F59E0B 100%);
-  box-shadow: 0 4px 15px rgba(251, 191, 36, 0.4);
-  transform: scale(1.05);
-}
-
-.lang-item:hover:not(.active) {
+  color: rgba(255, 255, 255, 0.85);
   background: rgba(255, 255, 255, 0.1);
 }
 
-.flag-circle-img {
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  overflow: hidden;
-  display: flex;
+.lang-item:hover:not(.active) {
+  color: rgba(255, 255, 255, 0.65);
+}
+
+/* Kontakt CTA pill button */
+.nav-pill-cta {
+  display: inline-flex;
   align-items: center;
-  justify-content: center;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  transition: transform 0.3s ease;
-  background: transparent; /* Fixed the white background issue */
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 999px;
+  padding: 0.45rem 1rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.85);
+  text-decoration: none;
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+  white-space: nowrap;
 }
 
-.lang-item:hover .flag-circle-img {
-  transform: scale(1.1);
+.nav-pill-cta:hover {
+  background: rgba(255, 255, 255, 0.16);
+  border-color: rgba(255, 255, 255, 0.25);
+  color: #fff;
 }
 
-.flag-circle-img svg {
-  width: 100%;
-  height: 100%;
-  display: block;
+/* Flex spacer to push lang+cta to right */
+.nav-flex-spacer {
+  flex: 1;
+  min-width: 1.5rem;
 }
 
 /* Mobile Toggle Button */
@@ -338,7 +347,7 @@ onMounted(() => {
 .mobile-menu-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(5, 10, 24, 0.95);
+  background: rgba(17, 17, 17, 0.97);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   z-index: 9999;
@@ -400,39 +409,16 @@ onMounted(() => {
   transform: translateY(-20px);
 }
 
-.topbar-left-group {
-  display: flex;
-  align-items: center;
-  gap: 2rem;
-}
-
-@media (max-width: 900px) {
-  .topbar-left-group {
-    gap: 1rem;
-  }
-}
-
 @media (max-width: 768px) {
-  .topbar-left-group {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
   .desktop-nav {
     display: none !important;
   }
   .mobile-toggle {
     display: flex;
-    margin-left: 1rem;
+    margin-left: 0.25rem;
   }
-  .lang-selector-pill {
-    margin-left: auto;
-    padding: 0.25rem;
-    gap: 0.25rem;
-  }
-  .lang-item {
-    width: 38px;
-    height: 38px;
+  .nav-flex-spacer {
+    min-width: 0.5rem;
   }
 }
 </style>

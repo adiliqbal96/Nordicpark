@@ -7,7 +7,7 @@
       <div class="blob blob-3"></div>
     </div>
 
-    <div class="container--standard relative z-10 pt-8">
+    <div class="container--standard relative z-10 pt-48">
       <div class="header-nav-group">
         <Backlink :to="{ name: 'erhverv' }" :label="i18n.t('services.back')" />
       </div>
@@ -162,7 +162,7 @@ const handleSubmit = async () => {
   min-height: 100vh;
   padding-bottom: 5rem;
   overflow: hidden;
-  background: var(--color-base);
+  background: var(--color-surface); /* Softened from base */
 }
 
 /* WOW Background blobs */
@@ -221,7 +221,7 @@ const handleSubmit = async () => {
   display: grid;
   grid-template-columns: 1fr 1.3fr;
   gap: 5rem;
-  margin-top: 0; /* Moved up */
+  margin-top: -2rem; /* Pulled up further */
   max-width: 1200px; /* Centered & Tighter */
   margin-inline: auto;
   align-items: center;
