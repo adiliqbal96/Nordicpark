@@ -296,7 +296,6 @@
 <style scoped>
 .parking-wrap {
   width: 100%;
-  max-width: 440px;
   border-radius: 16px;
   overflow: hidden;
   box-shadow: 0 28px 56px rgba(0, 0, 0, 0.65);

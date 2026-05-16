@@ -329,8 +329,8 @@ const processSteps = [
 
 .hero-split {
   display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 5rem;
+  grid-template-columns: 1fr 500px;
+  gap: 4rem;
   align-items: center;
   position: relative;
   z-index: 1;
@@ -341,7 +341,7 @@ const processSteps = [
 }
 
 .hero-visual {
-  flex-shrink: 0;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -450,18 +450,34 @@ const processSteps = [
 }
 
 /* ── RESPONSIVE ── */
+@media (max-width: 1100px) {
+  .hero-split {
+    grid-template-columns: 1fr 420px;
+    gap: 3rem;
+  }
+}
+
 @media (max-width: 900px) {
   .hero-split {
     grid-template-columns: 1fr;
-    gap: 3rem;
+    gap: 2.5rem;
   }
 
   .hero-visual {
-    display: none;
+    display: flex;
+    max-width: 480px;
+    margin: 0 auto;
+    width: 100%;
   }
 
   .hero {
     min-height: auto;
+  }
+}
+
+@media (max-width: 600px) {
+  .hero-visual {
+    max-width: 100%;
   }
 }
 
