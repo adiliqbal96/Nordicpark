@@ -43,12 +43,9 @@
             </div>
           </div>
 
-          <!-- RIGHT: Spline 3D scene -->
+          <!-- RIGHT: Parking lot visual -->
           <div class="hero-visual" aria-hidden="true">
-            <SplineScene
-              scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
-              class-name="hero-spline"
-            />
+            <ParkingVisual />
           </div>
 
         </div>
@@ -271,7 +268,7 @@
 <script setup>
 import { RouterLink } from 'vue-router'
 import { i18n } from '../i18n.js'
-import SplineScene from '../components/SplineScene.vue'
+import ParkingVisual from '../components/ParkingVisual.vue'
 
 const solutionCards = [
   {
@@ -307,12 +304,11 @@ const processSteps = [
 <style scoped>
 /* ── HERO SPLIT LAYOUT ── */
 .hero {
-  min-height: 82vh;
-  overflow: hidden;
+  min-height: 78vh;
 }
 
 :deep(.hero-inner--wide) {
-  max-width: 1200px;
+  max-width: 1140px;
   padding: 0 2rem;
 }
 
@@ -335,9 +331,8 @@ const processSteps = [
 .hero-split {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 2rem;
+  gap: 3rem;
   align-items: center;
-  min-height: 500px;
   position: relative;
   z-index: 1;
 }
@@ -346,25 +341,20 @@ const processSteps = [
   min-width: 0;
 }
 
-/* ── SPLINE 3D VISUAL ── */
 .hero-visual {
-  height: 500px;
+  height: 420px;
   border-radius: 1rem;
   overflow: hidden;
-  position: relative;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
 }
 
-:deep(.hero-spline) {
-  width: 100%;
-  height: 100%;
-}
-
-@media (max-width: 900px) {
+@media (max-width: 960px) {
   .hero-split {
     grid-template-columns: 1fr;
   }
   .hero-visual {
-    height: 340px;
+    height: 280px;
   }
 }
 
