@@ -110,7 +110,7 @@
               <div class="founder-initial initial-blue">M</div>
               <span class="founder-name">Max</span>
             </div>
-            <p class="team-caption">Fra venstre: Jamil, Kim og Max — vi har selv gået runderne på asfalten.</p>
+            <p class="team-caption">Jamil, Kim og Max — vi har selv gået runderne på asfalten.</p>
           </div>
         </div>
       </section>
