@@ -120,25 +120,32 @@ const status = reactive({
   type: '' // 'success' or 'error'
 })
 
+const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xqejzyln'
+
 const handleSubmit = async () => {
   loading.value = true
   status.message = ''
-  
+
   try {
-    const response = await fetch('/contact.php', {
+    const response = await fetch(FORMSPREE_ENDPOINT, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
       },
-      body: JSON.stringify(form)
+      body: JSON.stringify({
+        name: form.name,
+        email: form.email,
+        company: form.company,
+        message: form.message
+      })
     })
-    
+
     const data = await response.json()
-    
-    if (response.ok) {
+
+    if (data.ok) {
       status.message = i18n.t('contact.success')
       status.type = 'success'
-      // Clear form
       form.name = ''
       form.email = ''
       form.company = ''

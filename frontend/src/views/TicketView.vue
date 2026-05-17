@@ -468,32 +468,35 @@ const handleFileUpload = (e) => {
   form.files = Array.from(e.target.files)
 }
 
+const FORMSPREE_AFGIFT = 'https://formspree.io/f/mnjragzb'
+
 const submitPortalForm = async () => {
   loading.value = true
   status.message = ''
-  
-  try {
-    const payload = {
-      type: step.value,
-      ticketNumber: form.ticketNumber,
-      licensePlate: form.licensePlate,
-      email: form.email,
-      message: form.message
-    }
 
-    const response = await fetch('/api/contact', {
+  try {
+    // Use FormData to support file attachments on the complaint form
+    const data = new FormData()
+    data.append('type', step.value === 'complaint' ? 'Klage' : 'Fotoanmodning')
+    data.append('afgiftsnummer', form.ticketNumber)
+    data.append('nummerplade', form.licensePlate)
+    data.append('email', form.email)
+    if (form.message) data.append('besked', form.message)
+    form.files.forEach((file) => data.append('vedhæftning', file))
+
+    const response = await fetch(FORMSPREE_AFGIFT, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload)
+      headers: { 'Accept': 'application/json' },
+      body: data
     })
-    
-    const data = await response.json()
-    
-    if (response.ok) {
-      status.message = data.success || 'Din henvendelse er modtaget.'
+
+    const result = await response.json()
+
+    if (result.ok) {
+      status.message = 'Din henvendelse er modtaget.'
       status.type = 'success'
     } else {
-      status.message = data.error || 'Der opstod en fejl.'
+      status.message = 'Der opstod en fejl. Prøv igen eller kontakt os direkte.'
       status.type = 'error'
     }
   } catch (error) {
