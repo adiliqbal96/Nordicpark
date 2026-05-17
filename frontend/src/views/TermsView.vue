@@ -17,8 +17,8 @@
       <section>
         <h2>Formål</h2>
         <p>
-          Disse handelsbetingelser beskriver regler og vilkår for parkering på områder administreret af 
-          Nordic Park ApS samt betingelser for udstedelse, betaling og klagebehandling ved 
+          Disse handelsbetingelser beskriver regler og vilkår for parkering på områder administreret af
+          Nordic Park ApS samt betingelser for udstedelse, betaling og klagebehandling ved
           parkeringsafgifter.
         </p>
       </section>
@@ -26,19 +26,30 @@
       <section>
         <h2>1. Parkering</h2>
         <p>
-          Parkering er kun tilladt i overensstemmelse med gældende skiltning på området. 
-          Manglende overholdelse af skiltning, tidsbegrænsning, betalingskrav eller tilladelser medfører 
-          udstedelse af parkeringsafgift.
+          Parkering er kun tilladt i overensstemmelse med gældende skiltning på området.
+          Hvor dette tilbydes, kan betaling for parkering ske via betalingsautomat, betalingslink eller
+          tredjeparts betalingsløsninger såsom EasyPark.
+        </p>
+        <p>Bilisten er selv ansvarlig for korrekt registrering af:</p>
+        <ul>
+          <li>registreringsnummer</li>
+          <li>zonekode</li>
+          <li>parkeringstid</li>
+          <li>eventuelle forlængelser af parkeringen</li>
+        </ul>
+        <p>
+          Manglende eller fejlagtig registrering, manglende betaling eller overskridelse af tilladt
+          parkeringstid kan medføre udstedelse af parkeringsafgift.
         </p>
       </section>
 
       <section>
         <h2>2. Parkeringskontrol</h2>
         <p>
-          Parkeringskontrol udføres af Nordic Park ApS eller bemyndigede kontrollører. 
-          Overtrædelser dokumenteres, herunder ved brug af billeder af køretøj, registreringsnummer, 
+          Parkeringskontrol udføres af Nordic Park ApS eller bemyndigede kontrollører.
+          Overtrædelser dokumenteres digitalt, herunder ved billeder af køretøj, registreringsnummer,
           placering, dato og tidspunkt.
-          Automatisk kontrol, herunder kamera og nummerpladegenkendelse (ANPR), kan anvendes, hvor 
+          Automatisk kontrol, herunder kamera og nummerpladegenkendelse (ANPR), kan anvendes, hvor
           dette er lovligt og skiltet.
         </p>
       </section>
@@ -47,14 +58,28 @@
         <h2>3. {{ i18n.t('legal.feeTitle') }}</h2>
         <div class="highlight-box">
           <p><strong>{{ i18n.t('legal.feeTitle') }}: {{ i18n.t('legal.feeAmount') }}</strong></p>
-          <p>{{ i18n.t('legal.feeDue') }}</p>
+          <p>Beløbet forfalder til betaling senest 10 dage fra udstedelsesdatoen via de betalingsoplysninger, der fremgår af opkrævningen.</p>
         </div>
+        <p>Betaling kan ske via:</p>
+        <ul>
+          <li>bankoverførsel</li>
+          <li>betalingslink</li>
+          <li>betalingskort</li>
+          <li>MobilePay</li>
+          <li>EasyPark, hvor dette tilbydes</li>
+        </ul>
+        <p>
+          Ved betaling skal korrekt reference- eller sagsnummer anvendes.
+          Betalingen anses først for gennemført, når beløbet er registreret modtaget af Nordic Park ApS.
+          Ved betaling via EasyPark gælder den registrerede parkering i systemet som dokumentation for
+          betalingstidspunkt og varighed.
+        </p>
       </section>
 
       <section>
         <h2>4. Manglende betaling</h2>
         <p>
-          Ved manglende rettidig betaling kan der pålægges rykkergebyr på 100 kr. pr. rykker (maks. 3 rykkere). 
+          Ved manglende rettidig betaling kan der pålægges rykkergebyr på 100 kr. pr. rykker (maks. 3 rykkere).
           Sagen kan herefter overdrages til inkasso. Yderligere omkostninger kan pålægges i henhold til gældende lovgivning.
         </p>
       </section>
@@ -74,8 +99,8 @@
       <section>
         <h2>6. Persondata</h2>
         <p>
-          Personoplysninger behandles i forbindelse med parkeringskontrol og administration i 
-          overensstemmelse med gældende databeskyttelseslovgivning (GDPR). 
+          Personoplysninger behandles i forbindelse med parkeringskontrol og administration i
+          overensstemmelse med gældende databeskyttelseslovgivning (GDPR).
           Oplysninger kan videregives til inkasso ved manglende betaling.
         </p>
       </section>
@@ -83,16 +108,16 @@
       <section>
         <h2>7. Ansvar</h2>
         <p>
-          Al parkering sker på eget ansvar. 
-          Nordic Park ApS hæfter ikke for skader, tyveri eller tab på køretøjer eller disses indhold, 
+          Al parkering sker på eget ansvar.
+          Nordic Park ApS hæfter ikke for skader, tyveri eller tab på køretøjer eller disses indhold,
           medmindre skaden skyldes grov uagtsomhed eller forsæt.
         </p>
       </section>
 
       <footer class="legal-footer">
-        <h3>{{ i18n.t('legal.companyInfoTitle') }}</h3>
-        <p>Nordic Park ApS · CVR: 45900436</p>
-        <p>Email: kontakt@nordicpark.eu · {{ i18n.locale === 'da' ? 'Tlf' : 'Tel' }}: 71 61 36 21</p>
+        <h3>8. Virksomhedsoplysninger</h3>
+        <p>Nordic Park ApS · CVR: 45 90 04 36</p>
+        <p><a href="mailto:kontakt@nordicpark.eu">kontakt@nordicpark.eu</a> · Tlf: 71 61 36 21</p>
       </footer>
     </article>
   </div>

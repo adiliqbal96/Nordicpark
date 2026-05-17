@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import IntroView from '../views/IntroView.vue'
 import HomeView from '../views/HomeView.vue'
+import AboutView from '../views/AboutView.vue'
 import ServicesView from '../views/ServicesView.vue'
 import TicketView from '../views/TicketView.vue'
 import ContactView from '../views/ContactView.vue'
@@ -15,6 +16,7 @@ import PrivateView from '../views/PrivateView.vue'
 const routes = [
   { path: '/', name: 'intro', component: IntroView },
   { path: '/erhverv', name: 'erhverv', component: HomeView },
+  { path: '/om-os', name: 'about', component: AboutView },
   { path: '/services', name: 'services', component: ServicesView },
   { path: '/ticket', name: 'ticket', component: TicketView },
   { path: '/contact', name: 'contact', component: ContactView },
@@ -58,7 +60,7 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(),
   routes,
-  scrollBehavior(to, from, savedPosition) {
+  scrollBehavior(to, _from, savedPosition) {
     if (savedPosition) return savedPosition
 
     if (to.hash) {

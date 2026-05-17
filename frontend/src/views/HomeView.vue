@@ -198,7 +198,7 @@
       </div>
     </section>
 
-    <!-- PROCESS -->
+    <!-- PROCESS / KONTROLRUTE -->
     <section class="process-section" id="process">
       <div class="process-inner">
         <p
@@ -222,20 +222,97 @@
           class="process-intro"
         >{{ i18n.t('business.processIntro') }}</p>
 
-        <div class="process-grid">
-          <article
-            v-for="(step, i) in processSteps"
-            :key="step.titleKey"
-            class="process-card"
-            v-motion
-            :initial="{ opacity: 0, scale: 0.96, y: 20 }"
-            :visible-once="{ opacity: 1, scale: 1, y: 0, transition: { duration: 480, delay: i * 130, ease: [0.16, 1, 0.3, 1] } }"
-          >
-            <div class="process-step-number">0{{ i + 1 }}</div>
-            <h3>{{ i18n.t(step.titleKey) }}</h3>
-            <p>{{ i18n.t(step.descKey) }}</p>
-          </article>
+        <!-- KONTROLRUTE TRACK -->
+        <div class="route-track">
+
+          <!-- Step 1: above left — DOM order matches mobile flow -->
+          <div class="rt-slot rt-above rt-col-1">
+            <div class="cp-card">
+              <span class="cp-num">01</span>
+              <div class="cp-icon-wrap">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              </div>
+              <h3>{{ i18n.t('business.processSteps.analysis.title') }}</h3>
+              <p>{{ i18n.t('business.processSteps.analysis.desc') }}</p>
+            </div>
+            <div class="cp-stem"></div>
+          </div>
+
+          <!-- Step 2: below center — DOM order 2 ensures correct mobile flow -->
+          <div class="rt-slot rt-below rt-col-2">
+            <div class="cp-stem"></div>
+            <div class="cp-card">
+              <span class="cp-num">02</span>
+              <div class="cp-icon-wrap">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+              </div>
+              <h3>{{ i18n.t('business.processSteps.setup.title') }}</h3>
+              <p>{{ i18n.t('business.processSteps.setup.desc') }}</p>
+            </div>
+          </div>
+
+          <!-- Step 3: above right — DOM order 3 ensures correct mobile flow -->
+          <div class="rt-slot rt-above rt-col-3">
+            <div class="cp-card">
+              <span class="cp-num">03</span>
+              <div class="cp-icon-wrap">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              </div>
+              <h3>{{ i18n.t('business.processSteps.operation.title') }}</h3>
+              <p>{{ i18n.t('business.processSteps.operation.desc') }}</p>
+            </div>
+            <div class="cp-stem"></div>
+          </div>
+
+          <!-- Road row — spans all 3 columns -->
+          <div class="rt-road">
+            <div class="road-surface">
+              <div class="road-dashes"></div>
+            </div>
+            <div class="road-node rn-1"><div class="rn-pulse"></div><div class="rn-core"></div></div>
+            <div class="road-node rn-2"><div class="rn-pulse"></div><div class="rn-core"></div></div>
+            <div class="road-node rn-3"><div class="rn-pulse"></div><div class="rn-core"></div></div>
+            <div class="route-car">
+              <svg width="52" height="22" viewBox="0 0 52 22" fill="none">
+                <rect x="2" y="8" width="48" height="11" rx="3.5" fill="#1B3461"/>
+                <rect x="10" y="2" width="26" height="9" rx="2" fill="#1B3461"/>
+                <rect x="12" y="3" width="10" height="6" rx="1.2" fill="#93C5FD" opacity="0.75"/>
+                <rect x="24" y="3" width="10" height="6" rx="1.2" fill="#93C5FD" opacity="0.75"/>
+                <rect x="2" y="13" width="48" height="2.5" rx="0.5" fill="#FACC15"/>
+                <rect x="16" y="0" width="20" height="3.5" rx="1.75" fill="#1D4ED8"/>
+                <rect x="16" y="0" width="9" height="3.5" rx="1.5" class="rcar-blue"/>
+                <rect x="27" y="0" width="9" height="3.5" rx="1.5" class="rcar-red"/>
+                <circle cx="12" cy="20" r="3.5" fill="#0F172A" stroke="#334155" stroke-width="1.2"/>
+                <circle cx="12" cy="20" r="1.6" fill="#475569"/>
+                <circle cx="38" cy="20" r="3.5" fill="#0F172A" stroke="#334155" stroke-width="1.2"/>
+                <circle cx="38" cy="20" r="1.6" fill="#475569"/>
+              </svg>
+            </div>
+          </div>
+
+          <!-- Empty layout slots for desktop grid (hidden on mobile) -->
+          <div class="rt-slot rt-above rt-col-2 rt-empty"></div>
+          <div class="rt-slot rt-below rt-col-1 rt-empty"></div>
+          <div class="rt-slot rt-below rt-col-3 rt-empty"></div>
+
         </div>
+      </div>
+    </section>
+
+    <!-- BRAND STORY -->
+    <section class="brand-story-section">
+      <div class="brand-story-inner">
+        <p class="brand-story-eyebrow">Hvem er vi?</p>
+        <h2 class="brand-story-title">Find din plads i Norden</h2>
+        <p class="brand-story-sub">– Skabt af tre p-vagter med hjertet og ordentligheden i orden.</p>
+        <div class="brand-story-body">
+          <p>For de fleste er parkering bare praktisk. Men vi ved, at det også kan være en kilde til stress. Vi kender følelsen af at lede forgæves efter en plads, frustrationen over en app, der driller, eller usikkerheden ved et skilt, der er svært at tyde.</p>
+          <p>Vi er tre stiftere, der alle startede vores karriere som p-vagter på gaden. Vi har brugt tusindvis af timer på asfalten — vi startede vores eget firma, fordi vi så et behov for en parkeringsservice, der bygger på mere end bare kontrol.</p>
+        </div>
+        <RouterLink :to="{ name: 'about' }" class="brand-story-link">
+          Læs vores historie
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </RouterLink>
       </div>
     </section>
 
@@ -293,11 +370,7 @@ const solutionCards = [
   }
 ]
 
-const processSteps = [
-  { titleKey: 'business.processSteps.analysis.title',  descKey: 'business.processSteps.analysis.desc' },
-  { titleKey: 'business.processSteps.setup.title',     descKey: 'business.processSteps.setup.desc' },
-  { titleKey: 'business.processSteps.operation.title', descKey: 'business.processSteps.operation.desc' }
-]
+
 </script>
 
 <style scoped>

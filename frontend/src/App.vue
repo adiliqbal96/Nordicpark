@@ -34,7 +34,7 @@
 
         <!-- Right group: lang + CTA + hamburger -->
         <div class="nav-right">
-          <div class="lang-selector-pill">
+          <div class="lang-selector-pill desktop-nav">
             <button class="lang-item" :class="{ active: i18n.locale.value === 'da' }" @click="i18n.setLocale('da')" title="Dansk">DA</button>
             <button class="lang-item" :class="{ active: i18n.locale.value === 'en' }" @click="i18n.setLocale('en')" title="English">EN</button>
           </div>
@@ -122,6 +122,12 @@
               </span> {{ i18n.t('nav.contact') }}
             </RouterLink>
           </template>
+          <!-- Language switcher at bottom of mobile menu -->
+          <div class="mobile-lang">
+            <button class="mobile-lang-item" :class="{ active: i18n.locale.value === 'da' }" @click="i18n.setLocale('da')">DA</button>
+            <span class="mobile-lang-divider">·</span>
+            <button class="mobile-lang-item" :class="{ active: i18n.locale.value === 'en' }" @click="i18n.setLocale('en')">EN</button>
+          </div>
         </nav>
       </div>
     </Transition>
@@ -132,6 +138,7 @@
 
     <footer v-if="route.name !== 'intro'" class="footer">
       <div class="footer-links">
+        <RouterLink :to="{ name: 'about' }">Om os</RouterLink>
         <RouterLink :to="{ name: 'terms' }">{{ i18n.t('footer.terms') }}</RouterLink>
         <RouterLink :to="{ name: 'parking-terms' }">{{ i18n.t('footer.parkingTerms') }}</RouterLink>
         <RouterLink :to="{ name: 'privacy' }">{{ i18n.t('footer.privacy') }}</RouterLink>
@@ -394,6 +401,41 @@ onMounted(() => {
   border-radius: var(--radius-full);
   border: 1px solid rgba(252, 211, 77, 0.2);
   margin-top: 1rem;
+}
+
+.mobile-lang {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-top: 2.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.mobile-lang-item {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: rgba(255, 255, 255, 0.35);
+  padding: 0.25rem 0.5rem;
+  transition: color 0.2s ease;
+}
+
+.mobile-lang-item.active {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.mobile-lang-item:hover:not(.active) {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.mobile-lang-divider {
+  color: rgba(255, 255, 255, 0.2);
+  font-size: 0.85rem;
 }
 
 /* Animations */

@@ -616,62 +616,354 @@ section {
   z-index: 1;
 }
 
-/* --- PROCESS --- */
-.process-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+/* --- PROCESS / KONTROLRUTE --- */
+.process-section {
+  background: var(--color-base);
+  position: relative;
+  overflow: hidden;
+}
+
+.process-section::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 900px;
+  height: 500px;
+  background: radial-gradient(ellipse, rgba(59, 130, 246, 0.04) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+.process-inner {
   max-width: var(--container-max);
   margin: 0 auto;
-  border-top: 1px solid rgba(148, 163, 184, 0.14);
-}
-
-.process-card {
-  padding: 3rem 3rem 3rem 0;
-  text-align: left;
-  background: transparent;
-  border: none;
-  border-radius: 0;
-  border-right: 1px solid rgba(148, 163, 184, 0.1);
-  transition: none;
   position: relative;
-  overflow: visible;
+  z-index: 1;
 }
 
-.process-card:not(:first-child) {
-  padding-left: 3rem;
-  padding-right: 3rem;
+/* ROUTE TRACK GRID */
+.route-track {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: auto 60px auto;
+  column-gap: 1.5rem;
+  margin-top: 3.5rem;
 }
 
-.process-card:last-child {
-  border-right: none;
-  padding-right: 0;
+.rt-above {
+  grid-row: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
 }
 
-.process-step-number {
+.rt-below {
+  grid-row: 3;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.rt-road {
+  grid-row: 2;
+  grid-column: 1 / -1;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.rt-col-1 { grid-column: 1; }
+.rt-col-2 { grid-column: 2; }
+.rt-col-3 { grid-column: 3; }
+
+.rt-empty { pointer-events: none; }
+
+/* Cards hidden until the intro animation reveals them (plays once, stays) */
+.rt-slot { opacity: 0; }
+
+/* Card 01: car hits node 1 at ~1.0s into the first 5s loop */
+.rt-slot.rt-above.rt-col-1 {
+  animation: cp-slide-down 0.5s cubic-bezier(0.16, 1, 0.3, 1) 1.0s forwards;
+}
+/* Card 02: car hits node 2 at ~2.5s */
+.rt-slot.rt-below.rt-col-2 {
+  animation: cp-slide-up 0.5s cubic-bezier(0.16, 1, 0.3, 1) 2.5s forwards;
+}
+/* Card 03: car hits node 3 at ~4.0s */
+.rt-slot.rt-above.rt-col-3 {
+  animation: cp-slide-down 0.5s cubic-bezier(0.16, 1, 0.3, 1) 4.0s forwards;
+}
+
+@keyframes cp-slide-down {
+  from { opacity: 0; transform: translateY(-20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes cp-slide-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ROAD */
+.road-surface {
+  width: 100%;
+  height: 52px;
+  background: linear-gradient(to bottom, #091525, #0d1d38, #091525);
+  border-top: 1px solid rgba(59, 130, 246, 0.18);
+  border-bottom: 1px solid rgba(59, 130, 246, 0.18);
+  border-radius: 4px;
+  position: relative;
+  overflow: hidden;
+  clip-path: inset(0 100% 0 0 round 4px);
+  animation: road-reveal 0.7s ease-out forwards;
+}
+
+/* Road draws once and stays visible permanently */
+@keyframes road-reveal {
+  to { clip-path: inset(0 0% 0 0 round 4px); }
+}
+
+.road-dashes {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 2px;
+  margin-top: -1px;
+  background: repeating-linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0.14) 0,
+    rgba(255, 255, 255, 0.14) 18px,
+    transparent 18px,
+    transparent 34px
+  );
+  animation: dash-scroll 2.4s linear infinite;
+}
+
+@keyframes dash-scroll {
+  from { background-position: 0 0; }
+  to   { background-position: 34px 0; }
+}
+
+/* CHECKPOINT NODES */
+.road-node {
+  position: absolute;
+  top: 50%;
+  opacity: 0;
+  width: 18px;
+  height: 18px;
+  z-index: 2;
+}
+
+/* Nodes pop in as car arrives, stay visible permanently */
+.rn-1 { left: calc(100% / 6);     animation: node-pop 0.45s cubic-bezier(0.16, 1, 0.3, 1) 0.9s forwards; }
+.rn-2 { left: 50%;                 animation: node-pop 0.45s cubic-bezier(0.16, 1, 0.3, 1) 2.4s forwards; }
+.rn-3 { left: calc(100% * 5 / 6); animation: node-pop 0.45s cubic-bezier(0.16, 1, 0.3, 1) 3.9s forwards; }
+
+@keyframes node-pop {
+  0%   { opacity: 0; transform: translate(-50%, -50%) scale(0.2); }
+  65%  { opacity: 1; transform: translate(-50%, -50%) scale(1.25); }
+  100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+
+.rn-pulse {
+  position: absolute;
+  inset: -8px;
+  border-radius: 50%;
+  border: 1px solid rgba(59, 130, 246, 0.45);
+  animation: node-pulse 2.6s ease-in-out infinite;
+}
+
+.rn-core {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: var(--color-primary);
+  box-shadow: 0 0 14px rgba(59, 130, 246, 0.9), 0 0 6px rgba(255, 255, 255, 0.25);
+}
+
+@keyframes node-pulse {
+  0%, 100% { opacity: 0.25; transform: scale(1); }
+  50%       { opacity: 0.75; transform: scale(1.35); }
+}
+
+/* STEMS */
+.cp-stem {
+  width: 1px;
+  height: 30px;
+  flex-shrink: 0;
+}
+
+.rt-above .cp-stem {
+  background: linear-gradient(to bottom, rgba(59, 130, 246, 0.12), rgba(59, 130, 246, 0.55));
+}
+
+.rt-below .cp-stem {
+  background: linear-gradient(to bottom, rgba(59, 130, 246, 0.55), rgba(59, 130, 246, 0.12));
+}
+
+/* PATROL CAR */
+.route-car {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-70%);
+  animation: route-drive 5s linear infinite;
+  z-index: 3;
+}
+
+/* Simple left-to-right loop — runs forever once the road is visible */
+@keyframes route-drive {
+  from { left: -60px; }
+  to   { left: calc(100% + 60px); }
+}
+
+.rcar-blue { fill: #3B82F6; animation: rcar-flash 0.6s step-end infinite; }
+.rcar-red  { fill: #EF4444; animation: rcar-flash 0.6s step-end infinite 0.3s; }
+
+@keyframes rcar-flash {
+  0%, 49%   { opacity: 1; }
+  50%, 100% { opacity: 0.12; }
+}
+
+/* CHECKPOINT CARDS */
+.cp-card {
+  background: linear-gradient(160deg, rgba(14, 22, 42, 0.95), rgba(8, 13, 28, 0.98));
+  border: 1px solid rgba(59, 130, 246, 0.13);
+  border-radius: 20px;
+  padding: 1.75rem;
+  width: 100%;
+  text-align: left;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.cp-card:hover {
+  border-color: rgba(59, 130, 246, 0.32);
+  box-shadow: 0 0 32px rgba(59, 130, 246, 0.08);
+}
+
+.cp-num {
   display: block;
   font-size: 0.68rem;
   font-weight: 700;
   letter-spacing: 0.22em;
   color: var(--color-primary);
   text-transform: uppercase;
-  margin-bottom: 1.75rem;
-  opacity: 0.7;
+  opacity: 0.65;
+  margin-bottom: 1.1rem;
 }
 
-.process-card h3 {
-  font-size: 1.3rem;
+.cp-icon-wrap {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: rgba(59, 130, 246, 0.08);
+  border: 1px solid rgba(59, 130, 246, 0.18);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #60A5FA;
+  margin-bottom: 1.15rem;
+}
+
+.cp-card h3 {
+  font-size: 1.15rem;
   font-weight: 700;
-  margin-bottom: 0.85rem;
+  color: #fff;
+  margin-bottom: 0.55rem;
+  letter-spacing: -0.02em;
+  line-height: 1.3;
+}
+
+.cp-card p {
+  font-size: 0.88rem;
+  color: var(--color-text-muted);
+  line-height: 1.65;
+  margin: 0;
+}
+
+/* --- BRAND STORY --- */
+.brand-story-section {
+  padding: clamp(4rem, 7vw, 6rem) 2rem;
+  background: var(--color-surface);
+  border-top: 1px solid rgba(148, 163, 184, 0.08);
+  border-bottom: 1px solid rgba(148, 163, 184, 0.08);
+  position: relative;
+  overflow: hidden;
+}
+
+.brand-story-section::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px;
+  height: 400px;
+  background: radial-gradient(ellipse, rgba(250, 204, 21, 0.04) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+.brand-story-inner {
+  max-width: 640px;
+  margin: 0 auto;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+.brand-story-eyebrow {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: var(--color-accent);
+  opacity: 0.8;
+  margin-bottom: 1rem;
+}
+
+.brand-story-title {
+  font-size: clamp(1.9rem, 3.5vw, 2.6rem);
+  font-weight: 800;
   color: #fff;
   letter-spacing: -0.02em;
-  line-height: 1.25;
+  line-height: 1.2;
+  margin-bottom: 0.75rem;
 }
 
-.process-card p {
+.brand-story-sub {
+  font-size: 1rem;
+  color: var(--color-accent);
+  font-style: italic;
+  opacity: 0.85;
+  margin-bottom: 2rem;
+}
+
+.brand-story-body p {
+  font-size: 1rem;
   color: var(--color-text-muted);
-  font-size: 0.95rem;
-  line-height: 1.7;
-  margin: 0;
+  line-height: 1.75;
+  margin-bottom: 1.1rem;
+}
+
+.brand-story-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-accent);
+  text-decoration: none;
+  transition: gap 0.25s ease, opacity 0.2s ease;
+  opacity: 0.85;
+}
+
+.brand-story-link:hover {
+  gap: 0.85rem;
+  opacity: 1;
 }
 
 /* --- CTA --- */
@@ -1209,31 +1501,63 @@ section {
     gap: 3rem;
   }
 
-  /* --- PROCESS MOBILE --- */
-  .process-grid {
-    grid-template-columns: 1fr;
-    border-top: none;
+  /* --- PROCESS / KONTROLRUTE MOBILE --- */
+  /* Disable the looping animations; show all cards statically */
+  .rt-slot {
+    opacity: 1 !important;
+    animation: none !important;
+    transform: none !important;
   }
 
-  .process-card {
-    padding: 2.25rem 0;
-    border-right: none;
-    border-bottom: 1px solid rgba(148, 163, 184, 0.1);
-    border-top: 1px solid rgba(148, 163, 184, 0.1);
+  .route-track {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    padding-left: 2.25rem;
+    position: relative;
   }
 
-  .process-card:first-child {
-    border-top: none;
+  .route-track::before {
+    content: '';
+    position: absolute;
+    left: 8px;
+    top: 24px;
+    bottom: 24px;
+    width: 2px;
+    background: linear-gradient(to bottom, transparent, rgba(59, 130, 246, 0.3) 20%, rgba(59, 130, 246, 0.3) 80%, transparent);
+    border-radius: 1px;
   }
 
-  .process-card:not(:first-child) {
-    padding-left: 0;
-    padding-right: 0;
+  .rt-above,
+  .rt-below {
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 0;
+    padding: 1.25rem 0;
+    width: 100%;
+    position: relative;
   }
 
-  .process-card:last-child {
-    border-bottom: none;
+  .rt-above::before,
+  .rt-below::before {
+    content: '';
+    position: absolute;
+    left: -1.875rem;
+    top: 1.85rem;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--color-primary);
+    box-shadow: 0 0 8px rgba(59, 130, 246, 0.7);
+    flex-shrink: 0;
   }
+
+  .rt-empty { display: none; }
+  .rt-road  { display: none; }
+  .cp-stem  { display: none; }
+
+  .cp-card { max-width: none; }
 }
 
 @media (max-width: 768px) {
