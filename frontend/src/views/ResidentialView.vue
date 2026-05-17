@@ -47,6 +47,37 @@
 import { RouterLink } from 'vue-router'
 import { i18n } from '../i18n.js'
 import Backlink from '../components/Backlink.vue'
+import { useHead } from '@vueuse/head'
+
+useHead({
+  title: 'Parkeringskontrol til boligforeninger | Nordic Park ApS',
+  meta: [
+    { name: 'description', content: 'Professionel beboerparkering og parkeringskontrol til boligforeninger, ejerforeninger og andelsboligforeninger på Sjælland. Digital administration og fair, dokumenteret kontrol.' },
+    { property: 'og:title', content: 'Parkeringskontrol til boligforeninger | Nordic Park ApS' },
+    { property: 'og:description', content: 'Professionel parkeringskontrol og beboerparkering til boligforeninger og ejerforeninger på Sjælland. Digital administration og fair kontrol.' },
+    { property: 'og:url', content: 'https://nordicpark.eu/service/boligforeninger' },
+    { name: 'twitter:title', content: 'Parkeringskontrol til boligforeninger | Nordic Park ApS' },
+    { name: 'twitter:description', content: 'Professionel beboerparkering og parkeringskontrol til boligforeninger på Sjælland. Nordic Park ApS.' },
+  ],
+  link: [
+    { rel: 'canonical', href: 'https://nordicpark.eu/service/boligforeninger' }
+  ],
+  script: [
+    {
+      type: 'application/ld+json',
+      innerHTML: JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'Service',
+        'name': 'Parkeringskontrol til boligforeninger',
+        'description': 'Professionel parkeringskontrol og beboerparkering til boligforeninger, ejerforeninger og andelsboligforeninger på Sjælland.',
+        'provider': { '@id': 'https://nordicpark.eu/#business' },
+        'serviceType': 'Parkeringskontrol',
+        'areaServed': { '@type': 'AdministrativeArea', 'name': 'Sjælland' },
+        'url': 'https://nordicpark.eu/service/boligforeninger'
+      })
+    }
+  ]
+})
 </script>
 
 <style scoped>

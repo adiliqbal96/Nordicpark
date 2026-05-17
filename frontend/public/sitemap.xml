@@ -1,21 +1,108 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- Forside / Intro -->
   <url>
     <loc>https://nordicpark.eu/</loc>
-    <lastmod>2024-03-09</lastmod>
+    <lastmod>2026-05-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
+
+  <!-- Primær landingsside -->
   <url>
-    <loc>https://nordicpark.eu/tickets</loc>
-    <lastmod>2024-03-09</lastmod>
-    <changefreq>daily</changefreq>
+    <loc>https://nordicpark.eu/erhverv</loc>
+    <lastmod>2026-05-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- Løsninger hub -->
+  <url>
+    <loc>https://nordicpark.eu/services</loc>
+    <lastmod>2026-05-17</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
+
+  <!-- Service: Boligforeninger -->
+  <url>
+    <loc>https://nordicpark.eu/service/boligforeninger</loc>
+    <lastmod>2026-05-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Service: Erhverv og Retail -->
+  <url>
+    <loc>https://nordicpark.eu/service/erhverv-retail</loc>
+    <lastmod>2026-05-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Service: Privat kontrol -->
+  <url>
+    <loc>https://nordicpark.eu/service/privat-kontrol</loc>
+    <lastmod>2026-05-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Om os -->
+  <url>
+    <loc>https://nordicpark.eu/om-os</loc>
+    <lastmod>2026-05-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Kontakt -->
   <url>
     <loc>https://nordicpark.eu/contact</loc>
-    <lastmod>2024-03-09</lastmod>
+    <lastmod>2026-05-17</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.8</priority>
   </url>
+
+  <!-- Find afgift -->
+  <url>
+    <loc>https://nordicpark.eu/ticket</loc>
+    <lastmod>2026-05-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- Handelsbetingelser -->
+  <url>
+    <loc>https://nordicpark.eu/handelsbetingelser</loc>
+    <lastmod>2026-05-17</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
+  </url>
+
+  <!-- Parkeringsbetingelser -->
+  <url>
+    <loc>https://nordicpark.eu/parkeringsbetingelser</loc>
+    <lastmod>2026-05-17</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
+  </url>
+
+  <!-- Privatlivspolitik -->
+  <url>
+    <loc>https://nordicpark.eu/privatlivspolitik</loc>
+    <lastmod>2026-05-17</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
+  <!-- Cookiepolitik -->
+  <url>
+    <loc>https://nordicpark.eu/cookiepolitik</loc>
+    <lastmod>2026-05-17</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
 </urlset>

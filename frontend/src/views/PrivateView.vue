@@ -47,6 +47,37 @@
 import { RouterLink } from 'vue-router'
 import { i18n } from '../i18n.js'
 import Backlink from '../components/Backlink.vue'
+import { useHead } from '@vueuse/head'
+
+useHead({
+  title: 'Privat parkeringskontrol til grundejere | Nordic Park ApS',
+  meta: [
+    { name: 'description', content: 'Privat parkeringskontrol til private grundejere og ejendomme på Sjælland. Nordic Park sikrer fair, dokumenteret kontrol af dit parkeringsareal med lokal service.' },
+    { property: 'og:title', content: 'Privat parkeringskontrol til grundejere | Nordic Park ApS' },
+    { property: 'og:description', content: 'Professionel privat parkeringskontrol til grundejere og ejendomme på Sjælland. Fair og dokumenteret kontrol med lokal service.' },
+    { property: 'og:url', content: 'https://nordicpark.eu/service/privat-kontrol' },
+    { name: 'twitter:title', content: 'Privat parkeringskontrol | Nordic Park ApS' },
+    { name: 'twitter:description', content: 'Privat parkeringskontrol til private grundejere og ejendomme på Sjælland. Nordic Park ApS.' },
+  ],
+  link: [
+    { rel: 'canonical', href: 'https://nordicpark.eu/service/privat-kontrol' }
+  ],
+  script: [
+    {
+      type: 'application/ld+json',
+      innerHTML: JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'Service',
+        'name': 'Privat parkeringskontrol',
+        'description': 'Privat parkeringskontrol til private grundejere og ejendomme på Sjælland. Fair, dokumenteret kontrol med lokal service.',
+        'provider': { '@id': 'https://nordicpark.eu/#business' },
+        'serviceType': 'Privat parkeringskontrol',
+        'areaServed': { '@type': 'AdministrativeArea', 'name': 'Sjælland' },
+        'url': 'https://nordicpark.eu/service/privat-kontrol'
+      })
+    }
+  ]
+})
 </script>
 
 <style scoped>

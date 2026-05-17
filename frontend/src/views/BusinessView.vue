@@ -47,6 +47,37 @@
 import { RouterLink } from 'vue-router'
 import { i18n } from '../i18n.js'
 import Backlink from '../components/Backlink.vue'
+import { useHead } from '@vueuse/head'
+
+useHead({
+  title: 'Parkeringskontrol til erhverv & retail | Nordic Park ApS',
+  meta: [
+    { name: 'description', content: 'Sørg for fri parkering til dine kunder og medarbejdere. Nordic Park leverer professionel kundeparkering og erhvervsparkering til virksomheder, butikker og kontorejendomme på Sjælland.' },
+    { property: 'og:title', content: 'Parkeringskontrol til erhverv & retail | Nordic Park ApS' },
+    { property: 'og:description', content: 'Professionel kundeparkering og medarbejderparkering til erhverv og retail på Sjælland. Nordic Park ApS.' },
+    { property: 'og:url', content: 'https://nordicpark.eu/service/erhverv-retail' },
+    { name: 'twitter:title', content: 'Parkeringskontrol til erhverv & retail | Nordic Park ApS' },
+    { name: 'twitter:description', content: 'Professionel kundeparkering og medarbejderparkering til erhverv og retail på Sjælland.' },
+  ],
+  link: [
+    { rel: 'canonical', href: 'https://nordicpark.eu/service/erhverv-retail' }
+  ],
+  script: [
+    {
+      type: 'application/ld+json',
+      innerHTML: JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'Service',
+        'name': 'Parkeringskontrol til erhverv og retail',
+        'description': 'Professionel kundeparkering og medarbejderparkering til virksomheder, butikker og kontorejendomme på Sjælland.',
+        'provider': { '@id': 'https://nordicpark.eu/#business' },
+        'serviceType': 'Parkeringskontrol',
+        'areaServed': { '@type': 'AdministrativeArea', 'name': 'Sjælland' },
+        'url': 'https://nordicpark.eu/service/erhverv-retail'
+      })
+    }
+  ]
+})
 </script>
 
 <style scoped>

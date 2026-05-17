@@ -106,6 +106,20 @@
 import { ref, reactive } from 'vue'
 import { i18n } from '../i18n.js'
 import Backlink from '../components/Backlink.vue'
+import { useHead } from '@vueuse/head'
+
+useHead({
+  title: 'Kontakt os – Få et gratis tilbud | Nordic Park ApS',
+  meta: [
+    { name: 'description', content: 'Kontakt Nordic Park ApS for et uforpligtende tilbud på parkeringskontrol. Ring på 91 42 54 24 eller skriv til os – vi svarer inden for 24 timer.' },
+    { property: 'og:title', content: 'Kontakt os – Få et gratis tilbud | Nordic Park ApS' },
+    { property: 'og:description', content: 'Kontakt Nordic Park ApS for parkeringskontrol til boligforeninger, erhverv og private. Gratis og uforpligtende tilbud. Vi svarer inden for 24 timer.' },
+    { property: 'og:url', content: 'https://nordicpark.eu/contact' },
+    { name: 'twitter:title', content: 'Kontakt os | Nordic Park ApS' },
+    { name: 'twitter:description', content: 'Kontakt Nordic Park ApS for et gratis tilbud på parkeringskontrol. Ring på 91 42 54 24.' },
+  ],
+  link: [{ rel: 'canonical', href: 'https://nordicpark.eu/contact' }]
+})
 
 const form = reactive({
   name: '',

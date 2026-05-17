@@ -267,6 +267,17 @@ import { ref, reactive, computed, onMounted, nextTick } from 'vue'
 import Backlink from '../components/Backlink.vue'
 import { i18n } from '../i18n.js'
 import { loadStripe } from '@stripe/stripe-js'
+import { useHead } from '@vueuse/head'
+
+useHead({
+  title: 'Find din parkeringsafgift | Nordic Park ApS',
+  meta: [
+    { name: 'description', content: 'Har du modtaget en parkeringsafgift fra Nordic Park? Find din afgift, se dokumentation, indsend klage eller anmod om fotobevis her.' },
+    { property: 'og:title', content: 'Find din parkeringsafgift | Nordic Park ApS' },
+    { property: 'og:url', content: 'https://nordicpark.eu/ticket' },
+  ],
+  link: [{ rel: 'canonical', href: 'https://nordicpark.eu/ticket' }]
+})
 
 const step = ref('identify') // identify, portal, payment, complaint, photo
 const loading = ref(false)

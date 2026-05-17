@@ -79,6 +79,20 @@
 <script setup>
 import { RouterLink } from 'vue-router'
 import { i18n } from '../i18n.js'
+import { useHead } from '@vueuse/head'
+
+useHead({
+  title: 'Nordic Park ApS – Professionel parkeringskontrol på Sjælland',
+  meta: [
+    { name: 'description', content: 'Nordic Park ApS leverer professionel parkeringskontrol til boligforeninger, erhverv og private grundejere på Sjælland. Kontakt os for et gratis tilbud.' },
+    { property: 'og:title', content: 'Nordic Park ApS – Professionel parkeringskontrol på Sjælland' },
+    { property: 'og:description', content: 'Professionel parkeringskontrol til boligforeninger, erhverv og private på Sjælland. Fair kontrol, dokumentation og lokal service.' },
+    { property: 'og:url', content: 'https://nordicpark.eu/' },
+    { name: 'twitter:title', content: 'Nordic Park ApS – Professionel parkeringskontrol på Sjælland' },
+    { name: 'twitter:description', content: 'Professionel parkeringskontrol til boligforeninger, erhverv og private på Sjælland.' },
+  ],
+  link: [{ rel: 'canonical', href: 'https://nordicpark.eu/' }]
+})
 </script>
 
 <style scoped>

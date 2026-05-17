@@ -1,4 +1,7 @@
 User-agent: *
 Allow: /
+Disallow: /contact.php
+Disallow: /contact_backup.php
+Disallow: /mail-test.php
 
 Sitemap: https://nordicpark.eu/sitemap.xml

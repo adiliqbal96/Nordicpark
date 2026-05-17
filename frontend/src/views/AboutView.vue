@@ -169,6 +169,20 @@
 import { RouterLink } from 'vue-router'
 import { i18n } from '../i18n.js'
 import Backlink from '../components/Backlink.vue'
+import { useHead } from '@vueuse/head'
+
+useHead({
+  title: 'Om os – Lokalt parkeringsselskab | Nordic Park ApS',
+  meta: [
+    { name: 'description', content: 'Nordic Park ApS er et lokalt parkeringsselskab baseret i Køge. Vi leverer fair og dokumenteret parkeringskontrol med fokus på dialog og lokal tilstedeværelse på Sjælland.' },
+    { property: 'og:title', content: 'Om os – Lokalt parkeringsselskab | Nordic Park ApS' },
+    { property: 'og:description', content: 'Et lokalt parkeringsselskab baseret i Køge med fokus på fair kontrol, dokumentation og dialog. Professionel parkeringsservice på Sjælland.' },
+    { property: 'og:url', content: 'https://nordicpark.eu/om-os' },
+    { name: 'twitter:title', content: 'Om os – Lokalt parkeringsselskab | Nordic Park ApS' },
+    { name: 'twitter:description', content: 'Nordic Park ApS – et lokalt parkeringsselskab baseret i Køge med fokus på fair og professionel parkeringskontrol.' },
+  ],
+  link: [{ rel: 'canonical', href: 'https://nordicpark.eu/om-os' }]
+})
 </script>
 
 <style scoped>

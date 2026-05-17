@@ -345,6 +345,20 @@
 import { RouterLink } from 'vue-router'
 import { i18n } from '../i18n.js'
 import ParkingVisual from '../components/ParkingVisual.vue'
+import { useHead } from '@vueuse/head'
+
+useHead({
+  title: 'Parkeringskontrol & Parkeringsservice | Nordic Park ApS',
+  meta: [
+    { name: 'description', content: 'Professionel parkeringskontrol til boligforeninger, erhvervslejemål og private på Sjælland. Betroet af ejendomsadministratorer i Køge, Solrød, Slagelse og Næstved.' },
+    { property: 'og:title', content: 'Parkeringskontrol & Parkeringsservice | Nordic Park ApS' },
+    { property: 'og:description', content: 'Professionel parkeringskontrol til boligforeninger, erhverv og private på Sjælland. Fair kontrol og lokal service i Køge, Solrød, Slagelse og Næstved.' },
+    { property: 'og:url', content: 'https://nordicpark.eu/erhverv' },
+    { name: 'twitter:title', content: 'Parkeringskontrol & Parkeringsservice | Nordic Park ApS' },
+    { name: 'twitter:description', content: 'Professionel parkeringskontrol til boligforeninger, erhverv og private på Sjælland.' },
+  ],
+  link: [{ rel: 'canonical', href: 'https://nordicpark.eu/erhverv' }]
+})
 
 const solutionCards = [
   {

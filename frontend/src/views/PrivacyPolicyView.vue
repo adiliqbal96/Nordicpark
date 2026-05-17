@@ -143,4 +143,15 @@
 <script setup>
 import { i18n } from '../i18n.js'
 import Backlink from '../components/Backlink.vue'
+import { useHead } from '@vueuse/head'
+
+useHead({
+  title: 'Privatlivspolitik | Nordic Park ApS',
+  meta: [
+    { name: 'description', content: 'Læs Nordic Park ApS\' privatlivspolitik og se hvordan vi behandler personoplysninger i overensstemmelse med GDPR og databeskyttelsesloven.' },
+    { property: 'og:title', content: 'Privatlivspolitik | Nordic Park ApS' },
+    { property: 'og:url', content: 'https://nordicpark.eu/privatlivspolitik' },
+  ],
+  link: [{ rel: 'canonical', href: 'https://nordicpark.eu/privatlivspolitik' }]
+})
 </script>

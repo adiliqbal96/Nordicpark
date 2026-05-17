@@ -149,4 +149,15 @@
 <script setup>
 import { i18n } from '../i18n.js'
 import Backlink from '../components/Backlink.vue'
+import { useHead } from '@vueuse/head'
+
+useHead({
+  title: 'Handelsbetingelser | Nordic Park ApS',
+  meta: [
+    { name: 'description', content: 'Læs Nordic Park ApS\' handelsbetingelser for parkeringskontrol, herunder regler om parkeringsafgifter, klageprocedure og betaling.' },
+    { property: 'og:title', content: 'Handelsbetingelser | Nordic Park ApS' },
+    { property: 'og:url', content: 'https://nordicpark.eu/handelsbetingelser' },
+  ],
+  link: [{ rel: 'canonical', href: 'https://nordicpark.eu/handelsbetingelser' }]
+})
 </script>

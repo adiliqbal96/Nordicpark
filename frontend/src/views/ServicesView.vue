@@ -48,6 +48,20 @@
 import { RouterLink } from 'vue-router'
 import { i18n } from '../i18n.js'
 import Backlink from '../components/Backlink.vue'
+import { useHead } from '@vueuse/head'
+
+useHead({
+  title: 'Vores løsninger – Parkeringskontrol | Nordic Park ApS',
+  meta: [
+    { name: 'description', content: 'Nordic Park tilbyder skræddersyede parkeringsløsninger til boligforeninger, erhverv og private grundejere. Digital administration og fair kontrol på Sjælland.' },
+    { property: 'og:title', content: 'Vores løsninger – Parkeringskontrol | Nordic Park ApS' },
+    { property: 'og:description', content: 'Skræddersyede parkeringsløsninger til boligforeninger, erhverv og private på Sjælland. Digital administration og fair kontrol.' },
+    { property: 'og:url', content: 'https://nordicpark.eu/services' },
+    { name: 'twitter:title', content: 'Vores løsninger – Parkeringskontrol | Nordic Park ApS' },
+    { name: 'twitter:description', content: 'Parkeringsløsninger til boligforeninger, erhverv og private på Sjælland. Nordic Park ApS.' },
+  ],
+  link: [{ rel: 'canonical', href: 'https://nordicpark.eu/services' }]
+})
 </script>
 
 <style scoped>

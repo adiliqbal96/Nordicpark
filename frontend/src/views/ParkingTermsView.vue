@@ -139,4 +139,15 @@
 <script setup>
 import { i18n } from '../i18n.js'
 import Backlink from '../components/Backlink.vue'
+import { useHead } from '@vueuse/head'
+
+useHead({
+  title: 'Parkeringsbetingelser | Nordic Park ApS',
+  meta: [
+    { name: 'description', content: 'Læs parkeringsbetingelserne for Nordic Park ApS\' kontrollerede parkeringsarealer. Gælder alle arealer administreret af Nordic Park ApS.' },
+    { property: 'og:title', content: 'Parkeringsbetingelser | Nordic Park ApS' },
+    { property: 'og:url', content: 'https://nordicpark.eu/parkeringsbetingelser' },
+  ],
+  link: [{ rel: 'canonical', href: 'https://nordicpark.eu/parkeringsbetingelser' }]
+})
 </script>
