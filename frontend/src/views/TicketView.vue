@@ -43,7 +43,9 @@
             <button class="payment-card-premium" @click="goToForm('payment')">
               <div class="payment-card-glow"></div>
               <div class="card-content">
-                <div class="card-icon-main">💳</div>
+                <div class="card-icon-main">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>
+                </div>
                 <div class="card-text-main">
                   <h3>{{ i18n.t('portal.payNow') }}</h3>
                   <p>{{ i18n.t('portal.payDesc') }}</p>
@@ -57,11 +59,11 @@
             <p class="options-label">{{ i18n.t('portal.otherOptions') }}</p>
             <div class="options-grid">
               <button class="option-card glass" @click="goToForm('photo')">
-                <span class="option-icon">📸</span>
+                <span class="option-icon"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg></span>
                 <span>{{ i18n.t('portal.docs') }}</span>
               </button>
               <button class="option-card glass" @click="goToForm('complaint')">
-                <span class="option-icon">⚖️</span>
+                <span class="option-icon"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="M7 21h10"/><path d="M12 3v18"/><path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"/></svg></span>
                 <span>{{ i18n.t('portal.complaint') }}</span>
               </button>
             </div>
@@ -105,7 +107,7 @@
                         @click="selectType('standard')"
                       >
                         <div class="card-glow"></div>
-                        <div class="type-icon">🛡️</div>
+                        <div class="type-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
                         <div class="type-info">
                           <span class="type-name">{{ i18n.t('portal.payment.standard') }}</span>
                           <span class="type-price">950,-</span>
@@ -119,7 +121,7 @@
                         @click="selectType('handicap')"
                       >
                         <div class="card-glow"></div>
-                        <div class="type-icon">♿</div>
+                        <div class="type-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="4" r="1"/><path d="M9 9h1l2 4.5"/><path d="M13.5 13.5 15 17H9"/><path d="M8 17a5 5 0 1 0 8.9-2.4"/></svg></div>
                         <div class="type-info">
                           <span class="type-name">{{ i18n.t('portal.payment.handicap') }}</span>
                           <span class="type-price">1900,-</span>
@@ -133,7 +135,7 @@
                         @click="selectType('emergency')"
                       >
                         <div class="card-glow"></div>
-                        <div class="type-icon">🚒</div>
+                        <div class="type-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 21H5a2 2 0 0 1-2-2v-3a2 2 0 0 1 .6-1.4L9 10"/><path d="M13.7 21H19a2 2 0 0 0 2-2v-3a2 2 0 0 0-.6-1.4L15 10"/><path d="M9 3h6"/><path d="M12 3v7"/><path d="M9 14h6"/></svg></div>
                         <div class="type-info">
                           <span class="type-name">{{ i18n.t('portal.payment.emergency') }}</span>
                           <span class="type-price">1900,-</span>
@@ -216,7 +218,7 @@
               <div class="form-group">
                 <label>{{ i18n.t('portal.complaintForm.upload') }}</label>
                 <div class="drop-area" @click="$refs.fileInput.click()">
-                  <span class="drop-icon">📁</span>
+                  <span class="drop-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" x2="12" y1="3" y2="15"/></svg></span>
                   <span>{{ form.files.length > 0 ? i18n.t('portal.complaintForm.filesSelected', { count: form.files.length }) : i18n.t('portal.complaintForm.uploadBtn') }}</span>
                   <input type="file" ref="fileInput" @change="handleFileUpload" multiple accept="image/*" hidden />
                 </div>
@@ -252,7 +254,10 @@
       <!-- STATUS MESSAGES -->
       <div v-if="status.message" class="overlay-full" :class="status.type">
         <div class="overlay-card glass fadeIn">
-          <div class="overlay-icon">{{ status.type === 'success' ? '✅' : '❌' }}</div>
+          <div class="overlay-icon">
+            <svg v-if="status.type === 'success'" xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            <svg v-else xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="15" x2="9" y1="9" y2="15"/><line x1="9" x2="15" y1="9" y2="15"/></svg>
+          </div>
           <h3>{{ status.type === 'success' ? i18n.t('portal.status.successTitle') : i18n.t('portal.status.errorTitle') }}</h3>
           <p>{{ status.message }}</p>
           <button @click="resetPortal" class="btn primary-gold">{{ i18n.t('portal.status.okBtn') }}</button>

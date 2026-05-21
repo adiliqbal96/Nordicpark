@@ -1609,8 +1609,10 @@ section {
 }
 
 .premium-list li::before {
-  content: '✅';
-  font-size: 1.2rem;
+  content: '✓';
+  color: var(--color-accent);
+  font-size: 1rem;
+  font-weight: 700;
 }
 
 .premium-list li span {
@@ -1753,14 +1755,15 @@ section {
   /* --- TOPBAR MOBILE --- */
   .topbar {
     padding: 0.85rem 0;
+    width: calc(100vw - 2rem);
   }
 
   .topbar-inner {
     flex-direction: row;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     align-items: center;
     justify-content: space-between;
-    gap: 1rem;
+    gap: 0;
     padding: 0 1.25rem;
   }
 
