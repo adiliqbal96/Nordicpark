@@ -46,4 +46,9 @@ jobs:
           mkdir -p ~/.ssh
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/deploy_key
           chmod 600 ~/.ssh/deploy_key
-          rsync -av --delete -e "ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no" frontend/dist/ ${{ secrets.FTP_USERNAME }}@${{ secrets.FTP_SERVER }}:webroots/e199cb49/ || [ $? -eq 23 ]
+          DEST="${{ secrets.FTP_USERNAME }}@${{ secrets.FTP_SERVER }}:webroots/e199cb49/"
+          SSH_OPTS="-i ~/.ssh/deploy_key -o StrictHostKeyChecking=no"
+          # First pass — transfer everything (ignore partial errors on one.com)
+          rsync -av --delete -e "ssh $SSH_OPTS" frontend/dist/ "$DEST" || true
+          # Second pass — retry any missed files; fail the job if still broken
+          rsync -av --delete -e "ssh $SSH_OPTS" frontend/dist/ "$DEST"
